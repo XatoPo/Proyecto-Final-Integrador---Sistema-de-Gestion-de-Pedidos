@@ -238,7 +238,14 @@ VALUES
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
 VALUES
     ('PROD001', 'Inca Kola', 'The Coca-Cola Company', 47.88, 12, 'CTG01', 'Palet'),
-    ('PROD002', 'Cerveza Cusqueña', 'Backus', 71.88, 12, 'CTG01', 'Palet'),
+    ('PROD051', 'Coca Kola', 'The Coca-Cola Company', 50.90, 12, 'CTG01', 'Palet'),
+    ('PROD052', 'Fanta de Naranja', 'The Coca-Cola Company', 47.88, 12, 'CTG01', 'Palet'),
+    ('PROD053', 'Fanta Kola Inglesa', 'The Coca-Cola Company', 31.55, 12, 'CTG01', 'Palet'),
+    ('PROD002', 'Cerveza Cusqueña', 'Backus', 88.88, 12, 'CTG01', 'Caja'),
+    ('PROD054', 'Cerveza Cristal', 'Backus', 77.88, 12, 'CTG01', 'Caja'),
+    ('PROD055', 'Cerveza Pilsen', 'Backus', 89.88, 12, 'CTG01', 'Caja'),
+    ('PROD056', 'Cerveza Golden', 'Backus', 51.88, 12, 'CTG01', 'Caja'),
+    ('PROD057', 'Cerveza Cusqueña Negra', 'Backus', 81.88, 12, 'CTG01', 'Caja'),
     ('PROD003', 'Agua San Mateo', 'San Mateo', 35.88, 12, 'CTG01', 'Palet'),
     ('PROD004', 'Té de Manzanilla', 'Inka Tea', 27.00, 6, 'CTG01', 'Pack'),
     ('PROD005', 'Chicha Morada', 'Don Jorge', 89.25, 24, 'CTG01', 'Pack'),
@@ -248,7 +255,10 @@ VALUES
 -- Insertar productos en la categoría 'Panadería' (CTG02)
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
 VALUES
-    ('PROD007', 'Pan Integral', 'Bimbo', 49.00, 10, 'CTG02', 'Caja'),
+    ('PROD007', 'Pan Integral', 'Bimbo', 33.00, 10, 'CTG02', 'Cesta'),
+    ('PROD058', 'Pan Blanco', 'Bimbo', 49.00, 10, 'CTG02', 'Cesta'),
+    ('PROD059', 'Tortilla Integral', 'Bimbo', 26.00, 10, 'CTG02', 'Cesta'),
+    ('PROD060', 'Tortilla de Trigo', 'Bimbo', 22.00, 10, 'CTG02', 'Cesta'),
     ('PROD008', 'Pan Francés', 'Tanta', 39.00, 10, 'CTG02', 'Caja'),
     ('PROD009', 'Rosquitas de Viento', 'Pasquale', 46.80, 12, 'CTG02', 'Caja'),
     ('PROD010', 'Croissant de Chocolate', 'Mistura', 35.40, 6, 'CTG02', 'Pack'),
@@ -258,18 +268,25 @@ VALUES
 -- Insertar productos en la categoría 'Snacks' (CTG03)
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
 VALUES
-    ('PROD013', 'Papas Fritas', 'Inka Chips', 35.00, 10, 'CTG03', 'Caja'),
-    ('PROD014', 'Piqueo Mixto', 'Lays', 55.00, 12, 'CTG03', 'Caja'),
+    ('PROD013', 'Papas Fritas Sal de Mara', 'Inka Chips', 35.00, 10, 'CTG03', 'Paquete'),
+    ('PROD062', 'Papas Fritas BBQ', 'Inka Chips', 35.00, 10, 'CTG03', 'Paquete'),
+    ('PROD063', 'Papas Fritas Jalapeño', 'Inka Chips', 35.00, 10, 'CTG03', 'Paquete'),
+    ('PROD014', 'Piqueo Mixto', 'Lays', 23.00, 12, 'CTG03', 'Paquete'),
+    ('PROD064', 'Papas Fritas', 'Lays', 21.00, 10, 'CTG03', 'Paquete'),
+    ('PROD065', 'Dorits', 'Lays', 24.00, 10, 'CTG03', 'Paquete'),
     ('PROD015', 'Chocotejas', 'La Ibérica', 58.80, 24, 'CTG03', 'Caja'),
     ('PROD016', 'Chocolate Doña Pepa', 'Field', 119.40, 30, 'CTG03', 'Caja'),
     ('PROD017', 'Cua Cua', 'Field', 58.80, 12, 'CTG03', 'Caja'),
+    ('PROD066', 'Galleta Chokosoda', 'Field', 21.80, 12, 'CTG03', 'Caja'),
+    ('PROD067', 'Galleta Vainilla', 'Field', 15.80, 12, 'CTG03', 'Caja'),
+    ('PROD068', 'Galleta Charada', 'Field', 45.80, 12, 'CTG03', 'Caja'),
     ('PROD018', 'Chifles', 'El Ídolo', 70.00, 20, 'CTG03', 'Caja');
     
 -- Insertar productos en la categoría 'Lácteos' (CTG04)
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
 VALUES
     ('PROD019', 'Leche Evaporada', 'Gloria', 42.00, 12, 'CTG04', 'Caja'),
-    ('PROD020', 'Yogur Natural', 'Yoplait', 17.94, 6, 'CTG04', 'Pack'),
+    ('PROD020', 'Yogur Natural', 'Gloria', 17.94, 6, 'CTG04', 'Pack'),
     ('PROD021', 'Leche de Almendras', 'Almendrina', 31.92, 4, 'CTG04', 'Pack'),
     ('PROD022', 'Yogur Griego', 'Laive', 19.50, 6, 'CTG04', 'Pack'),
     ('PROD023', 'Queso Fresco', 'Bonle', 36.00, 8, 'CTG04', 'Caja'),
@@ -283,7 +300,7 @@ VALUES
     ('PROD027', 'Cloro', 'Poett', 35.00, 10, 'CTG05', 'Caja'),
     ('PROD028', 'Limpiavidrios', 'Sapolio', 49.90, 10, 'CTG05', 'Caja'),
     ('PROD029', 'Toallas de Papel', 'Nova', 55.00, 20, 'CTG05', 'Caja'),
-    ('PROD030', 'Detergente en Barra', 'Noria', 15.00, 10, 'CTG05', 'Caja');
+    ('PROD030', 'Detergente en Barra', 'Ace', 15.00, 10, 'CTG05', 'Caja');
 
 -- Insertar productos en la categoría 'Frutas y Verduras' (CTG06)
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
@@ -292,13 +309,13 @@ VALUES
     ('PROD032', 'Bananas', 'Del Monte', 23.94, 6, 'CTG06', 'Pack'),
     ('PROD033', 'Zanahorias', 'Del Monte', 23.76, 12, 'CTG06', 'Caja'),
     ('PROD034', 'Tomates', 'San Camilo', 119.40, 30, 'CTG06', 'Caja'),
-    ('PROD035', 'Lechuga', 'Santa Rosa', 22.50, 10, 'CTG06', 'Caja');
+    ('PROD035', 'Lechuga', 'Del Monte', 22.50, 10, 'CTG06', 'Caja');
 
 -- Insertar productos en la categoría 'Carnes y Aves' (CTG07)
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
 VALUES
     ('PROD036', 'Pollo Entero', 'San Fernando', 94.90, 10, 'CTG07', 'Caja'),
-    ('PROD037', 'Res Filete', 'La Chacra', 77.94, 6, 'CTG07', 'Pack'),
+    ('PROD037', 'Res Filete', 'San Fernando', 77.94, 6, 'CTG07', 'Pack'),
     ('PROD038', 'Cerdo Asado', 'El Campesino', 87.50, 10, 'CTG07', 'Caja'),
     ('PROD039', 'Jamón de Pavo', 'Todini', 29.94, 6, 'CTG07', 'Pack'),
     ('PROD040', 'Salchichas', 'San Fernando', 35.00, 10, 'CTG07', 'Caja');
@@ -307,8 +324,8 @@ VALUES
 INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, cant_x_empaq_produc, id_ctg, tipo_empq_produc)
 VALUES
     ('PROD041', 'Pizza Congelada', 'DiGiorno', 55.92, 12, 'CTG08', 'Caja'),
-    ('PROD042', 'Papas Fritas Congeladas', 'McCain', 45.00, 10, 'CTG08', 'Caja'),
-    ('PROD043', 'Nuggets de Pollo', 'Tyson', 35.94, 6, 'CTG08', 'Pack'),
+    ('PROD042', 'Papas Fritas Congeladas', 'DiGiorno', 45.00, 10, 'CTG08', 'Caja'),
+    ('PROD043', 'Nuggets de Pollo', 'San Fernando', 35.94, 6, 'CTG08', 'Pack'),
     ('PROD044', 'Filetes de Pescado', 'Gorton’s', 37.50, 10, 'CTG08', 'Caja'),
     ('PROD045', 'Vegetales Mixtos', 'Birds Eye', 79.80, 20, 'CTG08', 'Caja');
 
