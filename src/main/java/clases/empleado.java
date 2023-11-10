@@ -97,5 +97,4 @@ public class empleado {
         this.datos_ubigeo_emp = datos_ubigeo_emp;
     }
     
-    
 }
