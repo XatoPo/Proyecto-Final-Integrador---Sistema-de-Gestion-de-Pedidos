@@ -25,7 +25,7 @@ CREATE TABLE proveedor (
     id_prov CHAR(6) PRIMARY KEY, -- ID único del proveedor
     nom_prov VARCHAR(50) NOT NULL, -- Nombre del proveedor
     descd_prov TEXT, -- Descripción del proveedor
-    id_ubigeo CHAR(6) NOT NULL, -- ID único de la dirección
+    id_ubigeo CHAR(6) NULL, -- ID único de la dirección
     FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo) -- Relación con dirección
 );
 
@@ -36,9 +36,9 @@ CREATE TABLE empleado (
     nom_mat_emp VARCHAR(25) NOT NULL,
     ape_pat_emp VARCHAR(25) NOT NULL,
     ape_mat_emp VARCHAR(25) NOT NULL,
-    id_contac CHAR(6) NOT NULL,
+    id_contac CHAR(6) NULL,
     cargo_emp VARCHAR(20) NOT NULL,
-    id_ubigeo CHAR(6) NOT NULL,
+    id_ubigeo CHAR(6) NULL,
     fech_nac_emp DATE NOT NULL,
     FOREIGN KEY (id_contac) REFERENCES contacto(id_contac),
     FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo)
@@ -218,7 +218,8 @@ VALUES
     ('EMP02', 'María', 'Martínez', 'Fernández', 'Rodríguez', 'CON002', 'Vendedor', 'DIR002', '1985-07-21'),
     ('EMP03', 'Carlos', 'Gómez', 'Sánchez', 'Díaz', 'CON003', 'Cajero', 'DIR003', '1990-11-10'),
     ('EMP04', 'Laura', 'Torres', 'Jiménez', 'Hernández', 'CON004', 'Reponedor', 'DIR004', '1993-03-30'),
-    ('EMP05', 'Pedro', 'Ruiz', 'Alvarez', 'Santos', 'CON005', 'Vendedor', 'DIR005', '1988-05-05');
+    ('EMP05', 'Pedro', 'Ruiz', 'Alvarez', 'Santos', 'CON005', 'Vendedor', 'DIR005', '1988-05-05'),
+    ('EMP06', 'Flavio', 'Sebastian', 'Villanueva', 'Medina', NULL, 'Reponedor', NULL, '2004-01-28');
 
 -- Insertar datos de categorías de productos
 INSERT INTO categoria (id_ctg, nom_ctg)

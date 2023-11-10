@@ -38,5 +38,4 @@ public class contacto {
         this.telef_contac = telef_contac;
     }
     
-    
 }

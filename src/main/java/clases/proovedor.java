@@ -7,18 +7,18 @@ public class proovedor{
     private String id_prov;
     private String nom_prov;
     private String descd_prov;
-    private ubigeo ubigeo_proovedor;
-    private List<contacto> contacto_proovedor;
+    private ubigeo datos_ubigeo_prov;
+    private List<contacto> datos_contacto_prov;
 
     public proovedor() {
     }
     
     // Constructor que no recibe el ID como argumento
-    public proovedor(String nom_prov, String descd_prov, ubigeo ubigeo_proovedor, List<contacto> contacto_proovedor) {
+    public proovedor(String nom_prov, String descd_prov, ubigeo datos_ubigeo_prov, List<contacto> datos_contacto_prov) {
         this.nom_prov = nom_prov;
         this.descd_prov = descd_prov;
-        this.ubigeo_proovedor = ubigeo_proovedor;
-        this.contacto_proovedor = new ArrayList<>();
+        this.datos_ubigeo_prov = datos_ubigeo_prov;
+        this.datos_contacto_prov = new ArrayList<>();
     }
 
     public String getId_prov() {
@@ -45,20 +45,20 @@ public class proovedor{
         this.descd_prov = descd_prov;
     }
 
-    public ubigeo getUbigeo_proovedor() {
-        return ubigeo_proovedor;
+    public ubigeo getDatos_ubigeo_prov() {
+        return datos_ubigeo_prov;
     }
 
-    public void setUbigeo_proovedor(ubigeo ubigeo_proovedor) {
-        this.ubigeo_proovedor = ubigeo_proovedor;
+    public void setDatos_ubigeo_prov(ubigeo datos_ubigeo_prov) {
+        this.datos_ubigeo_prov = datos_ubigeo_prov;
     }
 
-    public List<contacto> getContacto_proovedor() {
-        return contacto_proovedor;
+    public List<contacto> getDatos_contacto_prov() {
+        return datos_contacto_prov;
     }
 
-    public void setContacto_proovedor(List<contacto> contacto_proovedor) {
-        this.contacto_proovedor = contacto_proovedor;
+    public void setDatos_contacto_prov(List<contacto> datos_contacto_prov) {
+        this.datos_contacto_prov = datos_contacto_prov;
     }
-     
+
 }
