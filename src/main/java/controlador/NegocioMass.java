@@ -2,9 +2,12 @@ package controlador;
 import java.sql.*;
 import java.util.*;
 import clases.*;
+import interfaces.*;
 import util.MySQLConexion;
-public class NegocioMass {
-    public void adi_Empleados(empleado e){
+public class NegocioMass implements registros, listados {
+    
+    @Override
+    public void adiEmpleado(empleado e){
         Connection cn = MySQLConexion.getConexion();
         String sql = "INSERT INTO empleado (id_emp, nom_pat_emp, nom_mat_emp, "
                 + "ape_pat_emp, ape_mat_emp,cargo_emp,fech_nac_emp,"
@@ -40,23 +43,108 @@ public class NegocioMass {
         }
     }
         
-        
+    @Override   
     public List<empleado> lisEmp(){
-     List<empleado> lista=new ArrayList();
-     Connection cn=MySQLConexion.getConexion();
+        List<empleado> lista=new ArrayList();
+        Connection cn=MySQLConexion.getConexion();
      try{
-      String sql="select id_emp, nom_pat_emp from empleado";
-      PreparedStatement st=cn.prepareStatement(sql);
-      ResultSet rs=st.executeQuery();
-      while(rs.next()){
-          empleado men=new empleado();
-          men.setId_emp(rs.getString(1));
-          men.setNom_pat_emp(rs.getString(2));
-          lista.add(men);
-      }
+        String sql="select id_emp, nom_pat_emp from empleado";
+        PreparedStatement st=cn.prepareStatement(sql);
+        ResultSet rs=st.executeQuery();
+        while(rs.next()){
+            empleado men=new empleado();
+            men.setId_emp(rs.getString(1));
+            men.setNom_pat_emp(rs.getString(2));
+            lista.add(men);
+        }
      }catch(Exception ex){
          ex.printStackTrace();
      }
-     return lista;  
+        return lista;  
+    }
+
+    @Override
+    public void adiContacto(contacto contac) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void adiPedido(pedido pedid, List<detalle_pedido> lista_productos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void adiGuia(gui_entrega guia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void adiProducto(producto produc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void adiProovedor(proovedor prov) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void adiUbigeo(ubigeo ubigeo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<categoria> listCategoria(String id_ctg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<contacto> listContactoEmpleado(String id_contac, String id_emp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<contacto> listContactoProovedor(String id_contac, String id_prov) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ubigeo> listUbigeoEmpleado(String id_ubigeo, String id_emp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ubigeo> listUbigeoProovedor(String id_ubigeo, String id_prov) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<empleado> listEmpleado(String id_emp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<proovedor> listProovedor(String id_prov) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<gui_entrega> listGia(String id_guia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<producto> listProducto(String id_produc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<pedido> listPedido(String id_pedi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<detalle_pedido> listDetallePedido(String id_pedi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

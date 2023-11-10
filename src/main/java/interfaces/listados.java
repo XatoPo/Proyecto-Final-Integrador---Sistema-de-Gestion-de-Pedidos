@@ -14,9 +14,11 @@ public interface listados {
     List<empleado> listEmpleado(String id_emp);
     List<proovedor> listProovedor(String id_prov);
     List<gui_entrega> listGia(String id_guia);
-    List<producto> listProducto(String id_produc);
+    List<producto> listProducto(String id_produc); 
+    List<empleado>  lisEmp();
     /*------------------------------------------------------*/
     List<pedido> listPedido(String id_pedi);
     List<detalle_pedido> listDetallePedido (String id_pedi);
+    
     
 }
