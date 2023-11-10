@@ -11,9 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 public class frmEmpleado extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmEmpleado
-     */
+
     public frmEmpleado() {
         initComponents();
         muestra();
