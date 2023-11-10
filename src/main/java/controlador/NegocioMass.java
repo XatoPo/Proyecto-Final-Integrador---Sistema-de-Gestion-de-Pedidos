@@ -1,11 +1,14 @@
 package controlador;
+
 import java.sql.*;
 import java.util.*;
 import clases.*;
 import interfaces.*;
 import util.MySQLConexion;
-public class NegocioMass implements registros, listados {
+
+public class NegocioMass implements registros, listados, mantenimiento, login, busquedas {
     
+    /*-----REGISTRO DE DATOS-----*/
     @Override
     public void adiEmpleado(empleado e){
         Connection cn = MySQLConexion.getConexion();
@@ -47,19 +50,19 @@ public class NegocioMass implements registros, listados {
     public List<empleado> lisEmp(){
         List<empleado> lista=new ArrayList();
         Connection cn=MySQLConexion.getConexion();
-     try{
-        String sql="select id_emp, nom_pat_emp from empleado";
-        PreparedStatement st=cn.prepareStatement(sql);
-        ResultSet rs=st.executeQuery();
-        while(rs.next()){
-            empleado men=new empleado();
-            men.setId_emp(rs.getString(1));
-            men.setNom_pat_emp(rs.getString(2));
-            lista.add(men);
+        try{
+           String sql="select id_emp, nom_pat_emp from empleado";
+           PreparedStatement st=cn.prepareStatement(sql);
+           ResultSet rs=st.executeQuery();
+           while(rs.next()){
+               empleado men=new empleado();
+               men.setId_emp(rs.getString(1));
+               men.setNom_pat_emp(rs.getString(2));
+               lista.add(men);
+           }
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
-     }catch(Exception ex){
-         ex.printStackTrace();
-     }
         return lista;  
     }
 
@@ -92,7 +95,9 @@ public class NegocioMass implements registros, listados {
     public void adiUbigeo(ubigeo ubigeo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    
+    /*-----LISTADO DE DATOS-----*/
     @Override
     public List<categoria> listCategoria(String id_ctg) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -146,5 +151,33 @@ public class NegocioMass implements registros, listados {
     @Override
     public List<detalle_pedido> listDetallePedido(String id_pedi) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    /*-----LOGIN-----*/
+    @Override
+    public empleado login_emp(String id_emp, String password_emp) {
+        empleado emp = null;
+        Connection connection = MySQLConexion.getConexion();
+        
+        String sql = "{CALL sp_login_emp(?, ?)}";
+        
+        try {
+            CallableStatement statement = connection.prepareCall(sql);
+            statement.setString(1, id_emp);
+            statement.setString(2, password_emp);
+      
+            emp = new empleado();
+            //cambiar get a set
+            emp.getId_emp();
+            emp.getNom_pat_emp();
+            emp.getNom_mat_emp();
+            emp.getApe_pat_emp();
+            emp.getApe_mat_emp();
+            emp.getDatos_contacto_emp();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return emp;
     }
 }

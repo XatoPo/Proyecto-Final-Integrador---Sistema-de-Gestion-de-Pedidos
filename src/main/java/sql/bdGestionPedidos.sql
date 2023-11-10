@@ -40,7 +40,7 @@ CREATE TABLE empleado (
     cargo_emp VARCHAR(20) NOT NULL,
     id_ubigeo CHAR(6) NULL,
     fech_nac_emp DATE NOT NULL,
-    password_emp VARCHAR(15) NOT NULL,
+    password_emp VARBINARY(255) NOT NULL,
     FOREIGN KEY (id_contac) REFERENCES contacto(id_contac),
     FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo)
 );
@@ -434,3 +434,30 @@ VALUES
     ('PROV42', 'CON047'),
     ('PROV43', 'CON048'),
     ('PROV44', 'CON049');
+
+-- Procedure para login
+-- Procedure para login
+DELIMITER //
+
+CREATE PROCEDURE sp_login_emp(
+    IN p_codigo_empleado CHAR(5),
+    IN p_contrasena VARCHAR(15)
+)
+BEGIN
+    DECLARE decrypted_password VARCHAR(255);
+
+    -- Desencriptar la contraseña almacenada en la base de datos
+    SELECT TRIM(AES_DECRYPT(password_emp, 'aB7xY9zL3pQ')) INTO decrypted_password
+    FROM empleado
+    WHERE id_emp = p_codigo_empleado;
+
+    -- Verificar si las contraseñas coinciden
+    IF TRIM(decrypted_password) = TRIM(p_contrasena) THEN
+        -- Autenticación exitosa, devolver datos del empleado
+        SELECT *
+        FROM empleado
+        WHERE id_emp = p_codigo_empleado;
+    END IF;
+END //
+
+DELIMITER ;
