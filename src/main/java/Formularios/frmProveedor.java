@@ -4,9 +4,9 @@ import java.awt.Component;
 
 
 
-public class FProveedor extends javax.swing.JFrame {
+public class frmProveedor extends javax.swing.JFrame {
 
-    public FProveedor() {
+    public frmProveedor() {
         initComponents();
         setLocationRelativeTo(null);
         bloquear2();
@@ -369,7 +369,7 @@ public class FProveedor extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FProveedor().setVisible(true);
+                new frmProveedor().setVisible(true);
             }
         });
     }
