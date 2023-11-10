@@ -9,7 +9,7 @@ public class proovedor{
     private String descd_prov;
     private ubigeo datos_ubigeo_prov;
     private List<contacto> datos_contacto_prov;
-
+    
     public proovedor() {
     }
     
