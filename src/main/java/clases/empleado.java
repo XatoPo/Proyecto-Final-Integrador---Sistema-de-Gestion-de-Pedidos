@@ -10,11 +10,20 @@ public class empleado {
     private String cargo_emp;
     private ubigeo datos_ubigeo_emp;
     private String fech_nac_emp;
+    private String password_emp;
+    
+    /*
+    PARA ENCRIPTAR EN LA BD USEN:
+    AES_ENCRYPT('password_emp', 'aB7xY9zL3pQ')
+    
+    PARA DESENCRIPTAR USEN:
+    AES_DECRYPT(password_emp, 'aB7xY9zL3pQ') AS password_emp
+    */
 
     public empleado() {
     }
 
-    public empleado(String nom_pat_emp, String nom_mat_emp, String ape_pat_emp, String ape_mat_emp, contacto datos_contacto_emp, String cargo_emp, ubigeo datos_ubigeo_emp, String fech_nac_emp) {
+    public empleado(String nom_pat_emp, String nom_mat_emp, String ape_pat_emp, String ape_mat_emp, contacto datos_contacto_emp, String cargo_emp, ubigeo datos_ubigeo_emp, String fech_nac_emp, String password_emp) {
         this.nom_pat_emp = nom_pat_emp;
         this.nom_mat_emp = nom_mat_emp;
         this.ape_pat_emp = ape_pat_emp;
@@ -23,6 +32,7 @@ public class empleado {
         this.cargo_emp = cargo_emp;
         this.datos_ubigeo_emp = datos_ubigeo_emp;
         this.fech_nac_emp = fech_nac_emp;
+        this.password_emp = password_emp;
     }
 
     public String getFech_nac_emp() {
@@ -95,6 +105,14 @@ public class empleado {
 
     public void setDatos_ubigeo_emp(ubigeo datos_ubigeo_emp) {
         this.datos_ubigeo_emp = datos_ubigeo_emp;
+    }
+
+    public String getPassword_emp() {
+        return password_emp;
+    }
+
+    public void setPassword_emp(String password_emp) {
+        this.password_emp = password_emp;
     }
     
 }

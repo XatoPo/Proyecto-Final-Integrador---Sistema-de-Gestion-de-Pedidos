@@ -40,6 +40,7 @@ CREATE TABLE empleado (
     cargo_emp VARCHAR(20) NOT NULL,
     id_ubigeo CHAR(6) NULL,
     fech_nac_emp DATE NOT NULL,
+    password_emp VARCHAR(15) NOT NULL,
     FOREIGN KEY (id_contac) REFERENCES contacto(id_contac),
     FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo)
 );
@@ -212,14 +213,14 @@ VALUES
 
 
 -- Insertar datos de empleados
-INSERT INTO empleado (id_emp, nom_pat_emp, nom_mat_emp, ape_pat_emp, ape_mat_emp, id_contac, cargo_emp, id_ubigeo, fech_nac_emp)
+INSERT INTO empleado (id_emp, nom_pat_emp, nom_mat_emp, ape_pat_emp, ape_mat_emp, id_contac, cargo_emp, id_ubigeo, fech_nac_emp, password_emp)
 VALUES
-    ('EMP01', 'Juan', 'García', 'Pérez', 'López', 'CON001', 'Gerente', 'DIR001', '1980-02-15'),
-    ('EMP02', 'María', 'Martínez', 'Fernández', 'Rodríguez', 'CON002', 'Vendedor', 'DIR002', '1985-07-21'),
-    ('EMP03', 'Carlos', 'Gómez', 'Sánchez', 'Díaz', 'CON003', 'Cajero', 'DIR003', '1990-11-10'),
-    ('EMP04', 'Laura', 'Torres', 'Jiménez', 'Hernández', 'CON004', 'Reponedor', 'DIR004', '1993-03-30'),
-    ('EMP05', 'Pedro', 'Ruiz', 'Alvarez', 'Santos', 'CON005', 'Vendedor', 'DIR005', '1988-05-05'),
-    ('EMP06', 'Flavio', 'Sebastian', 'Villanueva', 'Medina', NULL, 'Reponedor', NULL, '2004-01-28');
+    ('EMP01', 'Juan', 'García', 'Pérez', 'López', 'CON001', 'Gerente', 'DIR001', '1980-02-15', AES_ENCRYPT('ADMIN1', 'aB7xY9zL3pQ')),
+    ('EMP02', 'María', 'Martínez', 'Fernández', 'Rodríguez', 'CON002', 'Vendedor', 'DIR002', '1985-07-21', AES_ENCRYPT('vendedor44', 'aB7xY9zL3pQ')),
+    ('EMP03', 'Carlos', 'Gómez', 'Sánchez', 'Díaz', 'CON003', 'Cajero', 'DIR003', '1990-11-10', AES_ENCRYPT('cajero1123', 'aB7xY9zL3pQ')),
+    ('EMP04', 'Laura', 'Torres', 'Jiménez', 'Hernández', 'CON004', 'Reponedor', 'DIR004', '1993-03-30', AES_ENCRYPT('repo4467', 'aB7xY9zL3pQ')),
+    ('EMP05', 'Pedro', 'Ruiz', 'Alvarez', 'Santos', 'CON005', 'Vendedor', 'DIR005', '1988-05-05', AES_ENCRYPT('vendedor11', 'aB7xY9zL3pQ')),
+    ('EMP06', 'Flavio', 'Sebastian', 'Villanueva', 'Medina', NULL, 'Reponedor', NULL, '2004-01-28', AES_ENCRYPT('reponedor4324', 'aB7xY9zL3pQ'));
 
 -- Insertar datos de categorías de productos
 INSERT INTO categoria (id_ctg, nom_ctg)
