@@ -12,35 +12,17 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     @Override
     public void adiEmpleado(empleado e){
         Connection cn = MySQLConexion.getConexion();
-        String sql = "INSERT INTO empleado (id_emp, nom_pat_emp, nom_mat_emp, "
-                + "ape_pat_emp, ape_mat_emp,cargo_emp,fech_nac_emp,"
-                + " password_emp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "{CALL spAdicionEmpleado (?, ?, ?, ?, ?, ?, ?)}";
         try{           
             CallableStatement st=cn.prepareCall(sql);
-            st.setString(1, e.getId_emp());
-            st.setString(2, e.getNom_pat_emp());
-            st.setString(3, e.getNom_mat_emp());
-            st.setString(4, e.getApe_pat_emp());
-            st.setString(5, e.getApe_mat_emp());
-            /*st.setString(6, e.getDatos_contacto_emp().getId_contac());*/
-            /*// Verificar si Id_contac es nulo antes de establecerlo
-            if (e.getDatos_contacto_emp().getId_contac() != null) {
-                st.setString(6, e.getDatos_contacto_emp().getId_contac());
-            } else {
-                st.setNull(6, Types.VARCHAR);
-            }*/
-            st.setString(6, e.getCargo_emp());
-            /*st.setString(8, e.getDatos_ubigeo_emp().getId_ubigeo());*/
-            /*// Verificar si Id_ubigeo es nulo antes de establecerlo
-            if (e.getDatos_ubigeo_emp().getId_ubigeo() != null) {
-                st.setString(8, e.getDatos_ubigeo_emp().getId_ubigeo());
-            } else {
-                st.setNull(8, Types.VARCHAR);
-            }*/
-            st.setString(7, e.getFech_nac_emp());         
-            st.setString(8, e.getPassword_emp());
+            st.setString(1, e.getNom_pat_emp());
+            st.setString(2, e.getNom_mat_emp());
+            st.setString(3, e.getApe_pat_emp());
+            st.setString(4, e.getApe_mat_emp());
+            st.setString(5, e.getCargo_emp());
+            st.setString(6, e.getFech_nac_emp());         
+            st.setString(7, e.getPassword_emp());
             int rowsAffected = st.executeUpdate();
-    // Hacer algo con el resultado si es necesario        
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -51,13 +33,18 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         List<empleado> lista=new ArrayList();
         Connection cn=MySQLConexion.getConexion();
         try{
-           String sql="select id_emp, nom_pat_emp from empleado";
+           String sql="select id_emp, nom_pat_emp, ape_pat_emp, ape_mat_emp, cargo_emp, fech_nac_emp from empleado";
            PreparedStatement st=cn.prepareStatement(sql);
            ResultSet rs=st.executeQuery();
            while(rs.next()){
                empleado men=new empleado();
                men.setId_emp(rs.getString(1));
                men.setNom_pat_emp(rs.getString(2));
+               men.setApe_pat_emp(rs.getString(3));
+               men.setApe_mat_emp(rs.getString(4));
+               men.setCargo_emp(rs.getString(5));
+               men.setFech_nac_emp(rs.getString(6));
+
                lista.add(men);
            }
         }catch(Exception ex){
@@ -65,6 +52,73 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         return lista;  
     }
+    
+    @Override
+    public void adiContactoEmp(contacto c){
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spAdiContactoEmp (?, ?, ?)}";
+        try{           
+            CallableStatement st=cn.prepareCall(sql);
+            st.setString(1, c.getTipo_contac());
+            st.setString(2, c.getTelef_contac());
+            st.setString(3, c.getEmail_contac());
+            int rowsAffected = st.executeUpdate();
+    // Hacer algo con el resultado si es necesario        
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    @Override        
+    public void adiUbigeoEmp(ubigeo u){
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spAdiUbigeoEmp(?, ?, ?, ?, ?)}";
+        try{           
+            CallableStatement st=cn.prepareCall(sql);
+            //st.setString(1, e.getId_emp());
+            st.setString(1, u.getDistrito_ubi());
+            st.setString(2, u.getProvincia_ubi());
+            st.setString(3, u.getCalle_avend_ubi());
+            st.setInt(4, u.getNum_calle_ubi());
+            st.setString(5, u.getReferencia_ubi());
+            int rowsAffected = st.executeUpdate();
+        // Hacer algo con el resultado si es necesario        
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }     
+    
+    @Override
+    public String obtenerUltimoIdEmpleado() {
+    Connection cn = MySQLConexion.getConexion();
+    String ultimoIdEmp = null;
+
+    try {
+        // Realizar la consulta SQL para obtener el último id_emp
+        String sql = "SELECT MAX(id_emp) FROM empleado";
+        PreparedStatement pst = cn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            String maxId = rs.getString(1);
+            
+            if (maxId != null) {
+                // Extraer los últimos dos dígitos
+                int num = Integer.parseInt(maxId.substring(3));
+                
+                // Incrementar en 1 y formatear como cadena con dos dígitos
+                String nuevoNum = String.format("%02d", num + 1);
+                
+                // Formar el nuevo id_emp
+                ultimoIdEmp = "EMP" + nuevoNum;
+            }
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+
+    return ultimoIdEmp;
+}
 
     @Override
     public void adiContacto(contacto contac) {

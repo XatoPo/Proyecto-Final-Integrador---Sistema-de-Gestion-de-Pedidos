@@ -12,5 +12,7 @@ public interface registros {
     void adiProducto(producto produc);
     void adiProovedor(proovedor prov);
     void adiUbigeo(ubigeo ubigeo);
+    void adiContactoEmp(contacto c);
+    void adiUbigeoEmp(ubigeo u);
 
 }

@@ -461,3 +461,111 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- PROCEDURE PARA AGREGAR UN NUEVO EMPLEADO
+DELIMITER @@
+CREATE PROCEDURE spAdicionEmpleado(
+    IN nom_pat_emp VARCHAR(25),
+    IN nom_mat_emp VARCHAR(25),
+    IN ape_pat_emp VARCHAR(25),
+    IN ape_mat_emp VARCHAR(25),
+    IN cargo_emp VARCHAR(20),
+    IN fech_nac_emp DATE,
+    IN password_emp VARBINARY(255) 
+)
+BEGIN
+    DECLARE nuevoID CHAR(5);
+
+    -- Generar nuevo ID para empleado
+    SET nuevoID = CONCAT('EMP', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_emp, 4)) + 1, 1) FROM empleado), 2, '0'));
+
+    -- Insertar el nuevo empleado
+    INSERT INTO empleado (
+        id_emp,
+        nom_pat_emp,
+        nom_mat_emp,
+        ape_pat_emp,
+        ape_mat_emp,
+        cargo_emp,
+        fech_nac_emp,
+        password_emp
+    ) VALUES (
+        nuevoID,
+        nom_pat_emp,
+        nom_mat_emp,
+        ape_pat_emp,
+        ape_mat_emp,
+        cargo_emp,
+        fech_nac_emp,
+        CAST(AES_ENCRYPT(password_emp, 'aB7xY9zL3pQ') AS CHAR)
+    );
+END@@
+
+DELIMITER ;
+
+
+
+-- PROCEDURE PARA AGREGAR CONTACTO AL EMPLEADO
+DELIMITER @@
+CREATE PROCEDURE spAdiContactoEmp(
+    IN tipo_contac VARCHAR(50),
+    IN telef_contac VARCHAR(15),
+    IN email_contac VARCHAR(100)
+)
+BEGIN
+    DECLARE nuevoID_contac CHAR(6);
+    DECLARE ultimoID_emp CHAR(5);
+
+    -- Obtener el último ID de empleado
+    SELECT id_emp INTO ultimoID_emp
+    FROM empleado
+    ORDER BY id_emp DESC
+    LIMIT 1;
+
+    -- Generar nuevo ID para contacto
+    SET nuevoID_contac = CONCAT('CON', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_contac, 4)) + 1, 1) FROM contacto), 3, '0'));
+
+    -- Insertar el nuevo contacto
+    INSERT INTO contacto (id_contac, tipo_contac, telef_contac, email_contac)
+    VALUES (nuevoID_contac, tipo_contac, telef_contac, email_contac);
+
+    -- Actualizar el ID de contacto en el último empleado
+    UPDATE empleado
+    SET id_contac = nuevoID_contac
+    WHERE id_emp = ultimoID_emp;
+END@@
+DELIMITER ;
+
+
+-- PROCEDURE PARA AGREGAR UBIGEO AL EMPLEADO
+DELIMITER @@
+CREATE PROCEDURE spAdiUbigeoEmp(
+    IN distrito_ubi VARCHAR(20),	
+    IN provincia_ubi VARCHAR(20),
+    IN calle_avend_ubi VARCHAR(50),
+    IN num_calle_ubi INT,
+    IN referencia_ubi VARCHAR(150)
+)
+BEGIN
+    DECLARE nuevoID_ubigeo CHAR(6);
+    DECLARE ultimoID_emp CHAR(5);
+
+    -- Obtener el último ID de empleado
+    SELECT id_emp INTO ultimoID_emp
+    FROM empleado
+    ORDER BY id_emp DESC
+    LIMIT 1;
+
+    -- Generar nuevo ID para ubigeo
+    SET nuevoID_ubigeo = CONCAT('DIR', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_ubigeo, 4)) + 1, 1) FROM ubigeo), 3, '0'));
+
+    -- Insertar el nuevo ubigeo
+    INSERT INTO ubigeo (id_ubigeo, distrito_ubi, provincia_ubi, calle_avend_ubi, num_calle_ubi, referencia_ubi)
+    VALUES (nuevoID_ubigeo, distrito_ubi, provincia_ubi, calle_avend_ubi, num_calle_ubi, referencia_ubi);
+
+    -- Actualizar el ID de ubigeo en el último empleado
+    UPDATE empleado
+    SET id_ubigeo = nuevoID_ubigeo
+    WHERE id_emp = ultimoID_emp;
+END@@
+DELIMITER ;

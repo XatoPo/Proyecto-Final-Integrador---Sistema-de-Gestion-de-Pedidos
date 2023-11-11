@@ -5,7 +5,12 @@ public class contacto {
     private String tipo_contac;
     private String telef_contac;
     private String email_contac;
+    private String id_emp;
 
+    public void setId_emp(String id_emp) {
+        this.id_emp = id_emp;
+    }
+    
     public String getEmail_contac() {
         return email_contac;
     }
