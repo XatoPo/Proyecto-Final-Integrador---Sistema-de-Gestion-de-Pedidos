@@ -4,15 +4,23 @@ package Formularios;
 import clases.*;
 import controlador.*;
 import java.awt.Component;
+import java.awt.Image;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 public class frmEmpleado extends javax.swing.JFrame {
 
 
     public frmEmpleado() {
         initComponents();
         setLocationRelativeTo(null);
+        EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
+        EscaladoImagenesButton(btnGabarEmpleado, "src\\main\\java\\recursos\\AgregarEmpleado_(2).png");
+        EscaladoImagenesButton(btnNuevoEmp, "src\\main\\java\\recursos\\limpieza-de-datos_(1).png");
         muestra();
         bloquear();
         bloquear2();
@@ -101,7 +109,7 @@ public class frmEmpleado extends javax.swing.JFrame {
         txtCalleEmp = new javax.swing.JTextField();
         txtNroCalleEmp = new javax.swing.JTextField();
         btnNuevoEmp = new javax.swing.JButton();
-        jLabel18 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -109,7 +117,6 @@ public class frmEmpleado extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setText("REGISTRO EMPLEADO");
 
-        btnGabarEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/AgregarEmpleado (2).png"))); // NOI18N
         btnGabarEmpleado.setText("GRABAR");
         btnGabarEmpleado.setToolTipText("");
         btnGabarEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -286,15 +293,12 @@ public class frmEmpleado extends javax.swing.JFrame {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        btnNuevoEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/limpieza-de-datos (1).png"))); // NOI18N
         btnNuevoEmp.setText("NUEVO");
         btnNuevoEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoEmpActionPerformed(evt);
             }
         });
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mass (1).png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,9 +324,6 @@ public class frmEmpleado extends javax.swing.JFrame {
                                         .addComponent(txtPrimerNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(btnGabarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -332,7 +333,8 @@ public class frmEmpleado extends javax.swing.JFrame {
                                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(0, 0, Short.MAX_VALUE))
                                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                            .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(62, 62, 62)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +362,7 @@ public class frmEmpleado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbActivaContactoEmp)
@@ -559,6 +561,20 @@ public class frmEmpleado extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void EscaladoImagenesLabel(JLabel labelFondo, String ruta){
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelFondo.getWidth(), labelFondo.getHeight(), Image.SCALE_DEFAULT));
+        labelFondo.setIcon(icon);
+        this.repaint();
+    }
+    
+    private void EscaladoImagenesButton(JButton botonFondo, String ruta){
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        botonFondo.setIcon(icon);
+        this.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGabarEmpleado;
@@ -576,7 +592,6 @@ public class frmEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -588,6 +603,7 @@ public class frmEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelContactoEmp;
     private javax.swing.JPanel jPanelUbigeoEmp;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JTable tablaEmp;
     private javax.swing.JTextField txtCalleEmp;
     private javax.swing.JTextField txtCorreoEmp;

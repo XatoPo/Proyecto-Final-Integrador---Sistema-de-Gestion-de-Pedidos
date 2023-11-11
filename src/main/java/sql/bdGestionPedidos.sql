@@ -436,7 +436,6 @@ VALUES
     ('PROV44', 'CON049');
 
 -- Procedure para login
--- Procedure para login
 DELIMITER //
 
 CREATE PROCEDURE sp_login_emp(
