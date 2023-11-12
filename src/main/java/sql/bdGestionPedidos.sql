@@ -26,7 +26,9 @@ CREATE TABLE proveedor (
     nom_prov VARCHAR(50) NOT NULL, -- Nombre del proveedor
     descd_prov TEXT, -- Descripción del proveedor
     id_ubigeo CHAR(6) NULL, -- ID único de la dirección
-    FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo) -- Relación con dirección
+    id_contac CHAR(6) NULL,
+    FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo), -- Relación con dirección
+    FOREIGN KEY (id_contac) REFERENCES contacto(id_contac) -- Relación con contacto
 );
 
 -- Tabla de Empleados
@@ -43,15 +45,6 @@ CREATE TABLE empleado (
     password_emp VARBINARY(255) NOT NULL,
     FOREIGN KEY (id_contac) REFERENCES contacto(id_contac),
     FOREIGN KEY (id_ubigeo) REFERENCES ubigeo(id_ubigeo)
-);
-
--- Tabla de relación para múltiples contactos por proveedor
-CREATE TABLE proveedor_contacto (
-    id_prov CHAR(6), -- ID único del proveedor
-    id_contac CHAR(6), -- ID único del contacto
-    PRIMARY KEY (id_prov, id_contac), -- Clave compuesta
-    FOREIGN KEY (id_prov) REFERENCES proveedor(id_prov), -- Relación con proveedor
-    FOREIGN KEY (id_contac) REFERENCES contacto(id_contac) -- Relación con contacto
 );
 
 -- Tabla de Categorías
@@ -346,100 +339,52 @@ VALUES
     ('PROD050', 'Papel Higiénico', 'Scott', 43.00, 30, 'CTG09', 'Caja');
 
 -- Insertar datos de proveedores basados en las empresas mencionadas
-INSERT INTO proveedor (id_prov, nom_prov, descd_prov, id_ubigeo)
+INSERT INTO proveedor (id_prov, nom_prov, descd_prov, id_ubigeo, id_contac)
 VALUES
-    ('PROV01', 'The Coca-Cola Company', 'Proveedor de bebidas', 'DIR010'),
-    ('PROV02', 'Backus', 'Proveedor de cervezas', 'DIR011'),
-    ('PROV03', 'San Mateo', 'Proveedor de agua', 'DIR012'),
-    ('PROV04', 'Inka Tea', 'Proveedor de infusiones', 'DIR013'),
-    ('PROV05', 'Don Jorge', 'Proveedor de bebidas', 'DIR014'),
-    ('PROV06', 'Red Bull', 'Proveedor de bebidas energizantes', 'DIR015'),
-    ('PROV07', 'Bimbo', 'Proveedor de panadería', 'DIR016'),
-    ('PROV08', 'Tanta', 'Proveedor de panadería', 'DIR017'),
-    ('PROV09', 'Pasquale', 'Proveedor de panadería', 'DIR018'),
-    ('PROV10', 'Mistura', 'Proveedor de panadería', 'DIR019'),
-    ('PROV11', 'La Mora', 'Proveedor de panadería', 'DIR020'),
-    ('PROV12', 'Pan de la Chola', 'Proveedor de panadería', 'DIR021'),
-    ('PROV13', 'Inka Chips', 'Proveedor de snacks', 'DIR022'),
-    ('PROV14', 'Lays', 'Proveedor de snacks', 'DIR023'),
-    ('PROV15', 'La Ibérica', 'Proveedor de chocolates', 'DIR024'),
-    ('PROV16', 'Field', 'Proveedor de snacks', 'DIR025'),
-    ('PROV17', 'El Ídolo', 'Proveedor de snacks', 'DIR026'),
-    ('PROV18', 'Gloria', 'Proveedor de lácteos', 'DIR027'),
-    ('PROV19', 'Yoplait', 'Proveedor de productos lácteos', 'DIR028'),
-    ('PROV20', 'Almendrina', 'Proveedor de leche de almendras', 'DIR029'),
-    ('PROV21', 'Bonle', 'Proveedor de lácteos', 'DIR030'),
-    ('PROV22', 'Ace', 'Proveedor de productos de limpieza', 'DIR031'),
-    ('PROV23', 'Sapolio', 'Proveedor de productos de limpieza', 'DIR032'),
-    ('PROV24', 'Poett', 'Proveedor de productos de limpieza', 'DIR033'),
-    ('PROV25', 'Nova', 'Proveedor de productos de limpieza', 'DIR034'),
-    ('PROV26', 'Noria', 'Proveedor de productos de limpieza', 'DIR035'),
-    ('PROV27', 'Pink Lady', 'Proveedor de frutas y verduras', 'DIR036'),
-    ('PROV28', 'Del Monte', 'Proveedor de frutas y verduras', 'DIR037'),
-    ('PROV29', 'San Fernando', 'Proveedor de frutas y verduras', 'DIR038'),
-    ('PROV30', 'San Camilo', 'Proveedor de frutas y verduras', 'DIR039'),
-    ('PROV31', 'Santa Rosa', 'Proveedor de frutas y verduras', 'DIR040'),
-    ('PROV32', 'La Chacra', 'Proveedor de carnes y aves', 'DIR041'),
-    ('PROV33', 'El Campesino', 'Proveedor de carnes y aves', 'DIR042'),
-    ('PROV34', 'Todini', 'Proveedor de embutidos', 'DIR043'),
-    ('PROV35', 'DiGiorno', 'Proveedor de alimentos congelados', 'DIR044'),
-    ('PROV36', 'McCain', 'Proveedor de alimentos congelados', 'DIR045'),
-    ('PROV37', 'Tyson', 'Proveedor de alimentos congelados', 'DIR046'),
-    ('PROV38', 'Gorton’s', 'Proveedor de alimentos congelados', 'DIR047'),
-    ('PROV39', 'Birds Eye', 'Proveedor de alimentos congelados', 'DIR048'),
-    ('PROV40', 'Pantene', 'Proveedor de productos de cuidado personal', 'DIR049'),
-    ('PROV41', 'Sedal', 'Proveedor de productos de cuidado personal', 'DIR050'),
-    ('PROV42', 'Dove', 'Proveedor de productos de cuidado personal', 'DIR026'),
-    ('PROV43', 'Rexona', 'Proveedor de productos de cuidado personal', 'DIR026'),
-    ('PROV44', 'Scott', 'Proveedor de productos de cuidado personal', 'DIR026');
-
--- Insertar datos de contacto para los proveedores en la tabla de relación proveedor_contacto
-INSERT INTO proveedor_contacto (id_prov, id_contac)
-VALUES
-    ('PROV01', 'CON006'),
-    ('PROV02', 'CON007'),
-    ('PROV03', 'CON008'),
-    ('PROV04', 'CON009'),
-    ('PROV05', 'CON010'),
-    ('PROV06', 'CON011'),
-    ('PROV07', 'CON012'),
-    ('PROV08', 'CON013'),
-    ('PROV09', 'CON014'),
-    ('PROV10', 'CON015'),
-    ('PROV11', 'CON016'),
-    ('PROV12', 'CON017'),
-    ('PROV13', 'CON018'),
-    ('PROV14', 'CON019'),
-    ('PROV15', 'CON020'),
-    ('PROV16', 'CON021'),
-    ('PROV17', 'CON022'),
-    ('PROV18', 'CON023'),
-    ('PROV19', 'CON024'),
-    ('PROV20', 'CON025'),
-    ('PROV21', 'CON026'),
-    ('PROV22', 'CON027'),
-    ('PROV23', 'CON028'),
-    ('PROV24', 'CON029'),
-    ('PROV25', 'CON030'),
-    ('PROV26', 'CON031'),
-    ('PROV27', 'CON032'),
-    ('PROV28', 'CON033'),
-    ('PROV29', 'CON034'),
-    ('PROV30', 'CON035'),
-    ('PROV31', 'CON036'),
-    ('PROV32', 'CON037'),
-    ('PROV33', 'CON038'),
-    ('PROV34', 'CON039'),
-    ('PROV35', 'CON040'),
-    ('PROV36', 'CON041'),
-    ('PROV37', 'CON042'),
-    ('PROV38', 'CON043'),
-    ('PROV39', 'CON044'),
-    ('PROV40', 'CON045'),
-    ('PROV41', 'CON046'),
-    ('PROV42', 'CON047'),
-    ('PROV43', 'CON048'),
-    ('PROV44', 'CON049');
+    ('PROV01', 'The Coca-Cola Company', 'Proveedor de bebidas', 'DIR010', 'CON006'),
+    ('PROV02', 'Backus', 'Proveedor de cervezas', 'DIR011', 'CON007'),
+    ('PROV03', 'San Mateo', 'Proveedor de agua', 'DIR012', 'CON008'),
+    ('PROV04', 'Inka Tea', 'Proveedor de infusiones', 'DIR013', 'CON009'),
+    ('PROV05', 'Don Jorge', 'Proveedor de bebidas', 'DIR014', 'CON010'),
+    ('PROV06', 'Red Bull', 'Proveedor de bebidas energizantes', 'DIR015', 'CON011'),
+    ('PROV07', 'Bimbo', 'Proveedor de panadería', 'DIR016', 'CON012'),
+    ('PROV08', 'Tanta', 'Proveedor de panadería', 'DIR017', 'CON013'),
+    ('PROV09', 'Pasquale', 'Proveedor de panadería', 'DIR018', 'CON014'),
+    ('PROV10', 'Mistura', 'Proveedor de panadería', 'DIR019', 'CON015'),
+    ('PROV11', 'La Mora', 'Proveedor de panadería', 'DIR020', 'CON016'),
+    ('PROV12', 'Pan de la Chola', 'Proveedor de panadería', 'DIR021', 'CON017'),
+    ('PROV13', 'Inka Chips', 'Proveedor de snacks', 'DIR022', 'CON018'),
+    ('PROV14', 'Lays', 'Proveedor de snacks', 'DIR023', 'CON019'),
+    ('PROV15', 'La Ibérica', 'Proveedor de chocolates', 'DIR024', 'CON020'),
+    ('PROV16', 'Field', 'Proveedor de snacks', 'DIR025', 'CON021'),
+    ('PROV17', 'El Ídolo', 'Proveedor de snacks', 'DIR026', 'CON022'),
+    ('PROV18', 'Gloria', 'Proveedor de lácteos', 'DIR027', 'CON023'),
+    ('PROV19', 'Yoplait', 'Proveedor de productos lácteos', 'DIR028', 'CON024'),
+    ('PROV20', 'Almendrina', 'Proveedor de leche de almendras', 'DIR029', 'CON025'),
+    ('PROV21', 'Bonle', 'Proveedor de lácteos', 'DIR030', 'CON026'),
+    ('PROV22', 'Ace', 'Proveedor de productos de limpieza', 'DIR031', 'CON027'),
+    ('PROV23', 'Sapolio', 'Proveedor de productos de limpieza', 'DIR032', 'CON028'),
+    ('PROV24', 'Poett', 'Proveedor de productos de limpieza', 'DIR033', 'CON029'),
+    ('PROV25', 'Nova', 'Proveedor de productos de limpieza', 'DIR034', 'CON030'),
+    ('PROV26', 'Noria', 'Proveedor de productos de limpieza', 'DIR035', 'CON031'),
+    ('PROV27', 'Pink Lady', 'Proveedor de frutas y verduras', 'DIR036', 'CON032'),
+    ('PROV28', 'Del Monte', 'Proveedor de frutas y verduras', 'DIR037', 'CON033'),
+    ('PROV29', 'San Fernando', 'Proveedor de frutas y verduras', 'DIR038', 'CON034'),
+    ('PROV30', 'San Camilo', 'Proveedor de frutas y verduras', 'DIR039', 'CON035'),
+    ('PROV31', 'Santa Rosa', 'Proveedor de frutas y verduras', 'DIR040', 'CON036'),
+    ('PROV32', 'La Chacra', 'Proveedor de carnes y aves', 'DIR041', 'CON037'),
+    ('PROV33', 'El Campesino', 'Proveedor de carnes y aves', 'DIR042', 'CON038'),
+    ('PROV34', 'Todini', 'Proveedor de embutidos', 'DIR043', 'CON039'),
+    ('PROV35', 'DiGiorno', 'Proveedor de alimentos congelados', 'DIR044', 'CON040'),
+    ('PROV36', 'McCain', 'Proveedor de alimentos congelados', 'DIR045', 'CON041'),
+    ('PROV37', 'Tyson', 'Proveedor de alimentos congelados', 'DIR046', 'CON042'),
+    ('PROV38', 'Gorton’s', 'Proveedor de alimentos congelados', 'DIR047', 'CON043'),
+    ('PROV39', 'Birds Eye', 'Proveedor de alimentos congelados', 'DIR048', 'CON044'),
+    ('PROV40', 'Pantene', 'Proveedor de productos de cuidado personal', 'DIR049', 'CON045'),
+    ('PROV41', 'Sedal', 'Proveedor de productos de cuidado personal', 'DIR050', 'CON046'),
+    ('PROV42', 'Dove', 'Proveedor de productos de cuidado personal', 'DIR026', 'CON047'),
+    ('PROV43', 'Rexona', 'Proveedor de productos de cuidado personal', 'DIR026', 'CON048'),
+    ('PROV44', 'Scott', 'Proveedor de productos de cuidado personal', 'DIR026', 'CON049');
 
 -- Procedure para login
 DELIMITER //
@@ -620,6 +565,60 @@ BEGIN
         AND c.nom_ctg = nombreCategoria;
 END //
 DELIMITER ;
+
+-- Procedure para listar todos los datos de un proovedor
+DELIMITER //
+CREATE PROCEDURE obtenerTodosLosProveedoresDatos()
+BEGIN
+    SELECT
+        p.id_prov,
+        p.nom_prov,
+        p.descd_prov,
+        u.id_ubigeo,
+        u.distrito_ubi,
+        u.provincia_ubi,
+        u.calle_avend_ubi,
+        u.num_calle_ubi,
+        u.referencia_ubi,
+        c.id_contac,
+        c.tipo_contac AS tipo_contacto,
+        c.telef_contac,
+        c.email_contac
+    FROM
+        proveedor p
+        LEFT JOIN ubigeo u ON p.id_ubigeo = u.id_ubigeo
+        LEFT JOIN contacto c ON p.id_contac = c.id_contac;
+END //
+DELIMITER ;
+
+
+-- Procedure para listar todos los datos de todos los proovedores
+DELIMITER //
+CREATE PROCEDURE obtenerDatosProveedor(IN codigoProveedor CHAR(6))
+BEGIN
+    SELECT
+        p.id_prov,
+        p.nom_prov,
+        p.descd_prov,
+        u.id_ubigeo,
+        u.distrito_ubi,
+        u.provincia_ubi,
+        u.calle_avend_ubi,
+        u.num_calle_ubi,
+        u.referencia_ubi,
+        c.id_contac,
+        c.tipo_contac AS tipo_contacto,
+        c.telef_contac,
+        c.email_contac
+    FROM
+        proveedor p
+        LEFT JOIN ubigeo u ON p.id_ubigeo = u.id_ubigeo
+        LEFT JOIN contacto c ON p.id_contac = c.id_contac
+    WHERE
+        p.id_prov = codigoProveedor;
+END //
+DELIMITER ;
+
 
 -- PROCEDURE PARA AGREGAR UN NUEVO EMPLEADO
 DELIMITER @@

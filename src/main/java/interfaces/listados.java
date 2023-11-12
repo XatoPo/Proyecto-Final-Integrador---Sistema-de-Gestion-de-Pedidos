@@ -25,4 +25,6 @@ public interface listados {
     List<producto> obtenerProductosPorMarcaYCategoria(String marca_produc, String nom_ctg);
     /*------------------------------------------------------*/
     List<empleado> obtenerTodosLosEmpleadosDatos();
+    /*------------------------------------------------------*/
+    List<proovedor> obtenerTodosLosProveedoresDatos();
 }

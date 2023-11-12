@@ -1,24 +1,22 @@
 package clases;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class proovedor{
     private String id_prov;
     private String nom_prov;
     private String descd_prov;
     private ubigeo datos_ubigeo_prov;
-    private List<contacto> datos_contacto_prov;
+    private contacto datos_contacto_prov;
     
     public proovedor() {
     }
     
     // Constructor que no recibe el ID como argumento
-    public proovedor(String nom_prov, String descd_prov, ubigeo datos_ubigeo_prov, List<contacto> datos_contacto_prov) {
+    public proovedor(String nom_prov, String descd_prov, ubigeo datos_ubigeo_prov, contacto datos_contacto_prov) {
         this.nom_prov = nom_prov;
         this.descd_prov = descd_prov;
         this.datos_ubigeo_prov = datos_ubigeo_prov;
-        this.datos_contacto_prov = new ArrayList<>();
+        this.datos_contacto_prov = datos_contacto_prov;
     }
 
     public String getId_prov() {
@@ -53,11 +51,11 @@ public class proovedor{
         this.datos_ubigeo_prov = datos_ubigeo_prov;
     }
 
-    public List<contacto> getDatos_contacto_prov() {
+    public contacto getDatos_contacto_prov() {
         return datos_contacto_prov;
     }
 
-    public void setDatos_contacto_prov(List<contacto> datos_contacto_prov) {
+    public void setDatos_contacto_prov(contacto datos_contacto_prov) {
         this.datos_contacto_prov = datos_contacto_prov;
     }
 

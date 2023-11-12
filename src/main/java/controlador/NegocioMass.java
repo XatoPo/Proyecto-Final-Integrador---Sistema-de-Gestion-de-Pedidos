@@ -480,5 +480,40 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         
         return emp;
     }
+
+    @Override
+    public List<proovedor> obtenerTodosLosProveedoresDatos() {
+        List<proovedor> list_prov = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerTodosLosEmpleadosDatos()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                proovedor prov = new proovedor();
+                prov.setId_prov(rs.getString(1));
+                prov.setNom_prov(rs.getString(2));
+                prov.setDescd_prov(rs.getString(3));
+                prov.getDatos_ubigeo_prov().setId_ubigeo(rs.getString(4));
+                prov.getDatos_ubigeo_prov().setDistrito_ubi(rs.getString(5));
+                prov.getDatos_ubigeo_prov().setProvincia_ubi(rs.getString(6));
+                prov.getDatos_ubigeo_prov().setCalle_avend_ubi(rs.getString(7));
+                prov.getDatos_ubigeo_prov().setNum_calle_ubi(rs.getInt(8));
+                prov.getDatos_ubigeo_prov().setReferencia_ubi(rs.getString(9));
+                prov.getDatos_contacto_prov().getId_contac();
+                list_prov.add(prov);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_prov;
+    }
+
+    @Override
+    public proovedor obtenerDatosProveedor(String id_prov) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
