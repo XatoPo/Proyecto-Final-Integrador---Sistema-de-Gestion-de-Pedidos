@@ -436,15 +436,11 @@ public class frmEmpleado extends javax.swing.JFrame {
         if (cbActivaContactoEmp.isSelected()) {
 
             // Llamada al método de la clase de negocios para obtener el último id_emp
-            String idEmpRecienInsertado = obj.obtenerUltimoIdEmpleado();
             contacto c = new contacto();
             // Asignar valores a las propiedades del objeto contacto
             c.setTipo_contac(cmbTipoContactoEmp.getSelectedItem().toString());
             c.setTelef_contac(txtTelEmp.getText());
             c.setEmail_contac(txtCorreoEmp.getText());
-
-            // Asignar el id_emp recién insertado directamente a la propiedad id_emp de contacto
-            //c.setId_emp(idEmpRecienInsertado);
 
             // Asignar el objeto contacto al empleado
             e.setDatos_contacto_emp(c);
@@ -455,8 +451,6 @@ public class frmEmpleado extends javax.swing.JFrame {
         
         //Registrar datos de ubigeo de empleado con if para que pueda ser NULL
         if (cbActivaUbigeoEmp.isSelected()) {
-            // Llamada al método de la clase de negocios para obtener el último id_emp
-            String idEmpRecienInsertado = obj.obtenerUltimoIdEmpleado();
             ubigeo u = new ubigeo();
             // Asignar valores a las propiedades del objeto ubigeo
             u.setDistrito_ubi(txtDistEmp.getText());
@@ -464,9 +458,6 @@ public class frmEmpleado extends javax.swing.JFrame {
             u.setCalle_avend_ubi(txtCalleEmp.getText());
             u.setNum_calle_ubi(Integer.parseInt(txtNroCalleEmp.getText()));
             u.setReferencia_ubi(txtRefUbigeoEmp.getText());
-
-            // Asignar el id_emp recién insertado directamente a la propiedad id_emp de ubigeo
-            //u.setId_emp(idEmpRecienInsertado);
 
             // Asignar el objeto ubigeo al empleado
             e.setDatos_ubigeo_emp(u);
