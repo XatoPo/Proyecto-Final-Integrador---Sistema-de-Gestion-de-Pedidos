@@ -10,7 +10,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import vistas.vistaRapidaProovedores;
+import vistas.*;
 
 public class frmPedido extends javax.swing.JFrame {
     
@@ -66,14 +66,13 @@ public class frmPedido extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
-        lblCodFactura = new javax.swing.JLabel();
+        lblCodPedido = new javax.swing.JLabel();
         btnNuevaFactura = new javax.swing.JButton();
-        txtCodFactura = new javax.swing.JTextField();
+        txtCodPedido = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(920, 830));
 
         panelFondo.setMinimumSize(new java.awt.Dimension(920, 830));
         panelFondo.setPreferredSize(new java.awt.Dimension(920, 830));
@@ -92,16 +91,21 @@ public class frmPedido extends javax.swing.JFrame {
         lblTitulo.setText("REGISTRO DE PEDIDO");
         panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 290, 50));
 
-        lblCodFactura.setText("Código de Factura:");
-        panelFondo.add(lblCodFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 40));
+        lblCodPedido.setText("Código de Pedido:");
+        panelFondo.add(lblCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 40));
 
         btnNuevaFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaFactura.setText("Nueva Factura");
+        btnNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaFacturaActionPerformed(evt);
+            }
+        });
         panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 170, 40));
 
-        txtCodFactura.setEditable(false);
-        txtCodFactura.setEnabled(false);
-        panelFondo.add(txtCodFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 150, 40));
+        txtCodPedido.setEditable(false);
+        txtCodPedido.setEnabled(false);
+        panelFondo.add(txtCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 150, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 830));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,6 +125,11 @@ public class frmPedido extends javax.swing.JFrame {
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         this.dispose();
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void btnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaFacturaActionPerformed
+        String new_id_pedi = mass.generarNuevoIDPedido();
+        txtCodPedido.setText(new_id_pedi);
+    }//GEN-LAST:event_btnNuevaFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,11 +184,11 @@ public class frmPedido extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevaFactura;
     private javax.swing.JLabel lblCerrar;
-    private javax.swing.JLabel lblCodFactura;
+    private javax.swing.JLabel lblCodPedido;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelFondo;
-    public javax.swing.JTextField txtCodFactura;
+    public javax.swing.JTextField txtCodPedido;
     // End of variables declaration//GEN-END:variables
 }

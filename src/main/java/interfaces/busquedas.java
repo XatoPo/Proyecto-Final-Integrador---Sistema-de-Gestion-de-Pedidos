@@ -10,4 +10,5 @@ public interface busquedas {
     List<categoria> obtenerNombresCategorias();
     empleado obtenerDatosUnEmpleado(String id_emp);
     proovedor obtenerDatosProveedor(String id_prov);
+    String generarNuevoIDPedido();
 }

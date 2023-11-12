@@ -173,11 +173,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
 
     @Override
-    public void adiPedido(pedido pedid, List<detalle_pedido> lista_productos) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void adiGuia(gui_entrega guia) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -434,6 +429,51 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
     
     @Override
+    public List<proovedor> obtenerTodosLosProveedoresDatos() {
+        List<proovedor> list_prov = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerTodosLosProveedoresDatos()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                proovedor prov = new proovedor();
+                prov.setId_prov(rs.getString(1));
+                prov.setNom_prov(rs.getString(2));
+                prov.setDescd_prov(rs.getString(3));
+
+                // Initialize datos_ubigeo_prov
+                ubigeo datos_ubigeo_prov = new ubigeo();
+                datos_ubigeo_prov.setId_ubigeo(rs.getString(4));
+                datos_ubigeo_prov.setDistrito_ubi(rs.getString(5));
+                datos_ubigeo_prov.setProvincia_ubi(rs.getString(6));
+                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(7));
+
+                // Handle 'NUM_CALLE_UBI' as an integer
+                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(8));
+
+                datos_ubigeo_prov.setReferencia_ubi(rs.getString(9));
+                prov.setDatos_ubigeo_prov(datos_ubigeo_prov);
+
+                // Initialize datos_contacto_prov
+                contacto datos_contacto_prov = new contacto();
+                datos_contacto_prov.setId_contac(rs.getString(10));
+                datos_contacto_prov.setTipo_contac(rs.getString(11));
+                datos_contacto_prov.setTelef_contac(rs.getString(12));
+                datos_contacto_prov.setEmail_contac(rs.getString(13));
+                prov.setDatos_contacto_prov(datos_contacto_prov);
+
+                list_prov.add(prov);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_prov;
+    }
+    
+    @Override
     public List<pedido> listPedido(String id_pedi) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -546,94 +586,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return emp;
     }
     
-    /*-----LOGIN-----*/
-    @Override
-    public empleado login_emp(String id_emp, String password_emp) {
-        empleado emp = null;
-        Connection connection = MySQLConexion.getConexion();
-        
-        String sql = "{CALL sp_login_emp(?, ?)}";
-        
-        try {
-            CallableStatement statement = connection.prepareCall(sql);
-            statement.setString(1, id_emp);
-            statement.setString(2, password_emp);
-            
-            ResultSet resultSet = statement.executeQuery();
-            
-            if (true) {
-                emp = new empleado();
-                
-                emp.setId_emp(resultSet.getString(1));
-                emp.setNom_pat_emp(resultSet.getString(2));
-                emp.setNom_mat_emp(resultSet.getString(3));
-                emp.setApe_pat_emp(resultSet.getString(4));
-                emp.setApe_mat_emp(resultSet.getString(5));
-                
-                contacto datos_contacto_prov = new contacto();
-                datos_contacto_prov.setId_contac(resultSet.getString(6));
-                emp.setDatos_contacto_emp(datos_contacto_prov);
-                
-                emp.setCargo_emp(resultSet.getString(7));
-                
-                ubigeo datos_ubigeo_prov = new ubigeo();
-                datos_ubigeo_prov.setId_ubigeo(resultSet.getString(8));
-                emp.setDatos_ubigeo_emp(datos_ubigeo_prov);
-                
-                emp.setFech_nac_emp(resultSet.getString(9));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return emp;
-    }
-
-    @Override
-    public List<proovedor> obtenerTodosLosProveedoresDatos() {
-        List<proovedor> list_prov = new ArrayList();
-        Connection cn = MySQLConexion.getConexion();
-        
-        try {
-            String sql = "{CALL obtenerTodosLosProveedoresDatos()}";
-            CallableStatement cs = cn.prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                proovedor prov = new proovedor();
-                prov.setId_prov(rs.getString(1));
-                prov.setNom_prov(rs.getString(2));
-                prov.setDescd_prov(rs.getString(3));
-
-                // Initialize datos_ubigeo_prov
-                ubigeo datos_ubigeo_prov = new ubigeo();
-                datos_ubigeo_prov.setId_ubigeo(rs.getString(4));
-                datos_ubigeo_prov.setDistrito_ubi(rs.getString(5));
-                datos_ubigeo_prov.setProvincia_ubi(rs.getString(6));
-                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(7));
-
-                // Handle 'NUM_CALLE_UBI' as an integer
-                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(8));
-
-                datos_ubigeo_prov.setReferencia_ubi(rs.getString(9));
-                prov.setDatos_ubigeo_prov(datos_ubigeo_prov);
-
-                // Initialize datos_contacto_prov
-                contacto datos_contacto_prov = new contacto();
-                datos_contacto_prov.setId_contac(rs.getString(10));
-                datos_contacto_prov.setTipo_contac(rs.getString(11));
-                datos_contacto_prov.setTelef_contac(rs.getString(12));
-                datos_contacto_prov.setEmail_contac(rs.getString(13));
-                prov.setDatos_contacto_prov(datos_contacto_prov);
-
-                list_prov.add(prov);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return list_prov;
-    }
-
     @Override
     public proovedor obtenerDatosProveedor(String id_prov) {
         proovedor prov = null;
@@ -676,6 +628,104 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         
         return prov;
+    }
+    
+    @Override
+    public String generarNuevoIDPedido() {
+        String id_pedi = null;
+        Connection cn = MySQLConexion.getConexion();
+        
+        String sql = "{CALL generarNuevoIDPedido()}";
+        
+        try {
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                id_pedi = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id_pedi;
+    }
+    
+    /*-----LOGIN-----*/
+    @Override
+    public empleado login_emp(String id_emp, String password_emp) {
+        empleado emp = null;
+        Connection connection = MySQLConexion.getConexion();
+        
+        String sql = "{CALL sp_login_emp(?, ?)}";
+        
+        try {
+            CallableStatement statement = connection.prepareCall(sql);
+            statement.setString(1, id_emp);
+            statement.setString(2, password_emp);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                emp = new empleado();
+                
+                emp.setId_emp(resultSet.getString(1));
+                emp.setNom_pat_emp(resultSet.getString(2));
+                emp.setNom_mat_emp(resultSet.getString(3));
+                emp.setApe_pat_emp(resultSet.getString(4));
+                emp.setApe_mat_emp(resultSet.getString(5));
+                
+                contacto datos_contacto_prov = new contacto();
+                datos_contacto_prov.setId_contac(resultSet.getString(6));
+                emp.setDatos_contacto_emp(datos_contacto_prov);
+                
+                emp.setCargo_emp(resultSet.getString(7));
+                
+                ubigeo datos_ubigeo_prov = new ubigeo();
+                datos_ubigeo_prov.setId_ubigeo(resultSet.getString(8));
+                emp.setDatos_ubigeo_emp(datos_ubigeo_prov);
+                
+                emp.setFech_nac_emp(resultSet.getString(9));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return emp;
+    }
+
+    @Override
+    public void registrarDetallePedido(String id_pedi, String id_produc, detalle_pedido deta_pedi) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql="{Call registrarDetallePedido(?, ?, ?, ?)}";
+        try{           
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, id_pedi);
+            st.setString(2, id_produc);
+            st.setInt(3, deta_pedi.getCant_produc_pedi());
+            st.setDouble(4, deta_pedi.getPrecio_empaq_produc());
+            ResultSet rs=st.executeQuery();
+            rs.next();         
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void registrarPedido(pedido pedi) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql="{Call registrarPedido(?, ?, ?, ?, ?, ?)}";
+        try {
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, pedi.getId_pedi());
+            st.setString(2, pedi.getFech_pedi());
+            st.setString(3, pedi.getHora_pedi());
+            st.setString(4, pedi.getId_prov());
+            st.setString(5, pedi.getId_emp());
+            st.setString(6, pedi.getEstado_pedi());
+            ResultSet rs=st.executeQuery();
+            rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

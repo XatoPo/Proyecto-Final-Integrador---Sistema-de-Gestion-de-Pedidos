@@ -726,10 +726,31 @@ BEGIN
 END@@
 DELIMITER ;
 
+-- Generar nuevo cod de pedido
+DELIMITER //
 
+CREATE PROCEDURE generarNuevoIDPedido()
+BEGIN
+    DECLARE nuevo_id_pedi CHAR(7);
+    DECLARE ultimo_numero INT;
 
+    -- Obtener el último número de pedido
+    SELECT MAX(CAST(SUBSTRING(id_pedi, 4) AS SIGNED)) INTO ultimo_numero
+    FROM pedido;
 
+    -- Si no hay pedidos existentes, establecer el primer número como 1
+    IF ultimo_numero IS NULL THEN
+        SET nuevo_id_pedi = 'PED0001';
+    ELSE
+        -- Incrementar el número y generar el nuevo ID de pedido
+        SET nuevo_id_pedi = CONCAT('PED', LPAD(ultimo_numero + 1, 4, '0'));
+    END IF;
 
+    -- Devolver el nuevo ID de pedido
+    SELECT nuevo_id_pedi AS NuevoIDPedido;
+END //
+
+DELIMITER ;
 
 
 -- PROCEDURE PARA AGREGAR UN NUEVO PROVEEDOR
@@ -811,3 +832,56 @@ BEGIN
     WHERE id_prov = ultimoID_prov;
 END@@
 DELIMITER ;
+
+-- Registro de detalle_pedido
+DELIMITER //
+
+CREATE PROCEDURE registrarDetallePedido(
+    IN p_id_pedi CHAR(7),
+    IN p_id_produc CHAR(7),
+    IN p_cant_produc_pedi INT,
+    IN p_precio_tot_pedi DECIMAL(10, 2)
+)
+BEGIN
+    DECLARE exit handler for SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
+    INSERT INTO detalle_pedido (id_pedi, id_produc, cant_produc_pedi, precio_tot_pedi)
+    VALUES (p_id_pedi, p_id_produc, p_cant_produc_pedi, p_precio_tot_pedi);
+
+    COMMIT;
+END //
+
+DELIMITER ;
+
+-- Registro de pedido
+DELIMITER //
+
+CREATE PROCEDURE registrarPedido(
+    IN p_id_pedi CHAR(7),
+    IN p_fech_pedi DATE,
+    IN p_hora_pedi TIME,
+    IN p_id_prov CHAR(6),
+    IN p_id_emp CHAR(5),
+    IN p_estado_pedi VARCHAR(20)
+)
+BEGIN
+    DECLARE exit handler for SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
+    INSERT INTO pedido (id_pedi, fech_pedi, hora_pedi, id_prov, id_emp, estado_pedi)
+    VALUES (p_id_pedi, p_fech_pedi, p_hora_pedi, p_id_prov, p_id_emp, p_estado_pedi);
+
+    COMMIT;
+END //
+
+DELIMITER ;
+
