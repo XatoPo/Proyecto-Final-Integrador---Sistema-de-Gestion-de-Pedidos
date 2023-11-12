@@ -388,23 +388,33 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
                 empleado emp = new empleado();
+                contacto datos_contacto_prov = new contacto();
+                ubigeo datos_ubigeo_prov = new ubigeo();
                 emp.setId_emp(rs.getString(1));
                 emp.setNom_pat_emp(rs.getString(2));
                 emp.setNom_mat_emp(rs.getString(3));
                 emp.setApe_pat_emp(rs.getString(4));
                 emp.setApe_mat_emp(rs.getString(5));
-                emp.getDatos_contacto_emp().setId_contac(rs.getString(6));
+                
+                datos_contacto_prov.setId_contac(rs.getString(6));
+                
                 emp.setCargo_emp(rs.getString(7));
-                emp.getDatos_ubigeo_emp().setId_ubigeo(rs.getString(8));
+                
+                datos_ubigeo_prov.setId_ubigeo(rs.getString(8));
+                
                 emp.setFech_nac_emp(rs.getString(9));
-                emp.getDatos_contacto_emp().setTipo_contac(rs.getString(10));
-                emp.getDatos_contacto_emp().setTelef_contac(rs.getString(11));
-                emp.getDatos_contacto_emp().setEmail_contac(rs.getString(12));
-                emp.getDatos_ubigeo_emp().setDistrito_ubi(rs.getString(13));
-                emp.getDatos_ubigeo_emp().setProvincia_ubi(rs.getString(14));
-                emp.getDatos_ubigeo_emp().setCalle_avend_ubi(rs.getString(15));
-                emp.getDatos_ubigeo_emp().setNum_calle_ubi(rs.getInt(16));
-                emp.getDatos_ubigeo_emp().setReferencia_ubi(rs.getString(17));
+                
+                datos_contacto_prov.setTipo_contac(rs.getString(10));
+                datos_contacto_prov.setTelef_contac(rs.getString(11));
+                datos_contacto_prov.setEmail_contac(rs.getString(12));
+                emp.setDatos_contacto_emp(datos_contacto_prov);
+                
+                datos_ubigeo_prov.setDistrito_ubi(rs.getString(13));
+                datos_ubigeo_prov.setProvincia_ubi(rs.getString(14));
+                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(15));
+                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(16));
+                datos_ubigeo_prov.setReferencia_ubi(rs.getString(17));
+                emp.setDatos_ubigeo_emp(datos_ubigeo_prov);
                 list_emp.add(emp);
             }
         } catch (Exception e) {
@@ -492,23 +502,33 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ResultSet rs = cs.executeQuery();
             if (rs.next()) {
                 emp = new empleado();
+                contacto datos_contacto_prov = new contacto();
+                ubigeo datos_ubigeo_prov = new ubigeo();
                 emp.setId_emp(rs.getString(1));
                 emp.setNom_pat_emp(rs.getString(2));
                 emp.setNom_mat_emp(rs.getString(3));
                 emp.setApe_pat_emp(rs.getString(4));
                 emp.setApe_mat_emp(rs.getString(5));
-                emp.getDatos_contacto_emp().setId_contac(rs.getString(6));
+                
+                datos_contacto_prov.setId_contac(rs.getString(6));
+                
                 emp.setCargo_emp(rs.getString(7));
-                emp.getDatos_ubigeo_emp().setId_ubigeo(rs.getString(8));
+                
+                datos_ubigeo_prov.setId_ubigeo(rs.getString(8));
+                
                 emp.setFech_nac_emp(rs.getString(9));
-                emp.getDatos_contacto_emp().setTipo_contac(rs.getString(10));
-                emp.getDatos_contacto_emp().setTelef_contac(rs.getString(11));
-                emp.getDatos_contacto_emp().setEmail_contac(rs.getString(12));
-                emp.getDatos_ubigeo_emp().setDistrito_ubi(rs.getString(13));
-                emp.getDatos_ubigeo_emp().setProvincia_ubi(rs.getString(14));
-                emp.getDatos_ubigeo_emp().setCalle_avend_ubi(rs.getString(15));
-                emp.getDatos_ubigeo_emp().setNum_calle_ubi(rs.getInt(16));
-                emp.getDatos_ubigeo_emp().setReferencia_ubi(rs.getString(17));
+                
+                datos_contacto_prov.setTipo_contac(rs.getString(10));
+                datos_contacto_prov.setTelef_contac(rs.getString(11));
+                datos_contacto_prov.setEmail_contac(rs.getString(12));
+                emp.setDatos_contacto_emp(datos_contacto_prov);
+                
+                datos_ubigeo_prov.setDistrito_ubi(rs.getString(13));
+                datos_ubigeo_prov.setProvincia_ubi(rs.getString(14));
+                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(15));
+                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(16));
+                datos_ubigeo_prov.setReferencia_ubi(rs.getString(17));
+                emp.setDatos_ubigeo_emp(datos_ubigeo_prov);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -540,9 +560,17 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
                 emp.setNom_mat_emp(resultSet.getString(3));
                 emp.setApe_pat_emp(resultSet.getString(4));
                 emp.setApe_mat_emp(resultSet.getString(5));
-                emp.getDatos_contacto_emp().setId_contac(resultSet.getString(6));
+                
+                contacto datos_contacto_prov = new contacto();
+                datos_contacto_prov.setId_contac(resultSet.getString(6));
+                emp.setDatos_contacto_emp(datos_contacto_prov);
+                
                 emp.setCargo_emp(resultSet.getString(7));
-                emp.getDatos_ubigeo_emp().setId_ubigeo(resultSet.getString(8));
+                
+                ubigeo datos_ubigeo_prov = new ubigeo();
+                datos_ubigeo_prov.setId_ubigeo(resultSet.getString(8));
+                emp.setDatos_ubigeo_emp(datos_ubigeo_prov);
+                
                 emp.setFech_nac_emp(resultSet.getString(9));
             }
         } catch (Exception e) {
@@ -558,7 +586,7 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         Connection cn = MySQLConexion.getConexion();
         
         try {
-            String sql = "{CALL obtenerTodosLosEmpleadosDatos()}";
+            String sql = "{CALL obtenerTodosLosProveedoresDatos()}";
             CallableStatement cs = cn.prepareCall(sql);
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
@@ -566,16 +594,28 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
                 prov.setId_prov(rs.getString(1));
                 prov.setNom_prov(rs.getString(2));
                 prov.setDescd_prov(rs.getString(3));
-                prov.getDatos_ubigeo_prov().setId_ubigeo(rs.getString(4));
-                prov.getDatos_ubigeo_prov().setDistrito_ubi(rs.getString(5));
-                prov.getDatos_ubigeo_prov().setProvincia_ubi(rs.getString(6));
-                prov.getDatos_ubigeo_prov().setCalle_avend_ubi(rs.getString(7));
-                prov.getDatos_ubigeo_prov().setNum_calle_ubi(rs.getInt(8));
-                prov.getDatos_ubigeo_prov().setReferencia_ubi(rs.getString(9));
-                prov.getDatos_contacto_prov().setId_contac(rs.getString(10));
-                prov.getDatos_contacto_prov().setTipo_contac(rs.getString(11));
-                prov.getDatos_contacto_prov().setTelef_contac(rs.getString(12));
-                prov.getDatos_contacto_prov().setEmail_contac(rs.getString(13));
+
+                // Initialize datos_ubigeo_prov
+                ubigeo datos_ubigeo_prov = new ubigeo();
+                datos_ubigeo_prov.setId_ubigeo(rs.getString(4));
+                datos_ubigeo_prov.setDistrito_ubi(rs.getString(5));
+                datos_ubigeo_prov.setProvincia_ubi(rs.getString(6));
+                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(7));
+
+                // Handle 'NUM_CALLE_UBI' as an integer
+                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(8));
+
+                datos_ubigeo_prov.setReferencia_ubi(rs.getString(9));
+                prov.setDatos_ubigeo_prov(datos_ubigeo_prov);
+
+                // Initialize datos_contacto_prov
+                contacto datos_contacto_prov = new contacto();
+                datos_contacto_prov.setId_contac(rs.getString(10));
+                datos_contacto_prov.setTipo_contac(rs.getString(11));
+                datos_contacto_prov.setTelef_contac(rs.getString(12));
+                datos_contacto_prov.setEmail_contac(rs.getString(13));
+                prov.setDatos_contacto_prov(datos_contacto_prov);
+
                 list_prov.add(prov);
             }
         } catch (Exception e) {
@@ -600,16 +640,27 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
                 prov.setId_prov(rs.getString(1));
                 prov.setNom_prov(rs.getString(2));
                 prov.setDescd_prov(rs.getString(3));
-                prov.getDatos_ubigeo_prov().setId_ubigeo(rs.getString(4));
-                prov.getDatos_ubigeo_prov().setDistrito_ubi(rs.getString(5));
-                prov.getDatos_ubigeo_prov().setProvincia_ubi(rs.getString(6));
-                prov.getDatos_ubigeo_prov().setCalle_avend_ubi(rs.getString(7));
-                prov.getDatos_ubigeo_prov().setNum_calle_ubi(rs.getInt(8));
-                prov.getDatos_ubigeo_prov().setReferencia_ubi(rs.getString(9));
-                prov.getDatos_contacto_prov().setId_contac(rs.getString(10));
-                prov.getDatos_contacto_prov().setTipo_contac(rs.getString(11));
-                prov.getDatos_contacto_prov().setTelef_contac(rs.getString(12));
-                prov.getDatos_contacto_prov().setEmail_contac(rs.getString(13));
+
+                // Initialize datos_ubigeo_prov
+                ubigeo datos_ubigeo_prov = new ubigeo();
+                datos_ubigeo_prov.setId_ubigeo(rs.getString(4));
+                datos_ubigeo_prov.setDistrito_ubi(rs.getString(5));
+                datos_ubigeo_prov.setProvincia_ubi(rs.getString(6));
+                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(7));
+
+                // Handle 'NUM_CALLE_UBI' as an integer
+                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(8));
+
+                datos_ubigeo_prov.setReferencia_ubi(rs.getString(9));
+                prov.setDatos_ubigeo_prov(datos_ubigeo_prov);
+
+                // Initialize datos_contacto_prov
+                contacto datos_contacto_prov = new contacto();
+                datos_contacto_prov.setId_contac(rs.getString(10));
+                datos_contacto_prov.setTipo_contac(rs.getString(11));
+                datos_contacto_prov.setTelef_contac(rs.getString(12));
+                datos_contacto_prov.setEmail_contac(rs.getString(13));
+                prov.setDatos_contacto_prov(datos_contacto_prov);
             }
         } catch (Exception e) {
             e.printStackTrace();

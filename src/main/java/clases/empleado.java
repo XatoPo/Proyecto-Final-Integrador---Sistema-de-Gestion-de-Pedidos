@@ -34,6 +34,11 @@ public class empleado {
         this.fech_nac_emp = fech_nac_emp;
         this.password_emp = password_emp;
     }
+    
+    public String nomCompleto() {
+        String nombre_completo = nom_pat_emp + " " + nom_mat_emp + " " + ape_pat_emp + " " + ape_mat_emp;
+        return nombre_completo;
+    }
 
     public String getFech_nac_emp() {
         return fech_nac_emp;

@@ -20,11 +20,16 @@
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE126</version>
+            <version>RELEASE180</version>
         </dependency>
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>jcalendar-1.3.3</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
     </dependencies>
