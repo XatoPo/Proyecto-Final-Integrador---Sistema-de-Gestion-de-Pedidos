@@ -34,6 +34,19 @@ public class empleado {
         this.fech_nac_emp = fech_nac_emp;
         this.password_emp = password_emp;
     }
+
+    public empleado(String id_emp, String nom_pat_emp, String nom_mat_emp, String ape_pat_emp, String ape_mat_emp, contacto datos_contacto_emp, String cargo_emp, ubigeo datos_ubigeo_emp, String fech_nac_emp, String password_emp) {
+        this.id_emp = id_emp;
+        this.nom_pat_emp = nom_pat_emp;
+        this.nom_mat_emp = nom_mat_emp;
+        this.ape_pat_emp = ape_pat_emp;
+        this.ape_mat_emp = ape_mat_emp;
+        this.datos_contacto_emp = datos_contacto_emp;
+        this.cargo_emp = cargo_emp;
+        this.datos_ubigeo_emp = datos_ubigeo_emp;
+        this.fech_nac_emp = fech_nac_emp;
+        this.password_emp = password_emp;
+    }
     
     public String nomCompleto() {
         String nombre_completo = nom_pat_emp + " " + nom_mat_emp + " " + ape_pat_emp + " " + ape_mat_emp;

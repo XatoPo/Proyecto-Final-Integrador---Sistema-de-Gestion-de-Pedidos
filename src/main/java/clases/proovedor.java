@@ -19,6 +19,14 @@ public class proovedor{
         this.datos_contacto_prov = datos_contacto_prov;
     }
 
+    public proovedor(String id_prov, String nom_prov, String descd_prov, ubigeo datos_ubigeo_prov, contacto datos_contacto_prov) {
+        this.id_prov = id_prov;
+        this.nom_prov = nom_prov;
+        this.descd_prov = descd_prov;
+        this.datos_ubigeo_prov = datos_ubigeo_prov;
+        this.datos_contacto_prov = datos_contacto_prov;
+    }
+
     public String getId_prov() {
         return id_prov;
     }

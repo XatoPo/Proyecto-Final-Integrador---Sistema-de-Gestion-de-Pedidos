@@ -5,6 +5,9 @@ public class contacto {
     private String tipo_contac;
     private String telef_contac;
     private String email_contac;
+
+    public contacto() {
+    }
     
     public String getEmail_contac() {
         return email_contac;

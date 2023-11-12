@@ -48,6 +48,7 @@ public class frmPedido extends javax.swing.JFrame {
                 EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondo_vistaRapida(2).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
+                EscaladoImagenesButton(btnNuevaFactura, "src\\main\\java\\recursos\\nueva_factura.png");
             }
         });
     }
@@ -64,6 +65,10 @@ public class frmPedido extends javax.swing.JFrame {
         panelFondo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblCodFactura = new javax.swing.JLabel();
+        btnNuevaFactura = new javax.swing.JButton();
+        txtCodFactura = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,6 +86,22 @@ public class frmPedido extends javax.swing.JFrame {
             }
         });
         panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 40, 40));
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("REGISTRO DE PEDIDO");
+        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 290, 50));
+
+        lblCodFactura.setText("Código de Factura:");
+        panelFondo.add(lblCodFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 40));
+
+        btnNuevaFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevaFactura.setText("Nueva Factura");
+        panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 170, 40));
+
+        txtCodFactura.setEditable(false);
+        txtCodFactura.setEnabled(false);
+        panelFondo.add(txtCodFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 150, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 830));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,9 +173,13 @@ public class frmPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNuevaFactura;
     private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblCodFactura;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelFondo;
+    public javax.swing.JTextField txtCodFactura;
     // End of variables declaration//GEN-END:variables
 }

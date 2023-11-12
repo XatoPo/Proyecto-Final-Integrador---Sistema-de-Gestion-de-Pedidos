@@ -19,6 +19,15 @@ public class pedido {
         this.estado_pedi = estado_pedi;
     }
 
+    public pedido(String id_pedi, String fech_pedi, String hora_pedi, String id_prov, String id_emp, String estado_pedi) {
+        this.id_pedi = id_pedi;
+        this.fech_pedi = fech_pedi;
+        this.hora_pedi = hora_pedi;
+        this.id_prov = id_prov;
+        this.id_emp = id_emp;
+        this.estado_pedi = estado_pedi;
+    }
+
     public String getEstado_pedi() {
         return estado_pedi;
     }

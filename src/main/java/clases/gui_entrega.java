@@ -8,6 +8,12 @@ public class gui_entrega {
     public gui_entrega() {
     }
 
+    public gui_entrega(String id_guia, String id_pedi, String fech_entrg) {
+        this.id_guia = id_guia;
+        this.id_pedi = id_pedi;
+        this.fech_entrg = fech_entrg;
+    }
+
     public gui_entrega(String id_pedi, String fech_entrg) {
         this.id_pedi = id_pedi;
         this.fech_entrg = fech_entrg;

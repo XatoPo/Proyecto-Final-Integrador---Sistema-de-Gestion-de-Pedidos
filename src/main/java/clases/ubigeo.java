@@ -7,6 +7,26 @@ public class ubigeo {
     private String calle_avend_ubi;
     private int num_calle_ubi;
     private String referencia_ubi;
+
+    public ubigeo() {
+    }
+
+    public ubigeo(String id_ubigeo, String distrito_ubi, String provincia_ubi, String calle_avend_ubi, int num_calle_ubi, String referencia_ubi) {
+        this.id_ubigeo = id_ubigeo;
+        this.distrito_ubi = distrito_ubi;
+        this.provincia_ubi = provincia_ubi;
+        this.calle_avend_ubi = calle_avend_ubi;
+        this.num_calle_ubi = num_calle_ubi;
+        this.referencia_ubi = referencia_ubi;
+    }
+    
+    public ubigeo(String distrito_ubi, String provincia_ubi, String calle_avend_ubi, int num_calle_ubi, String referencia_ubi) {
+        this.distrito_ubi = distrito_ubi;
+        this.provincia_ubi = provincia_ubi;
+        this.calle_avend_ubi = calle_avend_ubi;
+        this.num_calle_ubi = num_calle_ubi;
+        this.referencia_ubi = referencia_ubi;
+    }
     
     public String getReferencia_ubi() {
         return referencia_ubi;

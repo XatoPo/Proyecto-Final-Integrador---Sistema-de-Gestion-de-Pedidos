@@ -20,6 +20,16 @@ public class producto extends categoria{
         this.tipo_empq_produc = tipo_empq_produc;
     }
 
+    public producto(String id_produc, String nom_produc, String marca_produc, double precio_empaq_produc, int cant_x_empaq_produc, String tipo_empq_produc, String id_ctg, String nom_ctg) {
+        super(id_ctg, nom_ctg);
+        this.id_produc = id_produc;
+        this.nom_produc = nom_produc;
+        this.marca_produc = marca_produc;
+        this.precio_empaq_produc = precio_empaq_produc;
+        this.cant_x_empaq_produc = cant_x_empaq_produc;
+        this.tipo_empq_produc = tipo_empq_produc;
+    }
+
     public String getTipo_empq_produc() {
         return tipo_empq_produc;
     }
