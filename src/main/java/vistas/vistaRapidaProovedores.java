@@ -12,13 +12,12 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 
 
-public class vistaRapidaProductos extends javax.swing.JFrame {
+public class vistaRapidaProovedores extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
-    public static String marca_produc;
     NegocioMass mass = new NegocioMass();
     
-    public vistaRapidaProductos() {
+    public vistaRapidaProovedores() {
         initComponents();
         setSize(650, 515);  // Establecer el tamaño del JFrame
         setResizable(false);
@@ -38,7 +37,7 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
                 int x = e.getXOnScreen() - mouseX;
                 int y = e.getYOnScreen() - mouseY;
 
-                vistaRapidaProductos.this.setLocation(x, y);
+                vistaRapidaProovedores.this.setLocation(x, y);
             }
         });
 
@@ -63,47 +62,46 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
         panelFondo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         lblTextoBsq = new javax.swing.JLabel();
-        txtNomProducto = new javax.swing.JTextField();
+        txtNomProovedor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
+        tablaProovedores = new javax.swing.JTable();
         lblCerrar = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(650, 515));
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 120, 40));
 
         lblTextoBsq.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTextoBsq.setText("Busqueda de Productos:");
+        lblTextoBsq.setText("Busqueda de Proovedor:");
         panelFondo.add(lblTextoBsq, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 160, 40));
 
-        txtNomProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNomProovedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNomProductoKeyReleased(evt);
+                txtNomProovedorKeyReleased(evt);
             }
         });
-        panelFondo.add(txtNomProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 260, 40));
+        panelFondo.add(txtNomProovedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 260, 40));
 
-        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProovedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "CATEGORÍA", "TIPO EMPAQUE", "CANTIDAD", "PRECIO"
+                "CÓDIGO", "NOMBRE", "DESCRIPCIÓN", "TELEFONO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaProductos);
+        jScrollPane1.setViewportView(tablaProovedores);
 
         panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 121, 600, 370));
 
@@ -133,9 +131,9 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_lblCerrarMouseClicked
 
-    private void txtNomProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProductoKeyReleased
-        filtra(txtNomProducto.getText());
-    }//GEN-LAST:event_txtNomProductoKeyReleased
+    private void txtNomProovedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProovedorKeyReleased
+        filtra(txtNomProovedor.getText());
+    }//GEN-LAST:event_txtNomProovedorKeyReleased
 
     /**
      * @param args the command line arguments
@@ -154,20 +152,21 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaProovedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaProovedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaProovedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaProovedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vistaRapidaProductos().setVisible(true);
+                new vistaRapidaProovedores().setVisible(true);
             }
         });
     }
@@ -188,12 +187,12 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
     }
     
     void filtra(String cad){
-        DefaultTableModel dt = (DefaultTableModel)tablaProductos.getModel();
+        DefaultTableModel dt = (DefaultTableModel)tablaProovedores.getModel();
         dt.setRowCount(0);
-        mass.obtenerProductosPorMarca(marca_produc).stream()
-                .filter(x-> x.getNom_produc().toLowerCase().startsWith(cad.toLowerCase()))
+        mass.obtenerTodosLosProveedoresDatos().stream()
+                .filter(x-> x.getNom_prov().toLowerCase().startsWith(cad.toLowerCase()))
                 .forEach(x-> dt.addRow(new Object[]{
-                    x.getId_produc(), x.getNom_produc(), x.getNom_ctg(), x.getTipo_empq_produc(), x.getCant_x_empaq_produc(), x.getPrecio_empaq_produc()
+                    x.getId_prov(), x.getNom_prov(), x.getDescd_prov(), x.getDatos_contacto_prov().getTelef_contac()
                 }));
     }
 
@@ -204,7 +203,7 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblTextoBsq;
     private javax.swing.JPanel panelFondo;
-    private javax.swing.JTable tablaProductos;
-    private javax.swing.JTextField txtNomProducto;
+    private javax.swing.JTable tablaProovedores;
+    private javax.swing.JTextField txtNomProovedor;
     // End of variables declaration//GEN-END:variables
 }
