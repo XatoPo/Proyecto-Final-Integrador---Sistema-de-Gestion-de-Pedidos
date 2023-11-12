@@ -308,6 +308,43 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
     
     @Override
+    public List<empleado> obtenerTodosLosEmpleadosDatos() {
+        List<empleado> list_emp = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerTodosLosEmpleadosDatos()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                empleado emp = new empleado();
+                emp.setId_emp(rs.getString(1));
+                emp.setNom_pat_emp(rs.getString(2));
+                emp.setNom_mat_emp(rs.getString(3));
+                emp.setApe_pat_emp(rs.getString(4));
+                emp.setApe_mat_emp(rs.getString(5));
+                emp.getDatos_contacto_emp().setId_contac(rs.getString(6));
+                emp.setCargo_emp(rs.getString(7));
+                emp.getDatos_ubigeo_emp().setId_ubigeo(rs.getString(8));
+                emp.setFech_nac_emp(rs.getString(9));
+                emp.getDatos_contacto_emp().setTipo_contac(rs.getString(10));
+                emp.getDatos_contacto_emp().setTelef_contac(rs.getString(11));
+                emp.getDatos_contacto_emp().setEmail_contac(rs.getString(12));
+                emp.getDatos_ubigeo_emp().setDistrito_ubi(rs.getString(13));
+                emp.getDatos_ubigeo_emp().setProvincia_ubi(rs.getString(14));
+                emp.getDatos_ubigeo_emp().setCalle_avend_ubi(rs.getString(15));
+                emp.getDatos_ubigeo_emp().setNum_calle_ubi(rs.getInt(16));
+                emp.getDatos_ubigeo_emp().setReferencia_ubi(rs.getString(17));
+                list_emp.add(emp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_emp;
+    }
+    
+    @Override
     public List<pedido> listPedido(String id_pedi) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -373,6 +410,42 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return ultimoIdEmp;
     }
     
+    @Override
+    public empleado obtenerDatosUnEmpleado(String id_emp) {
+        empleado emp = null;
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerTodosLosEmpleadosDatos()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                emp = new empleado();
+                emp.setId_emp(rs.getString(1));
+                emp.setNom_pat_emp(rs.getString(2));
+                emp.setNom_mat_emp(rs.getString(3));
+                emp.setApe_pat_emp(rs.getString(4));
+                emp.setApe_mat_emp(rs.getString(5));
+                emp.getDatos_contacto_emp().setId_contac(rs.getString(6));
+                emp.setCargo_emp(rs.getString(7));
+                emp.getDatos_ubigeo_emp().setId_ubigeo(rs.getString(8));
+                emp.setFech_nac_emp(rs.getString(9));
+                emp.getDatos_contacto_emp().setTipo_contac(rs.getString(10));
+                emp.getDatos_contacto_emp().setTelef_contac(rs.getString(11));
+                emp.getDatos_contacto_emp().setEmail_contac(rs.getString(12));
+                emp.getDatos_ubigeo_emp().setDistrito_ubi(rs.getString(13));
+                emp.getDatos_ubigeo_emp().setProvincia_ubi(rs.getString(14));
+                emp.getDatos_ubigeo_emp().setCalle_avend_ubi(rs.getString(15));
+                emp.getDatos_ubigeo_emp().setNum_calle_ubi(rs.getInt(16));
+                emp.getDatos_ubigeo_emp().setReferencia_ubi(rs.getString(17));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return emp;
+    }
+    
     /*-----LOGIN-----*/
     @Override
     public empleado login_emp(String id_emp, String password_emp) {
@@ -407,36 +480,5 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         
         return emp;
     }
-
-    @Override
-    public List<empleado> obtenerTodosLosEmpleadosDatos() {
-        List<empleado> list_emp = new ArrayList();
-        Connection cn = MySQLConexion.getConexion();
-        
-        try {
-            String sql = "{CALL obtenerTodosLosEmpleadosDatos()}";
-            CallableStatement cs = cn.prepareCall(sql);
-            ResultSet rs = cs.executeQuery();
-            while (rs.next()) {
-                empleado emp = new empleado();
-                emp.setId_emp(rs.getString(1));
-                emp.setNom_pat_emp(rs.getString(2));
-                emp.setNom_mat_emp(rs.getString(3));
-                emp.setApe_pat_emp(rs.getString(4));
-                emp.setApe_mat_emp(rs.getString(5));
-                emp.getDatos_contacto_emp().setId_contac(sql);
-                list_emp.add(emp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return list_emp;
-    }
-
-    @Override
-    public empleado obtenerDatosUnEmpleado(String id_emp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
 }
