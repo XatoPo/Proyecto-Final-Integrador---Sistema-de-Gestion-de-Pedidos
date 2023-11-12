@@ -8,11 +8,14 @@ public interface registros {
     void adiPedido(pedido pedid, List<detalle_pedido> lista_productos);
     //String adiPedido(pedido pedid, List<detalle_pedido> lista_productos);
     void adiEmpleado(empleado emp);
+    void adiProveedor(proovedor emp);
     void adiGuia(gui_entrega guia);
     void adiProducto(producto produc);
     void adiProovedor(proovedor prov);
     void adiUbigeo(ubigeo ubigeo);
     void adiContactoEmp(contacto c);
     void adiUbigeoEmp(ubigeo u);
+    void adiContactoProv(contacto c);
+    void adiUbigeoProv(ubigeo u);
 
 }

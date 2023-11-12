@@ -1,23 +1,63 @@
 package Formularios;
 
+import clases.contacto;
+import clases.proovedor;
+import clases.ubigeo;
+import controlador.NegocioMass;
 import java.awt.Component;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 
 
 public class frmProveedor extends javax.swing.JFrame {
-
+    
     public frmProveedor() {
         initComponents();
         setLocationRelativeTo(null);
         EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
         EscaladoImagenesButton(btnGrabarProovedor, "src\\main\\java\\recursos\\proveedor_(1).png");
+        muestraProv();
         bloquear2();
         bloquear();
+    }
+    List<proovedor> lista; 
+    NegocioMass obj=new NegocioMass();
+    
+    void muestraProv(){
+        DefaultTableModel dt = (DefaultTableModel)tablap.getModel();
+        dt.setRowCount(0);
+        
+        for(proovedor x : obj.lisProv()){
+            Object v[]={x.getId_prov(),x.getNom_prov(),x.getDescd_prov(), 
+            x.getDatos_ubigeo_prov().getId_ubigeo(), x.getDatos_contacto_prov().getId_contac()};
+        dt.addRow(v);
+        }
+    }
+    public void limpiar(){
+        txtnombre.setText("");     
+        txtdescripcion.setText("");        
+        
+        cmbtipo.setSelectedIndex(0);
+        txttelefono.setText("");
+        txtcorreo.setText("");
+
+        txtdistrito.setText("");
+        txtprovincia.setText("");
+        txtcalle.setText("");
+        txtcallenumero.setText("");
+        txtreferencia.setText("");
+        
+        //  Desmarcar los checkboxes
+        CBmasTelefono.setSelected(false);  
+        CBmasUbigeo.setSelected(false); 
+        bloquear();
+        bloquear2();
     }
     
     public void desbloquear(){
@@ -49,42 +89,35 @@ public class frmProveedor extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         JPDireccion = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtcalle = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtnumerocalle = new javax.swing.JTextField();
+        txtcallenumero = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtreferencia = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txtprovincia = new javax.swing.JTextField();
+        txtdistrito = new javax.swing.JTextField();
         JPTelefono = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbtipo = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txttelefono = new javax.swing.JTextField();
+        txtcorreo = new javax.swing.JTextField();
         btnGrabarProovedor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        CBmasinfo2 = new javax.swing.JCheckBox();
-        CBmasinfo = new javax.swing.JCheckBox();
+        txtdescripcion = new javax.swing.JTextArea();
+        CBmasTelefono = new javax.swing.JCheckBox();
+        CBmasUbigeo = new javax.swing.JCheckBox();
         lblLogo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablap = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
@@ -93,69 +126,46 @@ public class frmProveedor extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         jLabel1.setText("Registro de Proveedor");
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jLabel2.setText("ID Proveedor");
-
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel3.setText("Nombre Proveedor");
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel4.setText("Descripción");
 
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jLabel5.setText("ID Ubigeo");
-
         JPDireccion.setBackground(new java.awt.Color(204, 204, 255));
         JPDireccion.setEnabled(false);
+        JPDireccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel9.setText("Calle / Avenida");
+        JPDireccion.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 64, -1, -1));
+        JPDireccion.add(txtcalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 86, 250, 30));
 
         jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel10.setText("Número");
+        JPDireccion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 64, -1, -1));
+        JPDireccion.add(txtcallenumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 86, 92, 30));
 
         jLabel11.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel11.setText("Referencia");
+        JPDireccion.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 128, -1, -1));
+        JPDireccion.add(txtreferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 150, 417, 30));
 
-        javax.swing.GroupLayout JPDireccionLayout = new javax.swing.GroupLayout(JPDireccion);
-        JPDireccion.setLayout(JPDireccionLayout);
-        JPDireccionLayout.setHorizontalGroup(
-            JPDireccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPDireccionLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(JPDireccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPDireccionLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addGap(47, 47, 47))
-                    .addGroup(JPDireccionLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(313, 313, 313))
-                    .addComponent(txtreferencia)
-                    .addGroup(JPDireccionLayout.createSequentialGroup()
-                        .addComponent(txtcalle, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                        .addComponent(txtnumerocalle, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(14, 14, 14))
-        );
-        JPDireccionLayout.setVerticalGroup(
-            JPDireccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPDireccionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JPDireccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPDireccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtcalle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnumerocalle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtreferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel16.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel16.setText("Provincia");
+        JPDireccion.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 6, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel17.setText("Distrito");
+        JPDireccion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 6, -1, -1));
+
+        txtprovincia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtprovinciaActionPerformed(evt);
+            }
+        });
+        JPDireccion.add(txtprovincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 28, 180, 30));
+        JPDireccion.add(txtdistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 28, 180, 30));
 
         JPTelefono.setBackground(new java.awt.Color(204, 204, 255));
         JPTelefono.setDoubleBuffered(false);
@@ -164,93 +174,92 @@ public class frmProveedor extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel14.setText("Tipo de Contacto");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel15.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel15.setText("Correo Electronico");
+
+        jLabel18.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel18.setText("Telefono");
 
         javax.swing.GroupLayout JPTelefonoLayout = new javax.swing.GroupLayout(JPTelefono);
         JPTelefono.setLayout(JPTelefonoLayout);
         JPTelefonoLayout.setHorizontalGroup(
             JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPTelefonoLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addGroup(JPTelefonoLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel14)
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel18))
+                    .addGroup(JPTelefonoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15)
+                            .addGroup(JPTelefonoLayout.createSequentialGroup()
+                                .addComponent(cmbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(txttelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+                            .addComponent(txtcorreo))))
+                .addGap(18, 18, 18))
         );
         JPTelefonoLayout.setVerticalGroup(
             JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPTelefonoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(10, 10, 10)
+                .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel18))
+                .addGap(2, 2, 2)
+                .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtcorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
-
-        jLabel12.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jLabel12.setText("ID Contacto");
-
-        jLabel13.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jLabel13.setText("Número Teléfonico");
 
         btnGrabarProovedor.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         btnGrabarProovedor.setText("Agregar Proveedor");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGrabarProovedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGrabarProovedorActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jLabel6.setText("Provincia");
+        txtdescripcion.setColumns(20);
+        txtdescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtdescripcion);
 
-        jLabel8.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
-        jLabel8.setText("Distrito");
-
-        CBmasinfo2.setText("Agregar Más Información");
-        CBmasinfo2.addMouseListener(new java.awt.event.MouseAdapter() {
+        CBmasTelefono.setText("Agregar Información de Contacto");
+        CBmasTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CBmasinfo2MouseClicked(evt);
+                CBmasTelefonoMouseClicked(evt);
             }
         });
 
-        CBmasinfo.setText("Agregar Más Infornación");
-        CBmasinfo.addMouseListener(new java.awt.event.MouseAdapter() {
+        CBmasUbigeo.setText("Agregar Infornación de Ubigeo");
+        CBmasUbigeo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CBmasinfoMouseClicked(evt);
+                CBmasUbigeoMouseClicked(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Proveedor", "Nombre", "Descripción", "ID Ubigeo", "ID Contacto"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tablap);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,49 +269,28 @@ public class frmProveedor extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2)))
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtnombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JPTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JPDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(100, 100, 100)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel13))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5))
-                                    .addComponent(jLabel6))
-                                .addGap(144, 144, 144)
+                                    .addComponent(CBmasUbigeo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CBmasTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(CBmasinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(JPDireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(JPTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(CBmasinfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(30, 30, 30)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(100, 100, 100)
+                                        .addComponent(jLabel1)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(30, 30, 30)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
             .addGroup(layout.createSequentialGroup()
@@ -317,78 +305,103 @@ public class frmProveedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
+                        .addComponent(CBmasUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CBmasinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JPDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8))
+                        .addComponent(CBmasTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JPDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CBmasinfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
                         .addComponent(JPTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGrabarProovedor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void CBmasinfo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasinfo2MouseClicked
-        if(CBmasinfo2.isSelected()){
+    private void CBmasTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasTelefonoMouseClicked
+        if(CBmasTelefono.isSelected()){
             desbloquear2();
         }else{
             bloquear2();
         }
-    }//GEN-LAST:event_CBmasinfo2MouseClicked
+    }//GEN-LAST:event_CBmasTelefonoMouseClicked
 
-    private void CBmasinfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasinfoMouseClicked
-        if(CBmasinfo.isSelected()){
+    private void CBmasUbigeoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasUbigeoMouseClicked
+        if(CBmasUbigeo.isSelected()){
             desbloquear();
         }else{
             txtcalle.setText("");
             txtreferencia.setText("");
-            txtnumerocalle.setText("");
+            txtcallenumero.setText("");
             bloquear();
         }
-    }//GEN-LAST:event_CBmasinfoMouseClicked
+    }//GEN-LAST:event_CBmasUbigeoMouseClicked
+
+    private void txtprovinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprovinciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtprovinciaActionPerformed
+
+    private void btnGrabarProovedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarProovedorActionPerformed
+        proovedor p = new proovedor();
+        p.setNom_prov(txtnombre.getText());
+        p.setDescd_prov(txtdescripcion.getText());
+        // Agregar empleado
+        obj.adiProveedor(p);
+
+        //Registrar datos de contacto de empleado con if para que pueda ser NULL
+        if (CBmasTelefono.isSelected()) {
+
+            // Llamada al método de la clase de negocios para obtener el último id_emp
+            contacto c = new contacto();
+            // Asignar valores a las propiedades del objeto contacto
+            c.setTipo_contac(cmbtipo.getSelectedItem().toString());
+            c.setTelef_contac(txttelefono.getText());
+            c.setEmail_contac(txtcorreo.getText());
+
+            // Asignar el objeto contacto al proveedor
+            p.setDatos_contacto_prov(c);
+
+            // Agregar contacto asociado al id_prov
+            obj.adiContactoProv(c);
+        }
+        
+        //Registrar datos de ubigeo de empleado con if para que pueda ser NULL
+        if (CBmasUbigeo.isSelected()) {
+            ubigeo u = new ubigeo();
+            // Asignar valores a las propiedades del objeto ubigeo
+            u.setDistrito_ubi(txtdistrito.getText());
+            u.setProvincia_ubi(txtprovincia.getText());
+            u.setCalle_avend_ubi(txtcalle.getText());
+            u.setNum_calle_ubi(Integer.parseInt(txtcallenumero.getText()));
+            u.setReferencia_ubi(txtreferencia.getText());
+
+            // Asignar el objeto ubigeo al proveedor
+            p.setDatos_ubigeo_prov(u);
+
+            // Agregar ubigeo asociado al id_prov
+            obj.adiUbigeoProv(u); 
+        }
+        
+        muestraProv();//Actualizar datos de la tabla empleado
+        
+        limpiar();
+    }//GEN-LAST:event_btnGrabarProovedorActionPerformed
 
     public static void main(String args[]) {
 
@@ -414,42 +427,35 @@ public class frmProveedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CBmasinfo;
-    private javax.swing.JCheckBox CBmasinfo2;
+    private javax.swing.JCheckBox CBmasTelefono;
+    private javax.swing.JCheckBox CBmasUbigeo;
     private javax.swing.JPanel JPDireccion;
     private javax.swing.JPanel JPTelefono;
     private javax.swing.JButton btnGrabarProovedor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> cmbtipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JTable tablap;
     private javax.swing.JTextField txtcalle;
-    private javax.swing.JTextField txtnumerocalle;
+    private javax.swing.JTextField txtcallenumero;
+    private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextArea txtdescripcion;
+    private javax.swing.JTextField txtdistrito;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtprovincia;
     private javax.swing.JTextField txtreferencia;
+    private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
 }

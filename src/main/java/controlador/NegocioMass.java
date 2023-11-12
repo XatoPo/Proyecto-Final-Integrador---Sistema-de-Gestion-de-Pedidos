@@ -27,6 +27,20 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }
+    
+    @Override
+    public void adiProveedor(proovedor p){
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spAdicionProveedor (?, ?)}";
+        try{           
+            CallableStatement st=cn.prepareCall(sql);
+            st.setString(1,p.getNom_prov());            
+            st.setString(2, p.getDescd_prov());            
+            int rowsAffected = st.executeUpdate();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
         
     @Override   
     public List<empleado> lisEmp(){
@@ -46,6 +60,27 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
                men.setFech_nac_emp(rs.getString(6));
 
                lista.add(men);
+           }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return lista;  
+    }
+    
+    @Override   
+    public List<proovedor> lisProv(){
+        List<proovedor> lista=new ArrayList();
+        Connection cn=MySQLConexion.getConexion();
+        try{
+           String sql="select id_prov, nom_prov, descd_prov, id_ubigeo, id_contac from proveedor";
+           PreparedStatement st=cn.prepareStatement(sql);
+           ResultSet rs=st.executeQuery();
+           while(rs.next()){
+               proovedor prov = new proovedor();
+               prov.setId_prov(rs.getString(1));
+               prov.setNom_prov(rs.getString(2));
+               prov.setDescd_prov(rs.getString(3));
+               lista.add(prov);
            }
         }catch(Exception ex){
             ex.printStackTrace();
@@ -73,6 +108,41 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     public void adiUbigeoEmp(ubigeo u){
         Connection cn = MySQLConexion.getConexion();
         String sql = "{CALL spAdiUbigeoEmp(?, ?, ?, ?, ?)}";
+        try{           
+            CallableStatement st=cn.prepareCall(sql);
+            //st.setString(1, e.getId_emp());
+            st.setString(1, u.getDistrito_ubi());
+            st.setString(2, u.getProvincia_ubi());
+            st.setString(3, u.getCalle_avend_ubi());
+            st.setInt(4, u.getNum_calle_ubi());
+            st.setString(5, u.getReferencia_ubi());
+            int rowsAffected = st.executeUpdate();
+        // Hacer algo con el resultado si es necesario        
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }     
+    
+    @Override
+    public void adiContactoProv(contacto c){
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spAdiContactoProv (?, ?, ?)}";
+        try{           
+            CallableStatement st=cn.prepareCall(sql);
+            st.setString(1, c.getTipo_contac());
+            st.setString(2, c.getTelef_contac());
+            st.setString(3, c.getEmail_contac());
+            int rowsAffected = st.executeUpdate();
+    // Hacer algo con el resultado si es necesario        
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    @Override        
+    public void adiUbigeoProv(ubigeo u){
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spAdiUbigeoProv(?, ?, ?, ?, ?)}";
         try{           
             CallableStatement st=cn.prepareCall(sql);
             //st.setString(1, e.getId_emp());

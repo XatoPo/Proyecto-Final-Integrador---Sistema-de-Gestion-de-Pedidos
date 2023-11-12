@@ -15,6 +15,7 @@ public interface listados {
     List<gui_entrega> listGia(String id_guia);
     List<producto> listProducto(String id_produc); 
     List<empleado>  lisEmp();
+    List<proovedor>  lisProv();
     /*------------------------------------------------------*/
     List<pedido> listPedido(String id_pedi);
     List<detalle_pedido> listDetallePedido (String id_pedi);
