@@ -444,7 +444,7 @@ public class frmEmpleado extends javax.swing.JFrame {
             c.setEmail_contac(txtCorreoEmp.getText());
 
             // Asignar el id_emp recién insertado directamente a la propiedad id_emp de contacto
-            c.setId_emp(idEmpRecienInsertado);
+            //c.setId_emp(idEmpRecienInsertado);
 
             // Asignar el objeto contacto al empleado
             e.setDatos_contacto_emp(c);
@@ -466,7 +466,7 @@ public class frmEmpleado extends javax.swing.JFrame {
             u.setReferencia_ubi(txtRefUbigeoEmp.getText());
 
             // Asignar el id_emp recién insertado directamente a la propiedad id_emp de ubigeo
-            u.setId_emp(idEmpRecienInsertado);
+            //u.setId_emp(idEmpRecienInsertado);
 
             // Asignar el objeto ubigeo al empleado
             e.setDatos_ubigeo_emp(u);

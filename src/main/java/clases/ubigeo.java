@@ -7,11 +7,6 @@ public class ubigeo {
     private String calle_avend_ubi;
     private int num_calle_ubi;
     private String referencia_ubi;
-    private String id_emp;
-
-    public void setId_emp(String id_emp) {
-        this.id_emp = id_emp;
-    }
     
     public String getReferencia_ubi() {
         return referencia_ubi;

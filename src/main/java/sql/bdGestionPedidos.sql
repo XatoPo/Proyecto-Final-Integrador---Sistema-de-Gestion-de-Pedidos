@@ -242,11 +242,15 @@ VALUES
     ('PROD051', 'Coca Kola', 'The Coca-Cola Company', 50.90, 12, 'CTG01', 'Palet'),
     ('PROD052', 'Fanta de Naranja', 'The Coca-Cola Company', 47.88, 12, 'CTG01', 'Palet'),
     ('PROD053', 'Fanta Kola Inglesa', 'The Coca-Cola Company', 31.55, 12, 'CTG01', 'Palet'),
+    ('PROD069', 'Sprite', 'The Coca-Cola Company', 36.55, 12, 'CTG01', 'Palet'),
+    ('PROD070', 'San Mateo', 'The Coca-Cola Company', 21.55, 12, 'CTG01', 'Palet'),
     ('PROD002', 'Cerveza Cusqueña', 'Backus', 88.88, 12, 'CTG01', 'Caja'),
     ('PROD054', 'Cerveza Cristal', 'Backus', 77.88, 12, 'CTG01', 'Caja'),
-    ('PROD055', 'Cerveza Pilsen', 'Backus', 89.88, 12, 'CTG01', 'Caja'),
+    ('PROD055', 'Cerveza Pilsen Callao', 'Backus', 89.88, 12, 'CTG01', 'Caja'),
     ('PROD056', 'Cerveza Golden', 'Backus', 51.88, 12, 'CTG01', 'Caja'),
+    ('PROD071', 'Cerveza Pilsen Trujillo', 'Backus', 51.88, 12, 'CTG01', 'Caja'),
     ('PROD057', 'Cerveza Cusqueña Negra', 'Backus', 81.88, 12, 'CTG01', 'Caja'),
+    ('PROD072', 'Guaraná', 'Backus', 30.55, 12, 'CTG01', 'Palet'),
     ('PROD003', 'Agua San Mateo', 'San Mateo', 35.88, 12, 'CTG01', 'Palet'),
     ('PROD004', 'Té de Manzanilla', 'Inka Tea', 27.00, 6, 'CTG01', 'Pack'),
     ('PROD005', 'Chicha Morada', 'Don Jorge', 89.25, 24, 'CTG01', 'Pack'),
@@ -258,6 +262,8 @@ INSERT INTO producto (id_produc, nom_produc, marca_produc, precio_empaq_produc, 
 VALUES
     ('PROD007', 'Pan Integral', 'Bimbo', 33.00, 10, 'CTG02', 'Cesta'),
     ('PROD058', 'Pan Blanco', 'Bimbo', 49.00, 10, 'CTG02', 'Cesta'),
+    ('PROD073', 'Pan Vital', 'Bimbo', 35.00, 10, 'CTG02', 'Cesta'),
+    ('PROD074', 'Pan Artesanao', 'Bimbo', 50.00, 10, 'CTG02', 'Cesta'),
     ('PROD059', 'Tortilla Integral', 'Bimbo', 26.00, 10, 'CTG02', 'Cesta'),
     ('PROD060', 'Tortilla de Trigo', 'Bimbo', 22.00, 10, 'CTG02', 'Cesta'),
     ('PROD008', 'Pan Francés', 'Tanta', 39.00, 10, 'CTG02', 'Caja'),
@@ -461,6 +467,160 @@ END //
 
 DELIMITER ;
 
+-- Procedure para listar productos
+DELIMITER //
+CREATE PROCEDURE obtenerProductos()
+BEGIN
+    SELECT
+        p.id_produc,
+        p.nom_produc,
+        p.marca_produc,
+        p.precio_empaq_produc,
+        p.cant_x_empaq_produc,
+        p.id_ctg,
+        p.tipo_empq_produc,
+        c.nom_ctg AS nombre_categoria
+    FROM
+        producto p
+        JOIN categoria c ON p.id_ctg = c.id_ctg;
+END //
+DELIMITER ;
+
+-- Procedure para obtener todos los datos de un empleado
+DELIMITER //
+CREATE PROCEDURE obtenerDatosUnEmpleado(IN idEmpleado CHAR(5))
+BEGIN
+    SELECT
+        e.id_emp,
+        e.nom_pat_emp,
+        e.nom_mat_emp,
+        e.ape_pat_emp,
+        e.ape_mat_emp,
+        e.id_contac,
+        e.cargo_emp,
+        e.id_ubigeo,
+        e.fech_nac_emp,
+        c.tipo_contac AS tipo_contacto,
+        c.telef_contac,
+        c.email_contac,
+        u.distrito_ubi,
+        u.provincia_ubi,
+        u.calle_avend_ubi,
+        u.num_calle_ubi,
+        u.referencia_ubi
+    FROM
+        empleado e
+        LEFT JOIN contacto c ON e.id_contac = c.id_contac
+        LEFT JOIN ubigeo u ON e.id_ubigeo = u.id_ubigeo
+    WHERE
+        e.id_emp = idEmpleado;
+END //
+DELIMITER ;
+
+--Procedure para obtener todos los datos de todos los empleados
+-- Crear el procedimiento almacenado
+DELIMITER //
+CREATE PROCEDURE obtenerTodosLosEmpleadosDatos()
+BEGIN
+    SELECT
+        e.id_emp,
+        e.nom_pat_emp,
+        e.nom_mat_emp,
+        e.ape_pat_emp,
+        e.ape_mat_emp,
+        e.id_contac,
+        e.cargo_emp,
+        e.id_ubigeo,
+        e.fech_nac_emp,
+        c.tipo_contac AS tipo_contacto,
+        c.telef_contac,
+        c.email_contac,
+        u.distrito_ubi,
+        u.provincia_ubi,
+        u.calle_avend_ubi,
+        u.num_calle_ubi,
+        u.referencia_ubi
+    FROM
+        empleado e
+        LEFT JOIN contacto c ON e.id_contac = c.id_contac
+        LEFT JOIN ubigeo u ON e.id_ubigeo = u.id_ubigeo;
+END //
+DELIMITER ;
+
+
+-- Procedure para listar productos por categoria
+DELIMITER //
+CREATE PROCEDURE obtenerProductosPorCategoria(IN nombreCategoria VARCHAR(25))
+BEGIN
+    SELECT
+        p.id_produc,
+        p.nom_produc,
+        p.marca_produc,
+        p.precio_empaq_produc,
+        p.cant_x_empaq_produc,
+        p.id_ctg,
+        p.tipo_empq_produc,
+        c.nom_ctg AS nombre_categoria
+    FROM
+        producto p
+        JOIN categoria c ON p.id_ctg = c.id_ctg
+    WHERE
+        c.nom_ctg = nombreCategoria;
+END //
+DELIMITER ;
+
+-- Procedure para listar solo nombres de categoria
+DELIMITER //
+CREATE PROCEDURE obtenerNombresCategorias()
+BEGIN
+    SELECT nom_ctg
+    FROM categoria;
+END //
+DELIMITER ;
+
+-- Procedure para listar productos por marca_produc
+DELIMITER //
+CREATE PROCEDURE obtenerProductosPorMarca(IN nombreMarca VARCHAR(30))
+BEGIN
+    SELECT
+        p.id_produc,
+        p.nom_produc,
+        p.marca_produc,
+        p.precio_empaq_produc,
+        p.cant_x_empaq_produc,
+        p.id_ctg,
+        p.tipo_empq_produc,
+        c.nom_ctg AS nombre_categoria
+    FROM
+        producto p
+        JOIN categoria c ON p.id_ctg = c.id_ctg
+    WHERE
+        p.marca_produc = nombreMarca;
+END //
+DELIMITER ;
+
+-- Procedure para listar productos por marca_produc y categoria
+DELIMITER //
+CREATE PROCEDURE obtenerProductosPorMarcaYCategoria(IN nombreMarca VARCHAR(30), IN nombreCategoria VARCHAR(25))
+BEGIN
+    SELECT
+        p.id_produc,
+        p.nom_produc,
+        p.marca_produc,
+        p.precio_empaq_produc,
+        p.cant_x_empaq_produc,
+        p.id_ctg,
+        p.tipo_empq_produc,
+        c.nom_ctg AS nombre_categoria
+    FROM
+        producto p
+        JOIN categoria c ON p.id_ctg = c.id_ctg
+    WHERE
+        p.marca_produc = nombreMarca
+        AND c.nom_ctg = nombreCategoria;
+END //
+DELIMITER ;
+
 -- PROCEDURE PARA AGREGAR UN NUEVO EMPLEADO
 DELIMITER @@
 CREATE PROCEDURE spAdicionEmpleado(
@@ -501,8 +661,6 @@ BEGIN
 END@@
 
 DELIMITER ;
-
-
 
 -- PROCEDURE PARA AGREGAR CONTACTO AL EMPLEADO
 DELIMITER @@

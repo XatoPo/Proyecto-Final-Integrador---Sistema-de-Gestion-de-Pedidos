@@ -87,38 +87,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }     
-    
-    @Override
-    public String obtenerUltimoIdEmpleado() {
-    Connection cn = MySQLConexion.getConexion();
-    String ultimoIdEmp = null;
-
-    try {
-        // Realizar la consulta SQL para obtener el último id_emp
-        String sql = "SELECT MAX(id_emp) FROM empleado";
-        PreparedStatement pst = cn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-
-        if (rs.next()) {
-            String maxId = rs.getString(1);
-            
-            if (maxId != null) {
-                // Extraer los últimos dos dígitos
-                int num = Integer.parseInt(maxId.substring(3));
-                
-                // Incrementar en 1 y formatear como cadena con dos dígitos
-                String nuevoNum = String.format("%02d", num + 1);
-                
-                // Formar el nuevo id_emp
-                ultimoIdEmp = "EMP" + nuevoNum;
-            }
-        }
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-
-    return ultimoIdEmp;
-}
 
     @Override
     public void adiContacto(contacto contac) {
@@ -154,7 +122,26 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     /*-----LISTADO DE DATOS-----*/
     @Override
     public List<categoria> listCategoria(String id_ctg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<categoria> list_ctg = new ArrayList();
+        Connection connection = MySQLConexion.getConexion();
+        String sql = "SELECT * FROM categoria";
+        
+        try {
+            PreparedStatement statement = connection.prepareCall(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {
+                categoria categoria = new categoria();
+                categoria.setNom_ctg(resultSet.getString(2));
+                categoria.setId_ctg(resultSet.getString(1));
+                list_ctg.add(categoria);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_ctg;
     }
 
     @Override
@@ -178,11 +165,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
 
     @Override
-    public List<empleado> listEmpleado(String id_emp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public List<proovedor> listProovedor(String id_prov) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -194,9 +176,137 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
 
     @Override
     public List<producto> listProducto(String id_produc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<producto> list_produc = new ArrayList();
+        
+        Connection connection = MySQLConexion.getConexion();
+        
+        try {
+            String sql="";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs=st.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_produc;
+    }
+    
+    @Override
+    public List<producto> obtenerProductos() {
+        List<producto> list_produc = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerProductos()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                producto producto = new producto();
+                producto.setId_produc(rs.getString(1));
+                producto.setNom_produc(rs.getString(2));
+                producto.setMarca_produc(rs.getString(3));
+                producto.setPrecio_empaq_produc(rs.getDouble(4));
+                producto.setCant_x_empaq_produc(rs.getInt(5));
+                producto.setId_ctg(rs.getString(6));
+                producto.setTipo_empq_produc(rs.getString(7));
+                producto.setNom_ctg(rs.getString(8));
+                list_produc.add(producto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_produc;
+    }
+    
+    @Override
+    public List<producto> obtenerProductosPorCategoria(String nom_ctg) {
+        List<producto> list_produc = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerProductosPorCategoria(?)}";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, nom_ctg);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                producto producto = new producto();
+                producto.setId_produc(rs.getString(1));
+                producto.setNom_produc(rs.getString(2));
+                producto.setMarca_produc(rs.getString(3));
+                producto.setPrecio_empaq_produc(rs.getDouble(4));
+                producto.setCant_x_empaq_produc(rs.getInt(5));
+                producto.setId_ctg(rs.getString(6));
+                producto.setTipo_empq_produc(rs.getString(7));
+                producto.setNom_ctg(rs.getString(8));
+                list_produc.add(producto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_produc;
     }
 
+    @Override
+    public List<producto> obtenerProductosPorMarca(String marca_produc) {
+        List<producto> list_produc = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerProductosPorMarca(?)}";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, marca_produc);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                producto producto = new producto();
+                producto.setId_produc(rs.getString(1));
+                producto.setNom_produc(rs.getString(2));
+                producto.setMarca_produc(rs.getString(3));
+                producto.setPrecio_empaq_produc(rs.getDouble(4));
+                producto.setCant_x_empaq_produc(rs.getInt(5));
+                producto.setId_ctg(rs.getString(6));
+                producto.setTipo_empq_produc(rs.getString(7));
+                producto.setNom_ctg(rs.getString(8));
+                list_produc.add(producto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_produc;
+    }
+
+    @Override
+    public List<producto> obtenerProductosPorMarcaYCategoria(String marca_produc, String nom_ctg) {
+        List<producto> list_produc = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerProductosPorMarcaYCategoria(?, ?)}";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, marca_produc);
+            cs.setString(2, nom_ctg);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                producto producto = new producto();
+                producto.setId_produc(rs.getString(1));
+                producto.setNom_produc(rs.getString(2));
+                producto.setMarca_produc(rs.getString(3));
+                producto.setPrecio_empaq_produc(rs.getDouble(4));
+                producto.setCant_x_empaq_produc(rs.getInt(5));
+                producto.setId_ctg(rs.getString(6));
+                producto.setTipo_empq_produc(rs.getString(7));
+                producto.setNom_ctg(rs.getString(8));
+                list_produc.add(producto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_produc;
+    }
+    
     @Override
     public List<pedido> listPedido(String id_pedi) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -205,6 +315,62 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     @Override
     public List<detalle_pedido> listDetallePedido(String id_pedi) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    /*-----BUSQUEDAS-----*/
+    @Override
+    public List<categoria> obtenerNombresCategorias() {
+        List<categoria> list_ctg = new ArrayList();
+        Connection connection = MySQLConexion.getConexion();
+        String sql = "{CALL obtenerNombresCategorias()}";
+        
+        try {
+            CallableStatement statement = connection.prepareCall(sql);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {
+                categoria categoria = new categoria();
+                categoria.setNom_ctg(resultSet.getString(1));
+                list_ctg.add(categoria);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_ctg;
+    }
+    
+    @Override
+    public String obtenerUltimoIdEmpleado() {
+        Connection cn = MySQLConexion.getConexion();
+        String ultimoIdEmp = null;
+
+        try {
+            // Realizar la consulta SQL para obtener el último id_emp
+            String sql = "SELECT MAX(id_emp) FROM empleado";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String maxId = rs.getString(1);
+
+                if (maxId != null) {
+                    // Extraer los últimos dos dígitos
+                    int num = Integer.parseInt(maxId.substring(3));
+
+                    // Incrementar en 1 y formatear como cadena con dos dígitos
+                    String nuevoNum = String.format("%02d", num + 1);
+
+                    // Formar el nuevo id_emp
+                    ultimoIdEmp = "EMP" + nuevoNum;
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return ultimoIdEmp;
     }
     
     /*-----LOGIN-----*/
@@ -219,19 +385,58 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             CallableStatement statement = connection.prepareCall(sql);
             statement.setString(1, id_emp);
             statement.setString(2, password_emp);
-      
-            emp = new empleado();
-            //cambiar get a set
-            emp.getId_emp();
-            emp.getNom_pat_emp();
-            emp.getNom_mat_emp();
-            emp.getApe_pat_emp();
-            emp.getApe_mat_emp();
-            emp.getDatos_contacto_emp();
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (true) {
+                emp = new empleado();
+                
+                emp.setId_emp(resultSet.getString(1));
+                emp.setNom_pat_emp(resultSet.getString(2));
+                emp.setNom_mat_emp(resultSet.getString(3));
+                emp.setApe_pat_emp(resultSet.getString(4));
+                emp.setApe_mat_emp(resultSet.getString(5));
+                emp.getDatos_contacto_emp().setId_contac(resultSet.getString(6));
+                emp.setCargo_emp(resultSet.getString(7));
+                emp.getDatos_ubigeo_emp().setId_ubigeo(resultSet.getString(8));
+                emp.setFech_nac_emp(resultSet.getString(9));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         return emp;
     }
+
+    @Override
+    public List<empleado> obtenerTodosLosEmpleadosDatos() {
+        List<empleado> list_emp = new ArrayList();
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerTodosLosEmpleadosDatos()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                empleado emp = new empleado();
+                emp.setId_emp(rs.getString(1));
+                emp.setNom_pat_emp(rs.getString(2));
+                emp.setNom_mat_emp(rs.getString(3));
+                emp.setApe_pat_emp(rs.getString(4));
+                emp.setApe_mat_emp(rs.getString(5));
+                emp.getDatos_contacto_emp().setId_contac(sql);
+                list_emp.add(emp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return list_emp;
+    }
+
+    @Override
+    public empleado obtenerDatosUnEmpleado(String id_emp) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

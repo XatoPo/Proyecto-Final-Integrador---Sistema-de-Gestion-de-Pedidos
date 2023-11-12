@@ -1,6 +1,6 @@
 package clases;
 
-public abstract class categoria {
+public class categoria {
     private String id_ctg;
     private String nom_ctg;
 
