@@ -80,6 +80,15 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
                prov.setId_prov(rs.getString(1));
                prov.setNom_prov(rs.getString(2));
                prov.setDescd_prov(rs.getString(3));
+               // Initialize datos_ubigeo_prov
+                ubigeo datos_ubigeo_prov = new ubigeo();
+                datos_ubigeo_prov.setId_ubigeo(rs.getString(4));
+                prov.setDatos_ubigeo_prov(datos_ubigeo_prov);
+                // Initialize datos_contacto_prov
+                contacto datos_contacto_prov = new contacto();
+                datos_contacto_prov.setId_contac(rs.getString(5));
+                prov.setDatos_contacto_prov(datos_contacto_prov);
+                
                lista.add(prov);
            }
         }catch(Exception ex){

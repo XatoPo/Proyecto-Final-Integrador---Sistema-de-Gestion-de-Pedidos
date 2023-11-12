@@ -725,3 +725,89 @@ BEGIN
     WHERE id_emp = ultimoID_emp;
 END@@
 DELIMITER ;
+
+
+
+
+
+
+
+-- PROCEDURE PARA AGREGAR UN NUEVO PROVEEDOR
+DELIMITER @@
+CREATE PROCEDURE spAdicionProveedor(
+    IN nom_prov VARCHAR(50),
+    IN descd_prov TEXT	    
+)
+BEGIN
+    DECLARE nuevoID CHAR(6);
+
+    -- Generar nuevo ID para proveedor
+    SET nuevoID = CONCAT('PROV', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_prov, 5)) + 1, 1) FROM proveedor), 2, '0'));
+
+    -- Insertar el nuevo proveedor
+    INSERT INTO proveedor (
+        id_prov,
+        nom_prov,
+        descd_prov
+    ) VALUES (
+        nuevoID,
+        nom_prov,
+    	descd_prov
+    );
+END@@
+DELIMITER ;
+
+-- PROCEDURE PARA AGREGAR CONTACTO AL PROVEEDOR
+DELIMITER @@
+CREATE PROCEDURE spAdiContactoProv(IN `tipo_contac` VARCHAR(50), IN `telef_contac` VARCHAR(15), IN `email_contac` VARCHAR(100))
+BEGIN
+    DECLARE nuevoID_contac CHAR(6);
+    DECLARE ultimoID_prov CHAR(6);
+
+    -- Obtener el último ID de proveedor
+    SELECT id_prov INTO ultimoID_prov
+    FROM proveedor
+    ORDER BY id_prov DESC
+    LIMIT 1;
+
+    -- Generar nuevo ID para contacto
+    SET nuevoID_contac = CONCAT('CON', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_contac, 4)) + 1, 1) FROM contacto), 3, '0'));
+
+    -- Insertar el nuevo contacto
+    INSERT INTO contacto (id_contac, tipo_contac, telef_contac, email_contac)
+    VALUES (nuevoID_contac, tipo_contac, telef_contac, email_contac);
+
+    -- Actualizar el ID de contacto en el último proveedor
+    UPDATE proveedor
+    SET id_contac = nuevoID_contac
+    WHERE id_prov = ultimoID_prov;
+END@@
+DELIMITER ;
+
+
+-- PROCEDURE PARA AGREGAR UBIGEO AL PROVEEDOR
+DELIMITER @@
+CREATE PROCEDURE spAdiUbigeoProv(IN `distrito_ubi` VARCHAR(20), IN `provincia_ubi` VARCHAR(20), IN `calle_avend_ubi` VARCHAR(50), IN `num_calle_ubi` INT, IN `referencia_ubi` VARCHAR(150))
+BEGIN
+    DECLARE nuevoID_ubigeo CHAR(6);
+    DECLARE ultimoID_prov CHAR(6);
+
+    -- Obtener el último ID de empleado
+    SELECT id_prov INTO ultimoID_prov
+    FROM proveedor
+    ORDER BY id_prov DESC
+    LIMIT 1;
+
+    -- Generar nuevo ID para ubigeo
+    SET nuevoID_ubigeo = CONCAT('DIR', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_ubigeo, 4)) + 1, 1) FROM ubigeo), 3, '0'));
+
+    -- Insertar el nuevo ubigeo
+    INSERT INTO ubigeo (id_ubigeo, distrito_ubi, provincia_ubi, calle_avend_ubi, num_calle_ubi, referencia_ubi)
+    VALUES (nuevoID_ubigeo, distrito_ubi, provincia_ubi, calle_avend_ubi, num_calle_ubi, referencia_ubi);
+
+    -- Actualizar el ID de ubigeo en el último empleado
+    UPDATE proveedor
+    SET id_ubigeo = nuevoID_ubigeo
+    WHERE id_prov = ultimoID_prov;
+END@@
+DELIMITER ;
