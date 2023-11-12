@@ -466,7 +466,7 @@ public class frmEmpleado extends javax.swing.JFrame {
             obj.adiUbigeoEmp(u); 
         }
         
-        muestra();
+        muestra();//Actualizar datos de la tabla empleado
         
         
     }//GEN-LAST:event_btnGabarEmpleadoActionPerformed
