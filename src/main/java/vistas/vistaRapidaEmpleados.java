@@ -14,6 +14,7 @@ import java.awt.event.*;
 
 public class vistaRapidaEmpleados extends javax.swing.JFrame {
     
+    public static String id_emp;
     private int mouseX, mouseY;
     NegocioMass mass = new NegocioMass();
     
@@ -46,8 +47,8 @@ public class vistaRapidaEmpleados extends javax.swing.JFrame {
             @Override
             public void componentResized(ComponentEvent e) {
                 // Ajustar la escala de las imágenes al cambiar el tamaño de la ventana
-                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
-                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondo_vistaRapida(1).png");
+                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(650X515).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
             }
         });
@@ -101,6 +102,11 @@ public class vistaRapidaEmpleados extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEmpleados);
 
         panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 121, 600, 370));
@@ -134,6 +140,12 @@ public class vistaRapidaEmpleados extends javax.swing.JFrame {
     private void txtNomEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomEmpleadoKeyReleased
         filtra(txtNomEmpleado.getText());
     }//GEN-LAST:event_txtNomEmpleadoKeyReleased
+
+    private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
+        int fila = tablaEmpleados.getSelectedRow();
+        frmPedido.txtIdEmp.setText(tablaEmpleados.getValueAt(fila, 0).toString());
+        frmPedido.txtNomEmp.setText(tablaEmpleados.getValueAt(fila, 1).toString());
+    }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
     /**
      * @param args the command line arguments

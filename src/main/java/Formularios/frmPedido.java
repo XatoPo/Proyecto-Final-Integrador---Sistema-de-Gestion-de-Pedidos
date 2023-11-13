@@ -1,5 +1,6 @@
 package Formularios;
 
+import clases.pedido;
 import controlador.NegocioMass;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
@@ -10,16 +11,20 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 import vistas.*;
 
 public class frmPedido extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
     NegocioMass mass = new NegocioMass();
+    public static String id_emp;
+    public static String id_prov;
+    public static String id_produc;
     
     public frmPedido() {
         initComponents();
-        setSize(920, 830);  // Establecer el tamaño del JFrame
+        setSize(920, 1020);  // Establecer el tamaño del JFrame
         setResizable(false);
         setLocationRelativeTo(null);
         
@@ -45,12 +50,26 @@ public class frmPedido extends javax.swing.JFrame {
             @Override
             public void componentResized(ComponentEvent e) {
                 // Ajustar la escala de las imágenes al cambiar el tamaño de la ventana
-                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
-                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondo_vistaRapida(2).png");
+                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
                 EscaladoImagenesButton(btnNuevaFactura, "src\\main\\java\\recursos\\nueva_factura.png");
+                EscaladoImagenesButton(btnAyudaEmpleado, "src\\main\\java\\recursos\\lupa.png");
+                EscaladoImagenesButton(btnAyudaProovedor, "src\\main\\java\\recursos\\lupa.png");
+                EscaladoImagenesButton(btnAyudaProducto, "src\\main\\java\\recursos\\lupa.png");
             }
         });
+        
+        muestraPedidos();
+    }
+    
+    public void muestraPedidos(){
+        DefaultTableModel dt = (DefaultTableModel)tablaPedidos.getModel();
+        dt.setRowCount(0);
+        for(pedido pedi: mass.obtenerDatosPedidosParaLista()){
+            Object f[] = {pedi.getId_pedi(), pedi.getFech_pedi(), pedi.getHora_pedi(), pedi.getNom_prov_pedi(), pedi.getNom_emp_pedi(), pedi.getEstado_pedi(), pedi.getTotal_precio_pedi()};
+            dt.addRow(f);
+        }
     }
 
     /**
@@ -68,14 +87,32 @@ public class frmPedido extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblCodPedido = new javax.swing.JLabel();
         btnNuevaFactura = new javax.swing.JButton();
-        txtCodPedido = new javax.swing.JTextField();
+        txtCodPedido = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaPedidos = new javax.swing.JTable();
+        lblPedidosRegistrados = new javax.swing.JLabel();
+        panelDatosPedido = new javax.swing.JPanel();
+        lblNomEmp = new javax.swing.JLabel();
+        lblIdEmp = new javax.swing.JLabel();
+        lblIdProv = new javax.swing.JLabel();
+        lblNomProv = new javax.swing.JLabel();
+        btnAyudaProovedor = new javax.swing.JButton();
+        btnAyudaEmpleado = new javax.swing.JButton();
+        txtIdProv = new javax.swing.JTextField();
+        txtIdEmp = new javax.swing.JTextField();
+        txtNomEmp = new javax.swing.JLabel();
+        txtNomProv = new javax.swing.JLabel();
+        lblIdProduc = new javax.swing.JLabel();
+        txtIdProduc = new javax.swing.JTextField();
+        btnAyudaProducto = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        panelFondo.setMinimumSize(new java.awt.Dimension(920, 830));
-        panelFondo.setPreferredSize(new java.awt.Dimension(920, 830));
+        panelFondo.setMinimumSize(new java.awt.Dimension(920, 1020));
+        panelFondo.setPreferredSize(new java.awt.Dimension(920, 1020));
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 50));
 
@@ -91,8 +128,9 @@ public class frmPedido extends javax.swing.JFrame {
         lblTitulo.setText("REGISTRO DE PEDIDO");
         panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 290, 50));
 
+        lblCodPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCodPedido.setText("Código de Pedido:");
-        panelFondo.add(lblCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 120, 40));
+        panelFondo.add(lblCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 140, 40));
 
         btnNuevaFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaFactura.setText("Nueva Factura");
@@ -103,10 +141,123 @@ public class frmPedido extends javax.swing.JFrame {
         });
         panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 170, 40));
 
-        txtCodPedido.setEditable(false);
-        txtCodPedido.setEnabled(false);
-        panelFondo.add(txtCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 150, 40));
-        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 830));
+        txtCodPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtCodPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelFondo.add(txtCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, 40));
+
+        tablaPedidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CÓDIGO", "FECHA", "HORA", "PROOVEDOR", "EMPLEADO", "ESTADO", "PRECIO TOTAL"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaPedidos.setEnabled(false);
+        tablaPedidos.setFocusable(false);
+        jScrollPane1.setViewportView(tablaPedidos);
+
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 851, 880, 150));
+
+        lblPedidosRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPedidosRegistrados.setText("Pedidos Registrados:");
+        panelFondo.add(lblPedidosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 806, 150, 40));
+
+        panelDatosPedido.setBackground(new java.awt.Color(8, 77, 166));
+        panelDatosPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNomEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNomEmp.setForeground(new java.awt.Color(255, 255, 255));
+        lblNomEmp.setText("Nombre Empleado:");
+        panelDatosPedido.add(lblNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 140, 40));
+
+        lblIdEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblIdEmp.setForeground(new java.awt.Color(255, 255, 255));
+        lblIdEmp.setText("Código Empleado:");
+        panelDatosPedido.add(lblIdEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 140, 40));
+
+        lblIdProv.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblIdProv.setForeground(new java.awt.Color(255, 255, 255));
+        lblIdProv.setText("Código Proovedor:");
+        panelDatosPedido.add(lblIdProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 140, 40));
+
+        lblNomProv.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNomProv.setForeground(new java.awt.Color(255, 255, 255));
+        lblNomProv.setText("Nombre Proovedor:");
+        panelDatosPedido.add(lblNomProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 140, 40));
+
+        btnAyudaProovedor.setText("AYUDA");
+        btnAyudaProovedor.setEnabled(false);
+        btnAyudaProovedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaProovedorActionPerformed(evt);
+            }
+        });
+        panelDatosPedido.add(btnAyudaProovedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 120, 40));
+
+        btnAyudaEmpleado.setText("AYUDA");
+        btnAyudaEmpleado.setEnabled(false);
+        btnAyudaEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaEmpleadoActionPerformed(evt);
+            }
+        });
+        panelDatosPedido.add(btnAyudaEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 120, 40));
+
+        txtIdProv.setEditable(false);
+        txtIdProv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtIdProv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelDatosPedido.add(txtIdProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 150, 40));
+
+        txtIdEmp.setEditable(false);
+        txtIdEmp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtIdEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelDatosPedido.add(txtIdEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, 40));
+
+        txtNomEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNomEmp.setForeground(new java.awt.Color(255, 255, 255));
+        txtNomEmp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        panelDatosPedido.add(txtNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 270, 40));
+
+        txtNomProv.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNomProv.setForeground(new java.awt.Color(255, 255, 255));
+        txtNomProv.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        panelDatosPedido.add(txtNomProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 270, 40));
+
+        lblIdProduc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblIdProduc.setForeground(new java.awt.Color(255, 255, 255));
+        lblIdProduc.setText("Código Producto:");
+        panelDatosPedido.add(lblIdProduc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 140, 40));
+
+        txtIdProduc.setEditable(false);
+        txtIdProduc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtIdProduc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        panelDatosPedido.add(txtIdProduc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 150, 40));
+
+        btnAyudaProducto.setText("AYUDA");
+        btnAyudaProducto.setEnabled(false);
+        btnAyudaProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaProductoActionPerformed(evt);
+            }
+        });
+        panelDatosPedido.add(btnAyudaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 120, 40));
+
+        panelFondo.add(panelDatosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 460, 260));
+
+        jPanel1.setBackground(new java.awt.Color(242, 162, 12));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 460, 400));
+        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 1020));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,7 +280,31 @@ public class frmPedido extends javax.swing.JFrame {
     private void btnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaFacturaActionPerformed
         String new_id_pedi = mass.generarNuevoIDPedido();
         txtCodPedido.setText(new_id_pedi);
+        btnAyudaEmpleado.setEnabled(true);
+        btnAyudaProovedor.setEnabled(true);
     }//GEN-LAST:event_btnNuevaFacturaActionPerformed
+
+    private void btnAyudaProovedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaProovedorActionPerformed
+        vistaRapidaProovedores.id_prov = id_prov;
+        vistaRapidaProovedores proovedores = new vistaRapidaProovedores();
+        proovedores.setLocationRelativeTo(null);
+        proovedores.setVisible(true);
+    }//GEN-LAST:event_btnAyudaProovedorActionPerformed
+
+    private void btnAyudaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaEmpleadoActionPerformed
+        vistaRapidaEmpleados.id_emp = id_emp;
+        vistaRapidaEmpleados empleados = new vistaRapidaEmpleados();
+        empleados.setLocationRelativeTo(null);
+        empleados.setVisible(true);
+    }//GEN-LAST:event_btnAyudaEmpleadoActionPerformed
+
+    private void btnAyudaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaProductoActionPerformed
+        vistaRapidaProductos.id_produc = id_produc;
+        vistaRapidaProductos.marca_produc = txtNomProv.getText();
+        vistaRapidaProductos productos = new vistaRapidaProductos();
+        productos.setLocationRelativeTo(null);
+        productos.setVisible(true);
+    }//GEN-LAST:event_btnAyudaProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,13 +357,31 @@ public class frmPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAyudaEmpleado;
+    public static javax.swing.JButton btnAyudaProducto;
+    private javax.swing.JButton btnAyudaProovedor;
     private javax.swing.JButton btnNuevaFactura;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblCodPedido;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblIdEmp;
+    private javax.swing.JLabel lblIdProduc;
+    private javax.swing.JLabel lblIdProv;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblNomEmp;
+    private javax.swing.JLabel lblNomProv;
+    private javax.swing.JLabel lblPedidosRegistrados;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panelDatosPedido;
     private javax.swing.JPanel panelFondo;
-    public javax.swing.JTextField txtCodPedido;
+    private javax.swing.JTable tablaPedidos;
+    public static javax.swing.JLabel txtCodPedido;
+    public static javax.swing.JTextField txtIdEmp;
+    public static javax.swing.JTextField txtIdProduc;
+    public static javax.swing.JTextField txtIdProv;
+    public static javax.swing.JLabel txtNomEmp;
+    public static javax.swing.JLabel txtNomProv;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,7 +11,7 @@ public class frmProducto extends javax.swing.JFrame {
     public frmProducto() {
         initComponents();
         setLocationRelativeTo(null);
-        EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
+        EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
         EscaladoImagenesButton(btnGrabarProducto, "src\\main\\java\\recursos\\agregar-producto_(1).png");
     }
 

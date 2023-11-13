@@ -1,8 +1,6 @@
 package interfaces;
 
-import clases.categoria;
-import clases.empleado;
-import clases.proovedor;
+import clases.*;
 import java.util.List;
 
 public interface busquedas {
@@ -11,4 +9,5 @@ public interface busquedas {
     empleado obtenerDatosUnEmpleado(String id_emp);
     proovedor obtenerDatosProveedor(String id_prov);
     String generarNuevoIDPedido();
+    producto obtenerDatosProducto(String id_produc);
 }

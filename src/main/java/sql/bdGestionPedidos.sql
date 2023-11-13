@@ -386,6 +386,19 @@ VALUES
     ('PROV43', 'Rexona', 'Proveedor de productos de cuidado personal', 'DIR026', 'CON048'),
     ('PROV44', 'Scott', 'Proveedor de productos de cuidado personal', 'DIR026', 'CON049');
 
+-- Insertar un nuevo pedido
+INSERT INTO pedido (id_pedi, fech_pedi, hora_pedi, id_prov, id_emp, estado_pedi)
+VALUES
+    ('PED0001', '2023-11-13', '15:30:00', 'PROV01', 'EMP01', 'Pendiente');
+
+-- Insertar detalles del pedido (ajusta las cantidades y productos según sea necesario)
+INSERT INTO detalle_pedido (id_pedi, id_produc, cant_produc_pedi, precio_tot_pedi)
+VALUES
+    ('PED0001', 'PROD001', 2, 95.76),
+    ('PED0001', 'PROD007', 3, 105.00),
+    ('PED0001', 'PROD013', 1, 35.00),
+    ('PED0001', 'PROD019', 4, 168.00);
+
 -- Procedure para login
 DELIMITER //
 
@@ -885,3 +898,41 @@ END //
 
 DELIMITER ;
 
+-- Procedure para devolver datos especificos de todos los pedidos:
+DELIMITER //
+CREATE PROCEDURE obtenerDatosPedidos()
+BEGIN
+    SELECT
+        p.id_pedi,
+        p.fech_pedi,
+        p.hora_pedi,
+        prov.nom_prov AS nombre_proveedor,
+        CONCAT(e.ape_pat_emp, ' ', e.ape_mat_emp, ', ', e.nom_pat_emp, ' ', e.nom_mat_emp) AS nombre_empleado,
+        p.estado_pedi,
+        SUM(dp.precio_tot_pedi) AS suma_precio_tot_pedi
+    FROM
+        pedido p
+    JOIN proveedor prov ON p.id_prov = prov.id_prov
+    JOIN empleado e ON p.id_emp = e.id_emp
+    JOIN detalle_pedido dp ON p.id_pedi = dp.id_pedi
+    GROUP BY
+        p.id_pedi;
+END //
+DELIMITER ;
+
+-- Procedure para obtener todos los datos de un producto
+DELIMITER //
+CREATE PROCEDURE obtenerDatosProducto(IN producto_id CHAR(7))
+BEGIN
+    SELECT
+        p.nom_produc,
+        p.marca_produc,
+        p.precio_empaq_produc,
+        p.cant_x_empaq_produc,
+        c.nom_ctg AS categoria_nombre,
+        c.id_ctg AS categoria_id
+    FROM producto p
+    INNER JOIN categoria c ON p.id_ctg = c.id_ctg
+    WHERE p.id_produc = producto_id;
+END //
+DELIMITER ;

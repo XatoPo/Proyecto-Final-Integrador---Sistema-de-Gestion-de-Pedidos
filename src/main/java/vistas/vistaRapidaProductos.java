@@ -16,6 +16,7 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
     public static String marca_produc;
+    public static String id_produc;
     NegocioMass mass = new NegocioMass();
     
     public vistaRapidaProductos() {
@@ -47,8 +48,8 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
             @Override
             public void componentResized(ComponentEvent e) {
                 // Ajustar la escala de las imágenes al cambiar el tamaño de la ventana
-                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
-                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondo_vistaRapida(1).png");
+                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(650X515).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
             }
         });
@@ -71,7 +72,6 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(650, 515));
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 120, 40));
@@ -92,7 +92,7 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "CATEGORÍA", "TIPO EMPAQUE", "CANTIDAD", "PRECIO"
+                "CÓDIGO", "NOMBRE", "CATEGORÍA", "TIPO EMPAQUE", "CANTIDAD POR EMPAQUE", "PRECIO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -101,6 +101,11 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tablaProductos);
@@ -136,6 +141,11 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
     private void txtNomProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProductoKeyReleased
         filtra(txtNomProducto.getText());
     }//GEN-LAST:event_txtNomProductoKeyReleased
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        int fila = tablaProductos.getSelectedRow();
+        frmPedido.txtIdProduc.setText(tablaProductos.getValueAt(fila, 0).toString());
+    }//GEN-LAST:event_tablaProductosMouseClicked
 
     /**
      * @param args the command line arguments

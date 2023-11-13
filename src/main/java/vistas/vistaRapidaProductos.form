@@ -4,9 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="undecorated" type="boolean" value="true"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[650, 515]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -93,11 +90,14 @@
                     <Column editable="false" title="NOMBRE" type="java.lang.Object"/>
                     <Column editable="false" title="CATEGOR&#xcd;A" type="java.lang.Object"/>
                     <Column editable="false" title="TIPO EMPAQUE" type="java.lang.Object"/>
-                    <Column editable="false" title="CANTIDAD" type="java.lang.Object"/>
+                    <Column editable="false" title="CANTIDAD POR EMPAQUE" type="java.lang.Object"/>
                     <Column editable="false" title="PRECIO" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaProductosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -16,6 +16,7 @@ public class vistaRapidaProovedores extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
     NegocioMass mass = new NegocioMass();
+    public static String id_prov;
     
     public vistaRapidaProovedores() {
         initComponents();
@@ -46,8 +47,8 @@ public class vistaRapidaProovedores extends javax.swing.JFrame {
             @Override
             public void componentResized(ComponentEvent e) {
                 // Ajustar la escala de las imágenes al cambiar el tamaño de la ventana
-                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
-                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondo_vistaRapida(1).png");
+                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(650X515).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
             }
         });
@@ -101,6 +102,11 @@ public class vistaRapidaProovedores extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaProovedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProovedoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaProovedores);
 
         panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 121, 600, 370));
@@ -134,6 +140,13 @@ public class vistaRapidaProovedores extends javax.swing.JFrame {
     private void txtNomProovedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProovedorKeyReleased
         filtra(txtNomProovedor.getText());
     }//GEN-LAST:event_txtNomProovedorKeyReleased
+
+    private void tablaProovedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProovedoresMouseClicked
+        int fila = tablaProovedores.getSelectedRow();
+        frmPedido.txtIdProv.setText(tablaProovedores.getValueAt(fila, 0).toString());
+        frmPedido.txtNomProv.setText(tablaProovedores.getValueAt(fila, 1).toString());
+        frmPedido.btnAyudaProducto.setEnabled(true);
+    }//GEN-LAST:event_tablaProovedoresMouseClicked
 
     /**
      * @param args the command line arguments

@@ -18,7 +18,7 @@ public class frmEmpleado extends javax.swing.JFrame {
     public frmEmpleado() {
         initComponents();
         setLocationRelativeTo(null);
-        EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\mass_(1).png");
+        EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
         EscaladoImagenesButton(btnGabarEmpleado, "src\\main\\java\\recursos\\AgregarEmpleado_(2).png");
         EscaladoImagenesButton(btnNuevoEmp, "src\\main\\java\\recursos\\limpieza-de-datos_(1).png");
         muestra();

@@ -28,4 +28,6 @@ public interface listados {
     List<empleado> obtenerTodosLosEmpleadosDatos();
     /*------------------------------------------------------*/
     List<proovedor> obtenerTodosLosProveedoresDatos();
+    /*------------------------------------------------------*/
+    List<pedido> obtenerDatosPedidosParaLista();
 }
