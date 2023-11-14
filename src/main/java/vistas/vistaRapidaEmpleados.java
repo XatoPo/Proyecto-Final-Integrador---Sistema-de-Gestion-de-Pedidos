@@ -135,6 +135,7 @@ public class vistaRapidaEmpleados extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
        this.dispose();
+       frmPedido.btnAyudaEmpleado.setEnabled(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void txtNomEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomEmpleadoKeyReleased

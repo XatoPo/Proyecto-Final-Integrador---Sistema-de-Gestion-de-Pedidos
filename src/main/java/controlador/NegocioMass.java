@@ -193,17 +193,16 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
     
     @Override
-    public void registrarDetallePedido(String id_pedi, String id_produc, detalle_pedido deta_pedi) {
+    public void registrarDetallePedido(String id_pedi, detalle_pedido deta_pedi) {
         Connection cn = MySQLConexion.getConexion();
         String sql="{Call registrarDetallePedido(?, ?, ?, ?)}";
         try{           
             CallableStatement st = cn.prepareCall(sql);
             st.setString(1, id_pedi);
-            st.setString(2, id_produc);
+            st.setString(2, deta_pedi.getId_produc());
             st.setInt(3, deta_pedi.getCant_produc_pedi());
-            st.setDouble(4, deta_pedi.getPrecio_empaq_produc());
-            ResultSet rs=st.executeQuery();
-            rs.next();         
+            st.setDouble(4, deta_pedi.precio_tot_x_produc());
+            st.executeQuery();      
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -221,8 +220,7 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             st.setString(4, pedi.getId_prov());
             st.setString(5, pedi.getId_emp());
             st.setString(6, pedi.getEstado_pedi());
-            ResultSet rs=st.executeQuery();
-            rs.next();
+            st.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -711,6 +709,33 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return id_pedi;
     }
     
+    @Override
+    public producto obtenerDatosProducto(String id_produc) {
+        producto produc = null;
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerDatosProducto(?)}";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, id_produc);
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                produc = new producto();
+                produc.setNom_produc(rs.getString(1));
+                produc.setMarca_produc(rs.getString(2));
+                produc.setPrecio_empaq_produc(rs.getDouble(3));
+                produc.setCant_x_empaq_produc(rs.getInt(4));
+                produc.setTipo_empq_produc(rs.getString(5));
+                produc.setNom_ctg(rs.getString(6));
+                produc.setId_ctg(rs.getString(7));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return produc;
+    }
+    
     /*-----LOGIN-----*/
     @Override
     public empleado login_emp(String id_emp, String password_emp) {
@@ -752,32 +777,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         
         return emp;
-    }
-
-    @Override
-    public producto obtenerDatosProducto(String id_produc) {
-        producto produc = null;
-        Connection cn = MySQLConexion.getConexion();
-        
-        try {
-            String sql = "{CALL obtenerDatosProducto(?)}";
-            CallableStatement cs = cn.prepareCall(sql);
-            cs.setString(1, id_produc);
-            ResultSet rs = cs.executeQuery();
-            if (rs.next()) {
-                produc = new producto();
-                produc.setNom_produc(rs.getString(1));
-                produc.setMarca_produc(rs.getString(2));
-                produc.setPrecio_empaq_produc(rs.getDouble(3));
-                produc.setCant_x_empaq_produc(rs.getInt(4));
-                produc.setNom_ctg(rs.getString(5));
-                produc.setId_ctg(rs.getString(6));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return produc;
     }
 
 }

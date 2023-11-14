@@ -135,6 +135,7 @@ public class vistaRapidaProovedores extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
        this.dispose();
+       frmPedido.btnAyudaProovedor.setEnabled(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void txtNomProovedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProovedorKeyReleased
@@ -145,6 +146,7 @@ public class vistaRapidaProovedores extends javax.swing.JFrame {
         int fila = tablaProovedores.getSelectedRow();
         frmPedido.txtIdProv.setText(tablaProovedores.getValueAt(fila, 0).toString());
         frmPedido.txtNomProv.setText(tablaProovedores.getValueAt(fila, 1).toString());
+        frmPedido.txtIdProduc.setText("");
         frmPedido.btnAyudaProducto.setEnabled(true);
     }//GEN-LAST:event_tablaProovedoresMouseClicked
 

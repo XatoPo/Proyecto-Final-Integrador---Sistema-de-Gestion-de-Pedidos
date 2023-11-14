@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface registros {
     void adiContacto(contacto contac);
-    void registrarDetallePedido(String id_pedi, String id_produc, detalle_pedido deta_pedi);
+    void registrarDetallePedido(String id_pedi, detalle_pedido deta_pedi);
     void registrarPedido(pedido pedi);
     void adiEmpleado(empleado emp);
     void adiProveedor(proovedor emp);

@@ -82,7 +82,7 @@ CREATE TABLE detalle_pedido (
     id_pedi CHAR(7) NOT NULL, -- Parte de la clave primaria y clave foránea
     id_produc CHAR(7) NOT NULL,
     cant_produc_pedi INT NOT NULL,
-    precio_tot_pedi DECIMAL(10, 2) NOT NULL,
+    precio_tot_x_produc DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (id_pedi) REFERENCES pedido(id_pedi),
     FOREIGN KEY (id_produc) REFERENCES producto(id_produc),
     PRIMARY KEY (id_pedi, id_produc) -- Clave primaria compuesta
@@ -392,7 +392,7 @@ VALUES
     ('PED0001', '2023-11-13', '15:30:00', 'PROV01', 'EMP01', 'Pendiente');
 
 -- Insertar detalles del pedido (ajusta las cantidades y productos según sea necesario)
-INSERT INTO detalle_pedido (id_pedi, id_produc, cant_produc_pedi, precio_tot_pedi)
+INSERT INTO detalle_pedido (id_pedi, id_produc, cant_produc_pedi, precio_tot_x_produc)
 VALUES
     ('PED0001', 'PROD001', 2, 95.76),
     ('PED0001', 'PROD007', 3, 105.00),
@@ -853,7 +853,7 @@ CREATE PROCEDURE registrarDetallePedido(
     IN p_id_pedi CHAR(7),
     IN p_id_produc CHAR(7),
     IN p_cant_produc_pedi INT,
-    IN p_precio_tot_pedi DECIMAL(10, 2)
+    IN p_precio_tot_x_produc DECIMAL(10, 2)
 )
 BEGIN
     DECLARE exit handler for SQLEXCEPTION
@@ -863,8 +863,8 @@ BEGIN
 
     START TRANSACTION;
 
-    INSERT INTO detalle_pedido (id_pedi, id_produc, cant_produc_pedi, precio_tot_pedi)
-    VALUES (p_id_pedi, p_id_produc, p_cant_produc_pedi, p_precio_tot_pedi);
+    INSERT INTO detalle_pedido (id_pedi, id_produc, cant_produc_pedi, precio_tot_x_produc)
+    VALUES (p_id_pedi, p_id_produc, p_cant_produc_pedi, p_precio_tot_x_produc);
 
     COMMIT;
 END //
@@ -909,7 +909,7 @@ BEGIN
         prov.nom_prov AS nombre_proveedor,
         CONCAT(e.ape_pat_emp, ' ', e.ape_mat_emp, ', ', e.nom_pat_emp, ' ', e.nom_mat_emp) AS nombre_empleado,
         p.estado_pedi,
-        SUM(dp.precio_tot_pedi) AS suma_precio_tot_pedi
+        SUM(dp.precio_tot_x_produc) AS suma_precio_tot_x_produc
     FROM
         pedido p
     JOIN proveedor prov ON p.id_prov = prov.id_prov
@@ -929,6 +929,7 @@ BEGIN
         p.marca_produc,
         p.precio_empaq_produc,
         p.cant_x_empaq_produc,
+        p.tipo_empq_produc,
         c.nom_ctg AS categoria_nombre,
         c.id_ctg AS categoria_id
     FROM producto p

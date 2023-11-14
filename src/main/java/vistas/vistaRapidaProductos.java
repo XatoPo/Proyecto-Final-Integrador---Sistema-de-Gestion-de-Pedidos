@@ -1,6 +1,7 @@
 package vistas;
 
 import Formularios.*;
+import clases.producto;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -136,6 +137,7 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
        this.dispose();
+       frmPedido.btnAyudaProducto.setEnabled(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void txtNomProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProductoKeyReleased
@@ -144,7 +146,18 @@ public class vistaRapidaProductos extends javax.swing.JFrame {
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
         int fila = tablaProductos.getSelectedRow();
-        frmPedido.txtIdProduc.setText(tablaProductos.getValueAt(fila, 0).toString());
+        String id_product = tablaProductos.getValueAt(fila, 0).toString();
+        frmPedido.txtIdProduc.setText(id_product);
+        producto produc =  mass.obtenerDatosProducto(id_product);
+        frmPedido.txtNomProduc.setText(produc.getNom_produc());
+        frmPedido.txtMarcaProduc.setText(produc.getMarca_produc());
+        frmPedido.txtPrecioEmpaque.setText(String.valueOf(produc.getPrecio_empaq_produc()));
+        frmPedido.txtCantXEmpaque.setText(String.valueOf(produc.getCant_x_empaq_produc()));
+        frmPedido.txtNomCategoria.setText(produc.getNom_ctg());
+        frmPedido.txtTipoEmpaque.setText(produc.getTipo_empq_produc());
+        frmPedido.id_ctg = produc.getId_ctg();
+        frmPedido.btnAgregarProducto.setEnabled(true);
+        frmPedido.spnCantidadProducto.setEnabled(true);
     }//GEN-LAST:event_tablaProductosMouseClicked
 
     /**
