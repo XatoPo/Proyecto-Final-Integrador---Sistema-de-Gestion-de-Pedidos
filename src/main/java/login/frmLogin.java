@@ -204,7 +204,7 @@ public class frmLogin extends javax.swing.JFrame {
             frmMenú.cargoEmp = emp.getCargo_emp();
             frmMenú menu = new frmMenú();
             menu.setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
