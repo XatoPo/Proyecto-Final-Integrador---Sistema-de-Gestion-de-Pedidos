@@ -1,6 +1,7 @@
 package login;
 
-import Formularios.frmPedido;
+import clases.empleado;
+import controlador.NegocioMass;
 
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
@@ -17,6 +18,7 @@ import recursos.TextPrompt;
 public class frmLogin extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
+    NegocioMass mass = new NegocioMass();
 
     public frmLogin() {
         initComponents();
@@ -81,7 +83,7 @@ public class frmLogin extends javax.swing.JFrame {
         lblBienvenido = new javax.swing.JLabel();
         lblInicioSesion = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
         txtIdEmp = new javax.swing.JTextField();
         lblUsuario = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
@@ -90,7 +92,6 @@ public class frmLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(430, 520));
         setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(255, 198, 3));
@@ -121,12 +122,12 @@ public class frmLogin extends javax.swing.JFrame {
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(0, 0, 0));
         lblPassword.setText("Contraseña");
-        panelFondo.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 170, 40));
+        panelFondo.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 170, 40));
 
         txtPassword.setBackground(new java.awt.Color(255, 198, 3));
         txtPassword.setForeground(new java.awt.Color(0, 0, 0));
         txtPassword.setBorder(null);
-        panelFondo.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 370, 50));
+        panelFondo.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 250, 50));
 
         txtIdEmp.setBackground(new java.awt.Color(255, 198, 3));
         txtIdEmp.setForeground(new java.awt.Color(0, 0, 0));
@@ -136,28 +137,33 @@ public class frmLogin extends javax.swing.JFrame {
                 txtIdEmpActionPerformed(evt);
             }
         });
-        panelFondo.add(txtIdEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 370, 50));
+        panelFondo.add(txtIdEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 250, 50));
 
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(0, 0, 0));
         lblUsuario.setText("Usuario");
-        panelFondo.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 40));
+        panelFondo.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 170, 40));
 
         btnIngresar.setBackground(new java.awt.Color(3, 57, 166));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("INGRESAR");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
         panelFondo.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 150, 50));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("__________________________________________________");
-        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 370, 70));
+        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 370, 70));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("__________________________________________________");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 370, 50));
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 370, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,12 +182,31 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void txtIdEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdEmpActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        String idEmp = txtIdEmp.getText().trim();
+        String password = txtPassword.getText().trim();
+        
+        empleado emp = mass.login_emp(idEmp, password);
+        if (emp == null) {
+            frmErrorLogin error = new frmErrorLogin();
+            error.setVisible(true);
+            return;
+        } else {
+            frmMenú.idEmp = emp.getId_emp();
+            frmMenú.nomEmp = emp.nomCompleto();
+            frmMenú.cargoEmp = emp.getCargo_emp();
+            frmMenú menu = new frmMenú();
+            menu.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,6 +255,6 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel panelFondo;
     private javax.swing.JTextField txtIdEmp;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
