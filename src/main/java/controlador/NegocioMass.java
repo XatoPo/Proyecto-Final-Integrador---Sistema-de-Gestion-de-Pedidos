@@ -27,6 +27,48 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }
+    @Override
+    public void eliminarEmpleado(String idEmpleado) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spEliminarEmpleado (?)}";
+        try {           
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, idEmpleado);
+            int rowsAffected = st.executeUpdate();
+            // Hacer algo con el resultado si es necesario
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void editEmpleado(empleado e) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spModificarEmpleado (?, ?, ?, ?, ?, ?, ?, ?)}";
+        try {
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, e.getId_emp());  // Id del empleado que se va a modificar
+            st.setString(2, e.getNom_pat_emp());
+            st.setString(3, e.getNom_mat_emp());
+            st.setString(4, e.getApe_pat_emp());
+            st.setString(5, e.getApe_mat_emp());
+            st.setString(6, e.getCargo_emp());
+            st.setString(7, e.getFech_nac_emp());
+            st.setString(8, e.getPassword_emp());
+            int rowsAffected = st.executeUpdate();
+            // Puedes agregar lógica adicional según tus necesidades, por ejemplo, verificar rowsAffected
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }     
+    }
+
     
     @Override
     public void adiProveedor(proovedor p){
@@ -41,6 +83,45 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }
+    
+    @Override
+    public void eliminarProveedor(String idProveedor) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spEliminarProveedor (?)}";
+        try {           
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, idProveedor);
+            int rowsAffected = st.executeUpdate();
+            // Hacer algo con el resultado si es necesario
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void editProveedor(proovedor p) {
+    Connection cn = MySQLConexion.getConexion();
+    String sql = "{CALL spModificarProveedor (?, ?, ?)}";
+    try {           
+        CallableStatement st = cn.prepareCall(sql);
+        st.setString(1, p.getId_prov());  // El ID del proveedor que deseas modificar
+        st.setString(2, p.getNom_prov()); // El nuevo nombre del proveedor
+        st.setString(3, p.getDescd_prov()); // La nueva descripción del proveedor
+        int rowsAffected = st.executeUpdate();
+        // Hacer algo con el resultado si es necesario
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+
         
     @Override   
     public List<empleado> lisEmp(){
@@ -112,6 +193,23 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }
+    @Override
+    public void modificarContacto(contacto c) {
+    Connection cn = MySQLConexion.getConexion();
+    String sql = "{CALL spModificarContacto(?, ?, ?, ?)}";
+    try {
+        CallableStatement st = cn.prepareCall(sql);
+        st.setString(1, c.getId_contac());  // ID del contacto que deseas modificar
+        st.setString(2, c.getTipo_contac());
+        st.setString(3, c.getTelef_contac());
+        st.setString(4, c.getEmail_contac());
+        int rowsAffected = st.executeUpdate();
+        // Hacer algo con el resultado si es necesario
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+
     
     @Override        
     public void adiUbigeoEmp(ubigeo u){
@@ -131,6 +229,26 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }     
+    
+    @Override
+    public void modificarUbigeo(ubigeo u) {
+    Connection cn = MySQLConexion.getConexion();
+    String sql = "{CALL spModificarUbigeo(?, ?, ?, ?, ?, ?)}";
+    try {
+        CallableStatement st = cn.prepareCall(sql);
+        st.setString(1, u.getId_ubigeo());  // ID del ubigeo que deseas modificar
+        st.setString(2, u.getDistrito_ubi());
+        st.setString(3, u.getProvincia_ubi());
+        st.setString(4, u.getCalle_avend_ubi());
+        st.setInt(5, u.getNum_calle_ubi());
+        st.setString(6, u.getReferencia_ubi());
+        int rowsAffected = st.executeUpdate();
+        // Hacer algo con el resultado si es necesario
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+
     
     @Override
     public void adiContactoProv(contacto c){
@@ -626,17 +744,18 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
                 datos_ubigeo_prov.setId_ubigeo(rs.getString(8));
                 
                 emp.setFech_nac_emp(rs.getString(9));
+                emp.setPassword_emp(rs.getString(10));
                 
-                datos_contacto_prov.setTipo_contac(rs.getString(10));
-                datos_contacto_prov.setTelef_contac(rs.getString(11));
-                datos_contacto_prov.setEmail_contac(rs.getString(12));
+                datos_contacto_prov.setTipo_contac(rs.getString(11));
+                datos_contacto_prov.setTelef_contac(rs.getString(12));
+                datos_contacto_prov.setEmail_contac(rs.getString(13));
                 emp.setDatos_contacto_emp(datos_contacto_prov);
                 
-                datos_ubigeo_prov.setDistrito_ubi(rs.getString(13));
-                datos_ubigeo_prov.setProvincia_ubi(rs.getString(14));
-                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(15));
-                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(16));
-                datos_ubigeo_prov.setReferencia_ubi(rs.getString(17));
+                datos_ubigeo_prov.setDistrito_ubi(rs.getString(14));
+                datos_ubigeo_prov.setProvincia_ubi(rs.getString(15));
+                datos_ubigeo_prov.setCalle_avend_ubi(rs.getString(16));
+                datos_ubigeo_prov.setNum_calle_ubi(rs.getInt(17));
+                datos_ubigeo_prov.setReferencia_ubi(rs.getString(18));
                 emp.setDatos_ubigeo_emp(datos_ubigeo_prov);
             }
         } catch (Exception e) {

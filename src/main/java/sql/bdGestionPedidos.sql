@@ -458,6 +458,7 @@ BEGIN
         e.cargo_emp,
         e.id_ubigeo,
         e.fech_nac_emp,
+        CAST(AES_DECRYPT(e.password_emp, 'aB7xY9zL3pQ') AS CHAR)AS password,
         c.tipo_contac AS tipo_contacto,
         c.telef_contac,
         c.email_contac,
@@ -936,4 +937,146 @@ BEGIN
     INNER JOIN categoria c ON p.id_ctg = c.id_ctg
     WHERE p.id_produc = producto_id;
 END //
+DELIMITER ;
+
+
+-- Procedure para modificar datos de proveedores
+DELIMITER $$
+CREATE PROCEDURE spModificarProveedor(
+    IN id_prov_param CHAR(6),
+    IN nom_prov_param VARCHAR(50),
+    IN descd_prov_param TEXT	    
+)
+BEGIN
+    -- Verificar si el proveedor con el ID dado existe
+    IF (SELECT COUNT(*) FROM proveedor WHERE id_prov = id_prov_param) > 0 THEN
+        -- Modificar la información del proveedor
+        UPDATE proveedor
+        SET
+            nom_prov = nom_prov_param,
+            descd_prov = descd_prov_param
+        WHERE id_prov = id_prov_param;       
+    END IF;
+END$$
+DELIMITER ;
+
+--Procedure para modificar datos de los empleados
+DELIMITER $$
+CREATE PROCEDURE spModificarEmpleado(
+    IN id_emp_param CHAR(5),
+    IN nom_pat_emp_param VARCHAR(25),
+    IN nom_mat_emp_param VARCHAR(25),
+    IN ape_pat_emp_param VARCHAR(25),
+    IN ape_mat_emp_param VARCHAR(25),
+    IN cargo_emp_param VARCHAR(20),
+    IN fech_nac_emp_param DATE,
+    IN password_emp_param VARBINARY(255)
+)
+BEGIN
+    -- Verificar si el empleado con el ID dado existe
+    IF (SELECT COUNT(*) FROM empleado WHERE id_emp = id_emp_param) > 0 THEN
+        -- Modificar la información del empleado, incluida la contraseña
+        UPDATE empleado
+        SET
+            nom_pat_emp = nom_pat_emp_param,
+            nom_mat_emp = nom_mat_emp_param,
+            ape_pat_emp = ape_pat_emp_param,
+            ape_mat_emp = ape_mat_emp_param,
+            cargo_emp = cargo_emp_param,
+            fech_nac_emp = fech_nac_emp_param,
+            password_emp = AES_ENCRYPT(password_emp_param, 'aB7xY9zL3pQ')
+        WHERE id_emp = id_emp_param;       
+    END IF;
+END$$
+DELIMITER ;
+
+--Procedure para eliminar datos de prooveedores
+DELIMITER $$
+CREATE PROCEDURE spEliminarProveedor(IN `id_prov_param` CHAR(6))
+BEGIN
+    DECLARE id_contac_prov CHAR(6);
+    DECLARE id_ubigeo_prov CHAR(6);
+
+    -- Obtener el ID de contacto y ubigeo asociados al proveedor
+    SELECT id_contac, id_ubigeo INTO id_contac_prov, id_ubigeo_prov
+    FROM proveedor
+    WHERE id_prov = id_prov_param;
+
+    -- Verificar si el proveedor con el ID dado existe
+    IF (SELECT COUNT(*) FROM proveedor WHERE id_prov = id_prov_param) > 0 THEN
+        -- Eliminar el proveedor
+        DELETE FROM proveedor WHERE id_prov = id_prov_param;
+
+            DELETE FROM contacto WHERE id_contac = id_contac_prov;
+
+            DELETE FROM ubigeo WHERE id_ubigeo = id_ubigeo_prov;
+    END IF;
+END$$
+DELIMITER ;
+--Procedure para eliminar datos de empleados
+DELIMITER $$
+CREATE PROCEDURE spEliminarEmpleado(IN `id_emp_param` CHAR(5))
+BEGIN
+    DECLARE id_contac_emp CHAR(6);
+    DECLARE id_ubigeo_emp CHAR(6);
+
+    -- Obtener el ID de contacto y ubigeo asociados al empleado
+    SELECT id_contac, id_ubigeo INTO id_contac_emp, id_ubigeo_emp
+    FROM empleado
+    WHERE id_emp = id_emp_param;
+
+    -- Verificar si el empleado con el ID dado existe
+    IF (SELECT COUNT(*) FROM empleado WHERE id_emp = id_emp_param) > 0 THEN
+        -- Eliminar el empleado
+        DELETE FROM empleado WHERE id_emp = id_emp_param;
+
+        -- Eliminar el contacto asociado al empleado
+        IF id_contac_emp IS NOT NULL THEN
+            DELETE FROM contacto WHERE id_contac = id_contac_emp;
+        END IF;
+
+        -- Eliminar el ubigeo asociado al empleado
+        IF id_ubigeo_emp IS NOT NULL THEN
+            DELETE FROM ubigeo WHERE id_ubigeo = id_ubigeo_emp;
+        END IF;
+    END IF;
+END$$
+DELIMITER ;
+--procedure para editar datos de contacto
+DELIMITER $$
+CREATE PROCEDURE spModificarContacto(
+    IN id_contac_param CHAR(6),
+    IN tipo_contac_param VARCHAR(50),
+    IN telef_contac_param VARCHAR(15),
+    IN email_contac_param VARCHAR(100)
+)
+BEGIN
+    -- Verificar si el contacto existe
+    DECLARE existe_contacto INT;
+    SELECT COUNT(*) INTO existe_contacto FROM contacto WHERE id_contac = id_contac_param;
+        -- Actualizar el contacto
+        UPDATE contacto
+        SET tipo_contac = tipo_contac_param,
+            telef_contac = telef_contac_param,
+            email_contac = email_contac_param
+        WHERE id_contac = id_contac_param;
+END$$
+DELIMITER ;
+
+--procedure para editar datos de ubigeo
+DELIMITER $$
+CREATE PROCEDURE spModificarUbigeo(IN `id_ubigeo_param` CHAR(6), IN `distrito_ubi_param` VARCHAR(20), IN `provincia_ubi_param` VARCHAR(20), IN `calle_avend_ubi_param` VARCHAR(50), IN `num_calle_ubi_param` INT, IN `referencia_ubi_param` VARCHAR(150))
+BEGIN
+    -- Verificar si el ubigeo existe
+    DECLARE existe_ubigeo INT;
+    SELECT COUNT(*) INTO existe_ubigeo FROM ubigeo WHERE id_ubigeo = id_ubigeo_param;
+        -- Actualizar el ubigeo
+        UPDATE ubigeo
+        SET distrito_ubi = distrito_ubi_param,
+            provincia_ubi = provincia_ubi_param,
+            calle_avend_ubi = calle_avend_ubi_param,
+            num_calle_ubi = num_calle_ubi_param,
+            referencia_ubi = referencia_ubi_param
+        WHERE id_ubigeo = id_ubigeo_param;    
+END$$
 DELIMITER ;
