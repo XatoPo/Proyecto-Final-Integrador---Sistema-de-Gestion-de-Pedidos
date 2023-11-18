@@ -20,10 +20,6 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
     
     public vistaRapidaMarcas() {
         initComponents();
-        
-        
-        
-        
         setResizable(false);
         setLocationRelativeTo(null);
         filtraNomMarca("");
@@ -44,6 +40,22 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
             }
         });
         
+        this.addComponentListener(new ComponentAdapter(){
+            @Override
+            public void componentResized(ComponentEvent e){
+                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(650X515).png");
+                EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
+            }
+        });
+    }
+    
+    private void EscaladoImagenesLabel(JLabel labelFondo, String ruta) {
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(labelFondo.getWidth(), labelFondo.getHeight(), Image.SCALE_DEFAULT));
+        labelFondo.setIcon(icon);
+        this.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -72,6 +84,7 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 180, 50));
@@ -134,6 +147,7 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomMarcaKeyReleased
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        this.dispose();
         
     }//GEN-LAST:event_lblCerrarMouseClicked
 

@@ -68,7 +68,52 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }     
     }
-
+    
+    public void eliminarProducto(String idProducto) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spEliminarProducto (?)}";
+        try {           
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, idProducto);
+            int rowsAffected = st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void editProducto(producto p){
+        Connection cn = MySQLConexion.getConexion();
+        String sqlConsulta = "SELECT id_ctg FROM categoria WHERE nom_ctg = ?";
+        try{
+            PreparedStatement consulta = cn.prepareStatement(sqlConsulta);
+            consulta.setString(1,p.getNom_ctg());
+            ResultSet rs = consulta.executeQuery();
+            if(rs.next()){
+                String idCtg = rs.getString("id_ctg");
+                String sql = "{CALL spModificarProducto (?,?,?,?,?,?,?)}";
+                CallableStatement st = cn.prepareCall(sql);
+                st.setString(1, p.getId_produc());
+                st.setString(2, p.getNom_produc());
+                st.setString(3, p.getMarca_produc());
+                st.setDouble(4, p.getPrecio_empaq_produc());
+                st.setInt(5, p.getCant_x_empaq_produc());
+                st.setString(6, idCtg);  
+                st.setString(7, p.getTipo_empq_produc());
+                int rowsAffected = st.executeUpdate();
+            }   
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
     
     @Override
     public void adiProveedor(proovedor p){

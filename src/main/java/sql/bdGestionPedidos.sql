@@ -1137,3 +1137,10 @@ BEGIN
 END@@
 
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE spEliminarProducto(IN p_id_produc CHAR(7))
+BEGIN
+    DELETE FROM producto WHERE id_produc = p_id_produc;
+END //
+DELIMITER ;
