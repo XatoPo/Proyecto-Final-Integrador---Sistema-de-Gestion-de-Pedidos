@@ -296,8 +296,28 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
 
     @Override
-    public void adiProducto(producto produc) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void adiProducto(producto p) {
+        Connection cn = MySQLConexion.getConexion();
+        String sqlConsulta = "SELECT id_ctg FROM categoria WHERE nom_ctg = ?";
+        try {
+            PreparedStatement consulta = cn.prepareStatement(sqlConsulta);
+            consulta.setString(1, p.getNom_ctg());
+            ResultSet rs = consulta.executeQuery();
+            if (rs.next()) {
+                String idCtg = rs.getString("id_ctg");
+                String sql = "{CALL spAdicionProducto (?, ?, ?, ?, ?, ?)}";
+                CallableStatement st = cn.prepareCall(sql);
+                st.setString(1, p.getNom_produc());
+                st.setString(2, p.getMarca_produc());
+                st.setDouble(3, p.getPrecio_empaq_produc());
+                st.setInt(4, p.getCant_x_empaq_produc());
+                st.setString(5, idCtg);  
+                st.setString(6, p.getTipo_empq_produc());
+                int rowsAffected = st.executeUpdate();
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -414,6 +434,22 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         
         return list_produc;
+    }
+    
+    public List<String> obtenerNombresMarcas() {
+    List<String> nombresMarcas = new ArrayList<>();
+    Connection cn = MySQLConexion.getConexion();
+    try {
+        String sql = "{CALL ObtenerNombresMarcas()}";
+        CallableStatement cs = cn.prepareCall(sql);
+        ResultSet rs = cs.executeQuery();
+        while (rs.next()) {
+            nombresMarcas.add(rs.getString(1));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        }
+        return nombresMarcas;
     }
     
     @Override

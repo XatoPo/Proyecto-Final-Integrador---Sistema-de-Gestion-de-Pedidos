@@ -4,17 +4,92 @@
  */
 package Formularios;
 
-/**
- *
- * @author AMD
- */
-public class frmProducto extends javax.swing.JFrame {
+import static Formularios.frmPedido.btnAgregarProducto;
+import static Formularios.frmPedido.id_produc;
+import clases.producto;
+import controlador.NegocioMass;
+import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import login.frmMenú;
+import vistas.vistaRapidaMarcas;
 
-    /**
-     * Creates new form frmProducto
-     */
+
+public class frmProducto extends javax.swing.JFrame {
+    NegocioMass mass = new NegocioMass();
+    private int mouseX, mouseY;
+    
     public frmProducto() {
         initComponents();
+        muestra();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        
+        
+        panelFondo.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+        
+        panelFondo.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen() - mouseX;
+                int y = e.getYOnScreen() - mouseY;
+
+                frmProducto.this.setLocation(x, y);
+            }
+        });
+        
+        this.addComponentListener(new ComponentAdapter() {
+            
+            public void componentResized(ComponentEvent e) {
+                // Ajustar la escala de las imágenes al cambiar el tamaño de la ventana
+                EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+                EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
+                EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
+                EscaladoImagenesButton(btnAyudaMarca, "src\\main\\java\\recursos\\lupa.png");
+                EscaladoImagenesButton(btnAgregarProducto, "src\\main\\java\\recursos\\agregar_producto.png");
+            }
+        });
+    }
+    
+    private void EscaladoImagenesLabel(JLabel labelFondo, String ruta) {
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(labelFondo.getWidth(), labelFondo.getHeight(), Image.SCALE_DEFAULT));
+        labelFondo.setIcon(icon);
+        this.repaint();
+    }
+    
+    private void EscaladoImagenesButton(JButton botonFondo, String ruta){
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        botonFondo.setIcon(icon);
+        this.repaint();
+    }
+    
+    NegocioMass obj = new NegocioMass();
+    
+    void muestra(){
+        DefaultTableModel dt = (DefaultTableModel)tbProductos.getModel();
+        dt.setRowCount(0);
+        
+        for(producto x : obj.obtenerProductos()){
+            Object p[]={x.getId_produc(),x.getNom_produc(),x.getMarca_produc(),
+                x.getPrecio_empaq_produc(), x.getCant_x_empaq_produc(), x.getId_ctg(),
+                x.getTipo_empq_produc()};
+        dt.addRow(p);
+        }
     }
 
     /**
@@ -29,9 +104,7 @@ public class frmProducto extends javax.swing.JFrame {
         panelFondo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -39,35 +112,31 @@ public class frmProducto extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        btnRegistraProducto = new javax.swing.JButton();
+        txtNombreProducto = new javax.swing.JTextField();
+        txtPrecioEmpaque = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
+        txtCantidadEmpaque = new javax.swing.JTextField();
+        cbCodigoCategoria = new javax.swing.JComboBox<>();
+        txtTipoEmpaque = new javax.swing.JTextField();
+        btnAyudaMarca = new javax.swing.JButton();
+        btnNuevoRegistro = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbProductos = new javax.swing.JTable();
+        lblCerrar = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 50));
+        panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 140, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("REGISTRO DE PRODUCTO");
-        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 250, 50));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Código de producto:");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 150, 50));
-        panelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 150, 50));
-
-        jButton1.setText("NUEVO PRODUCTO");
-        panelFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, 180, 50));
+        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 250, 50));
+        panelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 50));
 
         jPanel1.setBackground(new java.awt.Color(8, 77, 166));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,26 +171,44 @@ public class frmProducto extends javax.swing.JFrame {
         jLabel9.setText("Tipo de empaquetado:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 180, 40));
 
-        jButton2.setText("REGISTRAR PRODUCTO");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 180, 40));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 240, 40));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 240, 40));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 290, 40));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 220, 40));
+        btnRegistraProducto.setText("REGISTRAR PRODUCTO");
+        btnRegistraProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistraProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegistraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 180, 40));
+        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 240, 40));
+        jPanel1.add(txtPrecioEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 240, 40));
+        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 250, 40));
+        jPanel1.add(txtCantidadEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 220, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 240, 40));
+        cbCodigoCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Bebidas", "Panadería", "Snacks", "Lácteos", "Limpieza", "Frutas y verduras", "Carnes y aves", "Congelados", "Cuidado personal" }));
+        jPanel1.add(cbCodigoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 240, 40));
+        jPanel1.add(txtTipoEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 240, 40));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 250, 40));
+        btnAyudaMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaMarcaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAyudaMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, 40, 40));
 
-        panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 910, 280));
+        btnNuevoRegistro.setText("NUEVO REGISTRO");
+        btnNuevoRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoRegistroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevoRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 160, 40));
+
+        panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 910, 280));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Productos registrados:");
-        panelFondo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 190, 40));
+        panelFondo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 190, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -132,9 +219,16 @@ public class frmProducto extends javax.swing.JFrame {
                 "Código del producto", "Nombre", "Marca", "Precio", "Cantidad por empaquetado", "Código de categoría", "Tipo de empaquetado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbProductos);
 
-        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 890, 260));
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 890, 350));
+
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
+            }
+        });
+        panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 40, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,6 +246,43 @@ public class frmProducto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistraProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraProductoActionPerformed
+        producto pro = new producto();
+        pro.setNom_produc(txtNombreProducto.getText());
+        pro.setMarca_produc(txtMarca.getText());
+        pro.setPrecio_empaq_produc(Double.parseDouble(txtPrecioEmpaque.getText()));
+        pro.setCant_x_empaq_produc(Integer.parseInt(txtCantidadEmpaque.getText()));
+        pro.setNom_ctg(cbCodigoCategoria.getSelectedItem().toString());
+        pro.setTipo_empq_produc(txtTipoEmpaque.getText());
+        obj.adiProducto(pro);
+        muestra();
+        
+    }//GEN-LAST:event_btnRegistraProductoActionPerformed
+    
+    private void btnAyudaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaMarcaActionPerformed
+        vistaRapidaMarcas.id_produc = id_produc;
+        vistaRapidaMarcas empleados = new vistaRapidaMarcas();
+        empleados.setLocationRelativeTo(null);
+        empleados.setVisible(true);
+        btnAyudaMarca.setEnabled(false);
+    }//GEN-LAST:event_btnAyudaMarcaActionPerformed
+
+    private void btnNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoRegistroActionPerformed
+        txtNombreProducto.setText("");
+        txtNombreProducto.setText("");
+        txtMarca.setText("");
+        txtPrecioEmpaque.setText("");
+        txtCantidadEmpaque.setText("");
+        cbCodigoCategoria.setSelectedIndex(0);
+        txtTipoEmpaque.setText("");
+    }//GEN-LAST:event_btnNuevoRegistroActionPerformed
+
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        this.dispose();
+        frmMenú menu = new frmMenú();
+        menu.setVisible(true);
+    }//GEN-LAST:event_lblCerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -189,13 +320,12 @@ public class frmProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnAyudaMarca;
+    private javax.swing.JButton btnNuevoRegistro;
+    private javax.swing.JButton btnRegistraProducto;
+    private javax.swing.JComboBox<String> cbCodigoCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -205,13 +335,15 @@ public class frmProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JPanel panelFondo;
+    private javax.swing.JTable tbProductos;
+    private javax.swing.JTextField txtCantidadEmpaque;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPrecioEmpaque;
+    private javax.swing.JTextField txtTipoEmpaque;
     // End of variables declaration//GEN-END:variables
 }

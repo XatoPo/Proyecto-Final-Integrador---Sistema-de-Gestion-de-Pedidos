@@ -108,6 +108,12 @@ public class vistaRapidaEmpleados extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tablaEmpleados);
+        if (tablaEmpleados.getColumnModel().getColumnCount() > 0) {
+            tablaEmpleados.getColumnModel().getColumn(0).setHeaderValue("CÓDIGO");
+            tablaEmpleados.getColumnModel().getColumn(1).setHeaderValue("NOMBRE");
+            tablaEmpleados.getColumnModel().getColumn(2).setHeaderValue("CARGO");
+            tablaEmpleados.getColumnModel().getColumn(3).setHeaderValue("CORREO");
+        }
 
         panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 121, 600, 370));
 
@@ -148,6 +154,8 @@ public class vistaRapidaEmpleados extends javax.swing.JFrame {
         frmPedido.txtNomEmp.setText(tablaEmpleados.getValueAt(fila, 1).toString());
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
 
+    
+    
     /**
      * @param args the command line arguments
      */
