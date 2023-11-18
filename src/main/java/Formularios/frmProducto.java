@@ -128,6 +128,7 @@ public class frmProducto extends javax.swing.JFrame {
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 140, 50));

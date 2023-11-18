@@ -1080,3 +1080,60 @@ BEGIN
         WHERE id_ubigeo = id_ubigeo_param;    
 END$$
 DELIMITER ;
+
+-- Procedure para obtener el codigo de categoria mediante el nombre de categoria
+DELIMITER //
+CREATE PROCEDURE obtenerCodigoPorNombreDeCategoria (IN nombreCategoria VARCHAR(25))
+BEGIN
+    SELECT id_ctg
+    FROM categoria
+    WHERE nom_ctg = nombreCategoria;
+END //
+DELIMITER ;
+
+-- Procedure para obtener los nombres de las marcas
+DELIMITER //
+CREATE PROCEDURE ObtenerNombresMarcas()
+BEGIN
+    SELECT DISTINCT marca_produc
+    FROM producto;
+END //
+DELIMITER ;
+
+--Procedure para agregar productos
+DELIMITER @@
+CREATE PROCEDURE spAdicionProducto(
+    IN nom_produc VARCHAR(50),
+    IN marca_produc VARCHAR(30),
+    IN precio_empaq_produc DECIMAL(10, 2),
+    IN cant_x_empaq_produc INT,
+    IN id_ctg CHAR(5),
+    IN tipo_empq_produc VARCHAR(20)
+)
+BEGIN
+    DECLARE nuevoID CHAR(7);
+
+    -- Generar nuevo ID para el producto
+    SET nuevoID = CONCAT('PROD', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_produc, 5)) + 1, 1) FROM producto), 3, '0'));
+
+    -- Insertar el nuevo producto
+    INSERT INTO producto (
+        id_produc,
+        nom_produc,
+        marca_produc,
+        precio_empaq_produc,
+        cant_x_empaq_produc,
+        id_ctg,
+        tipo_empq_produc
+    ) VALUES (
+        nuevoID,
+        nom_produc,
+        marca_produc,
+        precio_empaq_produc,
+        cant_x_empaq_produc,
+        id_ctg,
+        tipo_empq_produc
+    );
+END@@
+
+DELIMITER ;
