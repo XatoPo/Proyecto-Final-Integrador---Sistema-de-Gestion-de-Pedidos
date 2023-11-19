@@ -330,10 +330,9 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
     
     private void btnAyudaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaMarcaActionPerformed
         vistaRapidaMarcas.id_produc = id_produc;
-        vistaRapidaMarcas empleados = new vistaRapidaMarcas();
-        empleados.setLocationRelativeTo(null);
-        empleados.setVisible(true);
-        btnAyudaMarca.setEnabled(false);
+        vistaRapidaMarcas p = new vistaRapidaMarcas();
+        p.setLocationRelativeTo(null);
+        p.setVisible(true);
     }//GEN-LAST:event_btnAyudaMarcaActionPerformed
 
     private void btnEliminaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaProductoActionPerformed

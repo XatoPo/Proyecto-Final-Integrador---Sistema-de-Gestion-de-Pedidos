@@ -1135,9 +1135,46 @@ BEGIN
         tipo_empq_produc
     );
 END@@
+DELIMITER ;
+
+-- Procedure para modificar un producto
+DELIMITER //
+
+CREATE PROCEDURE spModificarProducto(
+    IN p_id_produc CHAR(7),
+    IN p_nom_produc VARCHAR(50),
+    IN p_marca_produc VARCHAR(30),
+    IN p_precio_empaq_produc DECIMAL(10, 2),
+    IN p_cant_x_empaq_produc INT,
+    IN p_id_ctg CHAR(5),
+    IN p_tipo_empq_produc VARCHAR(20)
+)
+BEGIN
+    UPDATE producto
+    SET
+        nom_produc = p_nom_produc,
+        marca_produc = p_marca_produc,
+        precio_empaq_produc = p_precio_empaq_produc,
+        cant_x_empaq_produc = p_cant_x_empaq_produc,
+        id_ctg = p_id_ctg,
+        tipo_empq_produc = p_tipo_empq_produc
+    WHERE id_produc = p_id_produc;
+END //
 
 DELIMITER ;
 
+-- Procedure para obtener los datos de un producto por codigo
+DELIMITER //
+
+CREATE PROCEDURE spObtenerProductoPorCodigo(IN p_codigo CHAR(7))
+BEGIN
+    SELECT *
+    FROM producto
+    WHERE id_produc = p_codigo;
+END //
+DELIMITER ;
+
+-- Procedure para eliminar un producto
 DELIMITER //
 CREATE PROCEDURE spEliminarProducto(IN p_id_produc CHAR(7))
 BEGIN

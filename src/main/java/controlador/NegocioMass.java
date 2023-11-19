@@ -481,15 +481,17 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return list_produc;
     }
     
-    public List<String> obtenerNombresMarcas() {
-    List<String> nombresMarcas = new ArrayList<>();
+    public List<producto> obtenerNombresMarcas() {
+    List<producto> nombresMarcas = new ArrayList<>();
     Connection cn = MySQLConexion.getConexion();
     try {
         String sql = "{CALL ObtenerNombresMarcas()}";
         CallableStatement cs = cn.prepareCall(sql);
         ResultSet rs = cs.executeQuery();
         while (rs.next()) {
-            nombresMarcas.add(rs.getString(1));
+            producto p = new producto();
+            p.setMarca_produc(rs.getString(1));
+            nombresMarcas.add(p);
         }
     } catch (Exception e) {
         e.printStackTrace();

@@ -139,7 +139,8 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaMarcasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMarcasMouseClicked
-        
+        int fila = tablaMarcas.getSelectedRow();
+        frmProducto.txtMarca.setText(tablaMarcas.getValueAt(fila, 0).toString());
     }//GEN-LAST:event_tablaMarcasMouseClicked
 
     private void txtNomMarcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomMarcaKeyReleased
@@ -151,6 +152,15 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lblCerrarMouseClicked
 
+    void filtraNomMarca(String cad){
+        DefaultTableModel dt = (DefaultTableModel)tablaMarcas.getModel();
+        dt.setRowCount(0);
+        mass.obtenerNombresMarcas().stream()
+                .filter(x-> x.getMarca_produc().toLowerCase().startsWith(cad.toLowerCase()))
+                .forEach(x-> dt.addRow(new Object[]{
+                    x.getMarca_produc(),
+                }));
+    }
     
     /**
      * @param args the command line arguments
@@ -199,8 +209,4 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
     private javax.swing.JTextField txtNomMarca;
     // End of variables declaration//GEN-END:variables
 
-    
-    private void filtraNomMarca(String text) {
-        
-    }
 }

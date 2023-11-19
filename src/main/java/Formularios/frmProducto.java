@@ -271,10 +271,9 @@ public class frmProducto extends javax.swing.JFrame {
     
     private void btnAyudaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaMarcaActionPerformed
         vistaRapidaMarcas.id_produc = id_produc;
-        vistaRapidaMarcas empleados = new vistaRapidaMarcas();
-        empleados.setLocationRelativeTo(null);
-        empleados.setVisible(true);
-        btnAyudaMarca.setEnabled(false);
+        vistaRapidaMarcas p = new vistaRapidaMarcas();
+        p.setLocationRelativeTo(null);
+        p.setVisible(true);
     }//GEN-LAST:event_btnAyudaMarcaActionPerformed
 
     private void btnNuevoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoRegistroActionPerformed
@@ -350,7 +349,7 @@ public class frmProducto extends javax.swing.JFrame {
     private javax.swing.JPanel panelFondo;
     private javax.swing.JTable tbProductos;
     private javax.swing.JTextField txtCantidadEmpaque;
-    private javax.swing.JTextField txtMarca;
+    public static javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecioEmpaque;
     private javax.swing.JTextField txtTipoEmpaque;
