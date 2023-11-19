@@ -5,6 +5,8 @@ import clases.*;
 import controlador.*;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
@@ -13,17 +15,36 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 public class frmEmpleado extends javax.swing.JFrame {
-
+    private int mouseX, mouseY;
 
     public frmEmpleado() {
         initComponents();
         setLocationRelativeTo(null);
         EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+        EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
+        EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
         EscaladoImagenesButton(btnGabarEmpleado, "src\\main\\java\\recursos\\AgregarEmpleado_(2).png");
         EscaladoImagenesButton(btnNuevoEmp, "src\\main\\java\\recursos\\limpieza-de-datos_(1).png");
         muestra();
         bloquear();
         bloquear2();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        panelFondo.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+        
+        panelFondo.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen() - mouseX;
+                int y = e.getYOnScreen() - mouseY;
+
+                frmEmpleado.this.setLocation(x, y);
+            }
+        });
     }
     List<empleado> lista; 
     
@@ -70,6 +91,7 @@ public class frmEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnGabarEmpleado = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -77,26 +99,26 @@ public class frmEmpleado extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         dcFechaNacEmp = new com.toedter.calendar.JDateChooser();
         txtPrimerNomEmp = new javax.swing.JTextField();
         txtSegNombEmp = new javax.swing.JTextField();
         txtPrimerApeEmp = new javax.swing.JTextField();
         txtSegApeEmp = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEmp = new javax.swing.JTable();
         cmbCargoEmp = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtPasswordEmp = new javax.swing.JPasswordField();
         cbActivaContactoEmp = new javax.swing.JCheckBox();
         jPanelContactoEmp = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
         txtTelEmp = new javax.swing.JTextField();
         cmbTipoContactoEmp = new javax.swing.JComboBox<>();
         txtCorreoEmp = new javax.swing.JTextField();
         cbActivaUbigeoEmp = new javax.swing.JCheckBox();
+        btnNuevoEmp = new javax.swing.JButton();
         jPanelUbigeoEmp = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -108,14 +130,21 @@ public class frmEmpleado extends javax.swing.JFrame {
         txtProvEmp = new javax.swing.JTextField();
         txtCalleEmp = new javax.swing.JTextField();
         txtNroCalleEmp = new javax.swing.JTextField();
-        btnNuevoEmp = new javax.swing.JButton();
-        lblLogo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEmp = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        lblCerrar = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
+
+        panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setText("REGISTRO EMPLEADO");
+        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         btnGabarEmpleado.setText("GRABAR");
         btnGabarEmpleado.setToolTipText("");
@@ -124,35 +153,38 @@ public class frmEmpleado extends javax.swing.JFrame {
                 btnGabarEmpleadoActionPerformed(evt);
             }
         });
+        panelFondo.add(btnGabarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, -1, -1));
 
         jLabel3.setText("Primer Nombre");
+        panelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jLabel4.setText("Segundo Nombre");
+        panelFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         jLabel5.setText("Primer Apellido");
+        panelFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jLabel6.setText("Segundo Apellido");
+        panelFondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         jLabel7.setText("Cargo");
-
-        tablaEmp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Emp", "Nombre", "Apellido Pat", "Apellido Mat", "Cargo", "Fec Nacimiento"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaEmp);
+        panelFondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
+        panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 40));
+        panelFondo.add(dcFechaNacEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 150, -1));
+        panelFondo.add(txtPrimerNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 150, -1));
+        panelFondo.add(txtSegNombEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 150, -1));
+        panelFondo.add(txtPrimerApeEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 150, -1));
+        panelFondo.add(txtSegApeEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 150, -1));
 
         cmbCargoEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Vendedor", "Reponedor", "Cajero" }));
+        panelFondo.add(cmbCargoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 150, -1));
 
         jLabel10.setText("Fecha de Nacimiento");
+        panelFondo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
 
         jLabel11.setText("Contraseña");
+        panelFondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+        panelFondo.add(txtPasswordEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 150, -1));
 
         cbActivaContactoEmp.setText("Agregar Informacion de Contacto");
         cbActivaContactoEmp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,14 +197,15 @@ public class frmEmpleado extends javax.swing.JFrame {
                 cbActivaContactoEmpActionPerformed(evt);
             }
         });
+        panelFondo.add(cbActivaContactoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
 
         jPanelContactoEmp.setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel2.setText("Tipo");
+        jLabel51.setText("Tipo");
 
-        jLabel8.setText("Telefono");
+        jLabel52.setText("Telefono");
 
-        jLabel9.setText("Correo");
+        jLabel53.setText("Correo");
 
         cmbTipoContactoEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Personal", "Casa", "Contacto de Emergencia" }));
 
@@ -187,15 +220,15 @@ public class frmEmpleado extends javax.swing.JFrame {
                         .addGroup(jPanelContactoEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbTipoContactoEmp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelContactoEmpLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelContactoEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTelEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtCorreoEmp)
                     .addGroup(jPanelContactoEmpLayout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -205,20 +238,22 @@ public class frmEmpleado extends javax.swing.JFrame {
                 .addGroup(jPanelContactoEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelContactoEmpLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel51))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContactoEmpLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel8)))
+                        .addComponent(jLabel52)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelContactoEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTelEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipoContactoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
+                .addComponent(jLabel53)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCorreoEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        panelFondo.add(jPanelContactoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
 
         cbActivaUbigeoEmp.setText("Agregar Informacion de Ubigeo");
         cbActivaUbigeoEmp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -226,6 +261,15 @@ public class frmEmpleado extends javax.swing.JFrame {
                 cbActivaUbigeoEmpMouseClicked(evt);
             }
         });
+        panelFondo.add(cbActivaUbigeoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
+
+        btnNuevoEmp.setText("NUEVO");
+        btnNuevoEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoEmpActionPerformed(evt);
+            }
+        });
+        panelFondo.add(btnNuevoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, -1, -1));
 
         jPanelUbigeoEmp.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -265,7 +309,7 @@ public class frmEmpleado extends javax.swing.JFrame {
                             .addGroup(jPanelUbigeoEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNroCalleEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelUbigeoEmpLayout.setVerticalGroup(
             jPanelUbigeoEmpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,132 +337,100 @@ public class frmEmpleado extends javax.swing.JFrame {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        btnNuevoEmp.setText("NUEVO");
-        btnNuevoEmp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoEmpActionPerformed(evt);
+        panelFondo.add(jPanelUbigeoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, -1, -1));
+
+        tablaEmp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Emp", "Nombre", "Apellido Pat", "Apellido Mat", "Cargo", "Fec Nacimiento"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaEmp);
+
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 600, 630, 180));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Empleados registrados:");
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 200, 30));
+
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
             }
         });
+        panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 40, 40));
+        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 800));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbActivaContactoEmp))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtPrimerNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnGabarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                            .addComponent(lblLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(62, 62, 62)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(dcFechaNacEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtPasswordEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtSegNombEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtSegApeEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtPrimerApeEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(cmbCargoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(btnNuevoEmp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jPanelContactoEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanelUbigeoEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(cbActivaUbigeoEmp)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(231, 231, 231)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(27, 27, 27))
+                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbActivaContactoEmp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtPrimerNomEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txtPrimerApeEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtSegApeEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtSegNombEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(cmbCargoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(txtPasswordEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(dcFechaNacEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGabarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNuevoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelContactoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbActivaUbigeoEmp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelUbigeoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGabarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGabarEmpleadoActionPerformed
+    private void btnNuevoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEmpActionPerformed
+
+        dcFechaNacEmp.setDate(null);
+        txtPrimerNomEmp.setText("");
+        txtSegNombEmp.setText("");
+        txtPrimerApeEmp.setText("");
+        txtSegApeEmp.setText("");
+        cmbCargoEmp.setSelectedIndex(0);
+        txtPasswordEmp.setText("");
+
+        cmbTipoContactoEmp.setSelectedIndex(0);
+        txtTelEmp.setText("");
+        txtCorreoEmp.setText("");
+
+        txtDistEmp.setText("");
+        txtProvEmp.setText("");
+        txtCalleEmp.setText("");
+        txtNroCalleEmp.setText("");
+        txtRefUbigeoEmp.setText("");
+
+        //  Desmarcar los checkboxes
+        cbActivaContactoEmp.setSelected(false);
+        cbActivaUbigeoEmp.setSelected(false);
+        bloquear();
+        bloquear2();
+    }//GEN-LAST:event_btnNuevoEmpActionPerformed
+
+    private void cbActivaUbigeoEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbActivaUbigeoEmpMouseClicked
+        if(cbActivaUbigeoEmp.isSelected()){
+            desbloquear2();
+        }else{
+            bloquear2();
+        }
+    }//GEN-LAST:event_cbActivaUbigeoEmpMouseClicked
+
+    private void cbActivaContactoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbActivaContactoEmpActionPerformed
         
+    }//GEN-LAST:event_cbActivaContactoEmpActionPerformed
+
+    private void cbActivaContactoEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbActivaContactoEmpMouseClicked
+        if(cbActivaContactoEmp.isSelected()){
+            desbloquear();
+        }else{
+            bloquear();
+        }
+    }//GEN-LAST:event_cbActivaContactoEmpMouseClicked
+
+    private void btnGabarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGabarEmpleadoActionPerformed
+
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         empleado e = new empleado();
         String fec1 = sd.format(dcFechaNacEmp.getDate());
@@ -448,7 +460,7 @@ public class frmEmpleado extends javax.swing.JFrame {
             // Agregar contacto asociado al id_emp
             obj.adiContactoEmp(c);
         }
-        
+
         //Registrar datos de ubigeo de empleado con if para que pueda ser NULL
         if (cbActivaUbigeoEmp.isSelected()) {
             ubigeo u = new ubigeo();
@@ -463,60 +475,15 @@ public class frmEmpleado extends javax.swing.JFrame {
             e.setDatos_ubigeo_emp(u);
 
             // Agregar ubigeo asociado al id_emp
-            obj.adiUbigeoEmp(u); 
+            obj.adiUbigeoEmp(u);
         }
-        
+
         muestra();//Actualizar datos de la tabla empleado
-        
-        
     }//GEN-LAST:event_btnGabarEmpleadoActionPerformed
 
-    private void cbActivaContactoEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbActivaContactoEmpMouseClicked
-        if(cbActivaContactoEmp.isSelected()){
-            desbloquear();
-        }else{
-            bloquear();
-        }
-    }//GEN-LAST:event_cbActivaContactoEmpMouseClicked
-
-    private void cbActivaUbigeoEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbActivaUbigeoEmpMouseClicked
-        if(cbActivaUbigeoEmp.isSelected()){
-            desbloquear2();
-        }else{
-            bloquear2();
-        }
-    }//GEN-LAST:event_cbActivaUbigeoEmpMouseClicked
-
-    private void btnNuevoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEmpActionPerformed
-        
-        dcFechaNacEmp.setDate(null);
-        txtPrimerNomEmp.setText("");
-        txtSegNombEmp.setText("");
-        txtPrimerApeEmp.setText("");
-        txtSegApeEmp.setText("");
-        cmbCargoEmp.setSelectedIndex(0);
-        txtPasswordEmp.setText("");
-        
-        cmbTipoContactoEmp.setSelectedIndex(0);
-        txtTelEmp.setText("");
-        txtCorreoEmp.setText("");
-
-        txtDistEmp.setText("");
-        txtProvEmp.setText("");
-        txtCalleEmp.setText("");
-        txtNroCalleEmp.setText("");
-        txtRefUbigeoEmp.setText("");
-        
-        //  Desmarcar los checkboxes
-        cbActivaContactoEmp.setSelected(false);  
-        cbActivaUbigeoEmp.setSelected(false); 
-        bloquear();
-        bloquear2();
-    }//GEN-LAST:event_btnNuevoEmpActionPerformed
-
-    private void cbActivaContactoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbActivaContactoEmpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbActivaContactoEmpActionPerformed
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lblCerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -587,14 +554,18 @@ public class frmEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanelContactoEmp;
     private javax.swing.JPanel jPanelUbigeoEmp;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JPanel panelFondo;
     private javax.swing.JTable tablaEmp;
     private javax.swing.JTextField txtCalleEmp;
     private javax.swing.JTextField txtCorreoEmp;

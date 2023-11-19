@@ -230,7 +230,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
                 btnModificaProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 180, 40));
+        jPanel1.add(btnModificaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 220, 40));
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 240, 40));
         jPanel1.add(txtPrecioEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 240, 40));
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 250, 40));
@@ -253,7 +253,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
                 btnEliminaProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 160, 40));
+        jPanel1.add(btnEliminaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 180, 40));
 
         panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 910, 280));
 
@@ -356,8 +356,6 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
     
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         this.dispose();
-        frmMenú menu = new frmMenú();
-        menu.setVisible(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     /**

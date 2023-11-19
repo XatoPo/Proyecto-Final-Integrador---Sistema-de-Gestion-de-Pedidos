@@ -58,7 +58,8 @@ public class frmProducto extends javax.swing.JFrame {
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
                 EscaladoImagenesButton(btnAyudaMarca, "src\\main\\java\\recursos\\lupa.png");
-                EscaladoImagenesButton(btnAgregarProducto, "src\\main\\java\\recursos\\agregar_producto.png");
+                EscaladoImagenesButton(btnRegistraProducto, "src\\main\\java\\recursos\\agregar_producto.png");
+                EscaladoImagenesButton(btnNuevoRegistro, "src\\main\\java\\recursos\\limpieza-de-datos_(1).png");
             }
         });
     }
@@ -178,7 +179,7 @@ public class frmProducto extends javax.swing.JFrame {
                 btnRegistraProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 180, 40));
+        jPanel1.add(btnRegistraProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 250, 40));
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 240, 40));
         jPanel1.add(txtPrecioEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 240, 40));
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 250, 40));
@@ -201,7 +202,7 @@ public class frmProducto extends javax.swing.JFrame {
                 btnNuevoRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevoRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 160, 40));
+        jPanel1.add(btnNuevoRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 210, 40));
 
         panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 910, 280));
 
@@ -288,8 +289,6 @@ public class frmProducto extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         this.dispose();
-        frmMenú menu = new frmMenú();
-        menu.setVisible(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     /**
