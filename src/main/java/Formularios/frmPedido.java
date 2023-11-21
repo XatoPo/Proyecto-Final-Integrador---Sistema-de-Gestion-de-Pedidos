@@ -185,6 +185,7 @@ public class frmPedido extends javax.swing.JFrame {
 
         btnNuevaFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaFactura.setText("NUEVA FACTURA");
+        btnNuevaFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevaFacturaActionPerformed(evt);

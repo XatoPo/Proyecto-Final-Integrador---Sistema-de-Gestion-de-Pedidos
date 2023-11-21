@@ -227,48 +227,56 @@ public class frmMenú extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnRegistroEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroEmpleadosActionPerformed
+        this.dispose();
         frmEmpleado emp = new frmEmpleado();
         emp.setVisible(true);
         emp.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroEmpleadosActionPerformed
 
     private void btnRegistroProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroProductosActionPerformed
+        this.dispose();
         frmProducto pro = new frmProducto();
         pro.setVisible(true);
         pro.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroProductosActionPerformed
 
     private void btnRegistroProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroProveedoresActionPerformed
+        this.dispose();
         frmProveedor prov = new frmProveedor();
         prov.setVisible(true);
         prov.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroProveedoresActionPerformed
 
     private void btnRegistroPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroPedidosActionPerformed
+        this.dispose();
         frmPedido ped = new frmPedido();
         ped.setVisible(true);
         ped.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroPedidosActionPerformed
 
     private void btnMantenimientoEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoEmpleadosActionPerformed
+        this.dispose();
         frmMantenimientoEmpleado manemp = new frmMantenimientoEmpleado();
         manemp.setVisible(true);
         manemp.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMantenimientoEmpleadosActionPerformed
 
     private void btnMantenimientoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoProductosActionPerformed
+        this.dispose();
         frmMantenimientoProducto manpro = new frmMantenimientoProducto();
         manpro.setVisible(true);
         manpro.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMantenimientoProductosActionPerformed
 
     private void btnMantenimientoProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoProveedoresActionPerformed
+        this.dispose();
         frmMantenimientoProveedor manprov = new frmMantenimientoProveedor();
         manprov.setVisible(true);
         manprov.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMantenimientoProveedoresActionPerformed
 
     private void btnMantenimientoPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoPedidosActionPerformed
+        this.dispose();
         frmMantenimientoPedido manped = new frmMantenimientoPedido();
         manped.setVisible(true);
         manped.setLocationRelativeTo(null);
