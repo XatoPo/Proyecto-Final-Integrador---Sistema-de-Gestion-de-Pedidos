@@ -5,6 +5,8 @@ import clases.*;
 import controlador.*;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -171,9 +173,89 @@ public class frmEmpleado extends javax.swing.JFrame {
         panelFondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 150, 40));
         panelFondo.add(dcFechaNacEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 150, -1));
+
+        txtPrimerNomEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         panelFondo.add(txtPrimerNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 150, -1));
+
+        txtSegNombEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         panelFondo.add(txtSegNombEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 150, -1));
+
+        txtPrimerApeEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         panelFondo.add(txtPrimerApeEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 150, -1));
+
+        txtSegApeEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         panelFondo.add(txtSegApeEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 150, -1));
 
         cmbCargoEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Vendedor", "Reponedor", "Cajero" }));
@@ -206,6 +288,26 @@ public class frmEmpleado extends javax.swing.JFrame {
         jLabel52.setText("Telefono");
 
         jLabel53.setText("Correo");
+
+        txtTelEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtTelEmp.getText().length() >= 9) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 9 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
 
         cmbTipoContactoEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Personal", "Casa", "Contacto de Emergencia" }));
 
@@ -282,6 +384,86 @@ public class frmEmpleado extends javax.swing.JFrame {
         jLabel15.setText("Nro Calle");
 
         jLabel16.setText("Referencia");
+
+        txtDistEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
+
+        txtProvEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
+
+        txtCalleEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
+
+        txtNroCalleEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtNroCalleEmp.getText().length() >= 5) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 5 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
 
         javax.swing.GroupLayout jPanelUbigeoEmpLayout = new javax.swing.GroupLayout(jPanelUbigeoEmp);
         jPanelUbigeoEmp.setLayout(jPanelUbigeoEmpLayout);

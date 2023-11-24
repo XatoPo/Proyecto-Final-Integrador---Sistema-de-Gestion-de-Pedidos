@@ -12,6 +12,9 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.Icon;
@@ -230,9 +233,74 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnModificaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 220, 40));
+
+        txtNombreProducto.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 240, 40));
+
+        txtPrecioEmpaque.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+
+                // Verifica si es un dígito
+                if (Character.isDigit(c)) {
+                    // Verifica si ya hay 10 dígitos
+                    if (txtPrecioEmpaque.getText().length() >= 10) {
+                        e.consume(); // Ignora la entrada si ya hay 10 dígitos
+                    }
+                } else if (c == '.') {
+                    // Verifica si ya hay un punto
+                    if (txtPrecioEmpaque.getText().contains(".")) {
+                        e.consume(); // Ignora la entrada si ya hay un punto
+                    }
+                } else {
+                    e.consume(); // Ignora la entrada si no es un dígito ni un punto
+                }
+            }
+        });
         jPanel1.add(txtPrecioEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 240, 40));
+
+        txtMarca.setEditable(false);
+        txtMarca.setFocusable(false);
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 250, 40));
+
+        txtCantidadEmpaque.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtCantidadEmpaque.getText().length() >= 5) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 5 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         jPanel1.add(txtCantidadEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 220, 40));
 
         cbNombreCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Bebidas", "Panadería", "Snacks", "Lácteos", "Limpieza", "Frutas y verduras", "Carnes y aves", "Congelados", "Cuidado personal" }));

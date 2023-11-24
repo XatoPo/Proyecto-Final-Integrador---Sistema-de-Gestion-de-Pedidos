@@ -6,6 +6,9 @@ import clases.ubigeo;
 import controlador.NegocioMass;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -89,10 +92,18 @@ public class frmProveedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lblCerrar = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablap = new javax.swing.JTable();
+        lblLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtdescripcion = new javax.swing.JTextArea();
+        CBmasUbigeo = new javax.swing.JCheckBox();
         JPDireccion = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtcalle = new javax.swing.JTextField();
@@ -104,6 +115,7 @@ public class frmProveedor extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         txtprovincia = new javax.swing.JTextField();
         txtdistrito = new javax.swing.JTextField();
+        CBmasTelefono = new javax.swing.JCheckBox();
         JPTelefono = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         cmbtipo = new javax.swing.JComboBox<>();
@@ -112,19 +124,30 @@ public class frmProveedor extends javax.swing.JFrame {
         txttelefono = new javax.swing.JTextField();
         txtcorreo = new javax.swing.JTextField();
         btnGrabarProovedor = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtdescripcion = new javax.swing.JTextArea();
-        CBmasTelefono = new javax.swing.JCheckBox();
-        CBmasUbigeo = new javax.swing.JCheckBox();
-        lblLogo = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablap = new javax.swing.JTable();
-        lblCerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
         setUndecorated(true);
         setResizable(false);
+
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
+            }
+        });
+
+        tablap.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID Proveedor", "Nombre", "Descripción", "ID Ubigeo", "ID Contacto"
+            }
+        ));
+        jScrollPane2.setViewportView(tablap);
 
         jLabel1.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         jLabel1.setText("Registro de Proveedor");
@@ -132,8 +155,58 @@ public class frmProveedor extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel3.setText("Nombre Proveedor");
 
+        txtnombre.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel4.setText("Descripción");
+
+        txtdescripcion.setColumns(20);
+        txtdescripcion.setRows(5);
+        txtdescripcion.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
+        jScrollPane1.setViewportView(txtdescripcion);
+
+        CBmasUbigeo.setText("Agregar Infornación de Ubigeo");
+        CBmasUbigeo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CBmasUbigeoMouseClicked(evt);
+            }
+        });
 
         JPDireccion.setBackground(new java.awt.Color(204, 204, 255));
         JPDireccion.setEnabled(false);
@@ -142,11 +215,51 @@ public class frmProveedor extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel9.setText("Calle / Avenida");
         JPDireccion.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 64, -1, -1));
+
+        txtcalle.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtcalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 86, 250, 30));
 
         jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel10.setText("Número");
         JPDireccion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 64, -1, -1));
+
+        txtcallenumero.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtcallenumero.getText().length() >= 5) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 5 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtcallenumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 86, 92, 30));
 
         jLabel11.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
@@ -167,8 +280,54 @@ public class frmProveedor extends javax.swing.JFrame {
                 txtprovinciaActionPerformed(evt);
             }
         });
+        txtprovincia.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtprovincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 28, 180, 30));
+
+        txtdistrito.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtdistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 28, 180, 30));
+
+        CBmasTelefono.setText("Agregar Información de Contacto");
+        CBmasTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CBmasTelefonoMouseClicked(evt);
+            }
+        });
 
         JPTelefono.setBackground(new java.awt.Color(204, 204, 255));
         JPTelefono.setDoubleBuffered(false);
@@ -184,6 +343,26 @@ public class frmProveedor extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel18.setText("Telefono");
+
+        txttelefono.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txttelefono.getText().length() >= 9) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 9 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
 
         javax.swing.GroupLayout JPTelefonoLayout = new javax.swing.GroupLayout(JPTelefono);
         JPTelefono.setLayout(JPTelefonoLayout);
@@ -233,90 +412,51 @@ public class frmProveedor extends javax.swing.JFrame {
             }
         });
 
-        txtdescripcion.setColumns(20);
-        txtdescripcion.setRows(5);
-        jScrollPane1.setViewportView(txtdescripcion);
-
-        CBmasTelefono.setText("Agregar Información de Contacto");
-        CBmasTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CBmasTelefonoMouseClicked(evt);
-            }
-        });
-
-        CBmasUbigeo.setText("Agregar Infornación de Ubigeo");
-        CBmasUbigeo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CBmasUbigeoMouseClicked(evt);
-            }
-        });
-
-        tablap.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "ID Proveedor", "Nombre", "Descripción", "ID Ubigeo", "ID Contacto"
-            }
-        ));
-        jScrollPane2.setViewportView(tablap);
-
-        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCerrarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtnombre)
                     .addComponent(JPTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JPDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CBmasUbigeo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CBmasTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addComponent(btnGrabarProovedor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel3)
@@ -340,16 +480,27 @@ public class frmProveedor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CBmasTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasTelefonoMouseClicked
-        if(CBmasTelefono.isSelected()){
-            desbloquear2();
-        }else{
-            bloquear2();
-        }
-    }//GEN-LAST:event_CBmasTelefonoMouseClicked
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void CBmasUbigeoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasUbigeoMouseClicked
         if(CBmasUbigeo.isSelected()){
@@ -365,6 +516,14 @@ public class frmProveedor extends javax.swing.JFrame {
     private void txtprovinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprovinciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtprovinciaActionPerformed
+
+    private void CBmasTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CBmasTelefonoMouseClicked
+        if(CBmasTelefono.isSelected()){
+            desbloquear2();
+        }else{
+            bloquear2();
+        }
+    }//GEN-LAST:event_CBmasTelefonoMouseClicked
 
     private void btnGrabarProovedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarProovedorActionPerformed
         proovedor p = new proovedor();
@@ -389,7 +548,7 @@ public class frmProveedor extends javax.swing.JFrame {
             // Agregar contacto asociado al id_prov
             obj.adiContactoProv(c);
         }
-        
+
         //Registrar datos de ubigeo de empleado con if para que pueda ser NULL
         if (CBmasUbigeo.isSelected()) {
             ubigeo u = new ubigeo();
@@ -404,17 +563,13 @@ public class frmProveedor extends javax.swing.JFrame {
             p.setDatos_ubigeo_prov(u);
 
             // Agregar ubigeo asociado al id_prov
-            obj.adiUbigeoProv(u); 
+            obj.adiUbigeoProv(u);
         }
-        
+
         muestraProv();//Actualizar datos de la tabla empleado
-        
+
         limpiar();
     }//GEN-LAST:event_btnGrabarProovedorActionPerformed
-
-    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        this.dispose();
-    }//GEN-LAST:event_lblCerrarMouseClicked
 
     public static void main(String args[]) {
 
@@ -457,6 +612,7 @@ public class frmProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCerrar;

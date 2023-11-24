@@ -197,6 +197,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNombreProducto">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtNombreProducto.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="180" y="20" width="240" height="40"/>
@@ -204,6 +207,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrecioEmpaque">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtPrecioEmpaque.addKeyListener(new KeyAdapter() {&#xd;&#xa;    @Override&#xd;&#xa;    public void keyTyped(KeyEvent e) {&#xd;&#xa;        char c = e.getKeyChar();&#xd;&#xa;&#xd;&#xa;        // Verifica si es un d&#xed;gito&#xd;&#xa;        if (Character.isDigit(c)) {&#xd;&#xa;            // Verifica si ya hay 10 d&#xed;gitos&#xd;&#xa;            if (txtPrecioEmpaque.getText().length() &gt;= 10) {&#xd;&#xa;                e.consume(); // Ignora la entrada si ya hay 10 d&#xed;gitos&#xd;&#xa;            }&#xd;&#xa;        } else if (c == &apos;.&apos;) {&#xd;&#xa;            // Verifica si ya hay un punto&#xd;&#xa;            if (txtPrecioEmpaque.getText().contains(&quot;.&quot;)) {&#xd;&#xa;                e.consume(); // Ignora la entrada si ya hay un punto&#xd;&#xa;            }&#xd;&#xa;        } else {&#xd;&#xa;            e.consume(); // Ignora la entrada si no es un d&#xed;gito ni un punto&#xd;&#xa;        }&#xd;&#xa;    }&#xd;&#xa;});"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="180" y="90" width="240" height="40"/>
@@ -211,6 +217,10 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMarca">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="600" y="20" width="250" height="40"/>
@@ -218,6 +228,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCantidadEmpaque">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtCantidadEmpaque.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!Character.isDigit(c) || txtCantidadEmpaque.getText().length() &gt;= 5) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es un d&#xed;gito o si ya hay 5 d&#xed;gitos&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="660" y="90" width="220" height="40"/>
