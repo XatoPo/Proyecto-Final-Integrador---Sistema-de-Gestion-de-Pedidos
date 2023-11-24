@@ -141,6 +141,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrimerNomEmp">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtPrimerNomEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="80" width="150" height="-1"/>
@@ -148,6 +151,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSegNombEmp">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtSegNombEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="140" width="150" height="-1"/>
@@ -155,6 +161,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrimerApeEmp">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtPrimerApeEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="200" width="150" height="-1"/>
@@ -162,6 +171,9 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSegApeEmp">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtSegApeEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="180" y="260" width="150" height="-1"/>
@@ -315,6 +327,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTelEmp">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtTelEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!Character.isDigit(c) || txtTelEmp.getText().length() &gt;= 9) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es un d&#xed;gito o si ya hay 9 d&#xed;gitos&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbTipoContactoEmp">
               <Properties>
@@ -471,12 +486,24 @@
             <Component class="javax.swing.JTextField" name="txtRefUbigeoEmp">
             </Component>
             <Component class="javax.swing.JTextField" name="txtDistEmp">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtDistEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtProvEmp">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtProvEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCalleEmp">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtCalleEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!(Character.isLetter(c) || c == &apos; &apos;)) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es una letra o un espacio&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNroCalleEmp">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="txtNroCalleEmp.addKeyListener(new KeyListener() {&#xd;&#xa;            @Override&#xd;&#xa;            public void keyTyped(KeyEvent e) {&#xd;&#xa;                char c = e.getKeyChar();&#xd;&#xa;                if (!Character.isDigit(c) || txtNroCalleEmp.getText().length() &gt;= 5) {&#xd;&#xa;                    e.consume(); // Ignora la entrada si no es un d&#xed;gito o si ya hay 5 d&#xed;gitos&#xd;&#xa;                }&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyPressed(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;&#xd;&#xa;            @Override&#xd;&#xa;            public void keyReleased(KeyEvent e) {&#xd;&#xa;                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener&#xd;&#xa;            }&#xd;&#xa;        });"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

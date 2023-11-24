@@ -6,6 +6,8 @@ import clases.ubigeo;
 import controlador.NegocioMass;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -65,7 +67,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         }else{
             cmbTipoContactoEmp.setSelectedIndex(0);            
         }
-        txtTelEmp.setText(p.getDatos_contacto_prov().getTelef_contac());
+        txtTelProv.setText(p.getDatos_contacto_prov().getTelef_contac());
         txtCorreoEmp.setText(p.getDatos_contacto_prov().getEmail_contac());
         txtDistEmp.setText(p.getDatos_ubigeo_prov().getDistrito_ubi());
         txtCalleEmp.setText(p.getDatos_ubigeo_prov().getCalle_avend_ubi());
@@ -78,7 +80,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         txtdescripcionProv.setText("");        
         
         cmbTipoContactoEmp.setSelectedIndex(0);
-        txtTelEmp.setText("");
+        txtTelProv.setText("");
         txtCorreoEmp.setText("");
 
         txtDistEmp.setText("");
@@ -142,7 +144,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         cmbTipoContactoEmp = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        txtTelEmp = new javax.swing.JTextField();
+        txtTelProv = new javax.swing.JTextField();
         txtCorreoEmp = new javax.swing.JTextField();
         btnModificarProovedor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -168,6 +170,26 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel3.setText("Nombre Proveedor");
 
+        txtnombreProveedor.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel4.setText("Descripción");
 
@@ -178,11 +200,51 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel9.setText("Calle / Avenida");
         JPDireccion.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 64, -1, -1));
+
+        txtCalleEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtCalleEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 86, 250, 30));
 
         jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel10.setText("Número");
         JPDireccion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 64, -1, -1));
+
+        txtNroCalleEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtNroCalleEmp.getText().length() >= 5) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 5 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtNroCalleEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 86, 92, 30));
 
         jLabel11.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
@@ -203,7 +265,46 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 txtProvEmpActionPerformed(evt);
             }
         });
+        txtProvEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtProvEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 28, 180, 30));
+
+        txtDistEmp.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         JPDireccion.add(txtDistEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 28, 180, 30));
 
         JPTelefono.setBackground(new java.awt.Color(204, 204, 255));
@@ -220,6 +321,26 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel18.setText("Telefono");
+
+        txtTelProv.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) || txtTelProv.getText().length() >= 9) {
+                    e.consume(); // Ignora la entrada si no es un dígito o si ya hay 9 dígitos
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
 
         javax.swing.GroupLayout JPTelefonoLayout = new javax.swing.GroupLayout(JPTelefono);
         JPTelefono.setLayout(JPTelefonoLayout);
@@ -239,7 +360,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                             .addGroup(JPTelefonoLayout.createSequentialGroup()
                                 .addComponent(cmbTipoContactoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(52, 52, 52)
-                                .addComponent(txtTelEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
+                                .addComponent(txtTelProv, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                             .addComponent(txtCorreoEmp))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -253,7 +374,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(JPTelefonoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbTipoContactoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelProv, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -271,6 +392,25 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
 
         txtdescripcionProv.setColumns(20);
         txtdescripcionProv.setRows(5);
+        txtdescripcionProv.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    e.consume(); // Ignora la entrada si no es una letra o un espacio
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
+            }
+        });
         jScrollPane1.setViewportView(txtdescripcionProv);
 
         CBmasTelefono.setText("Agregar Información de Contacto");
@@ -463,7 +603,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
             // Asignar valores a las propiedades del objeto contacto
             c.setId_contac(pc.getDatos_contacto_prov().getId_contac());
             c.setTipo_contac(cmbTipoContactoEmp.getSelectedItem().toString());
-            c.setTelef_contac(txtTelEmp.getText());
+            c.setTelef_contac(txtTelProv.getText());
             c.setEmail_contac(txtCorreoEmp.getText());
 
             // Asignar el objeto contacto al proveedor
@@ -569,7 +709,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtNroCalleEmp;
     private javax.swing.JTextField txtProvEmp;
     private javax.swing.JTextField txtRefUbigeoEmp;
-    private javax.swing.JTextField txtTelEmp;
+    private javax.swing.JTextField txtTelProv;
     private javax.swing.JTextArea txtdescripcionProv;
     private javax.swing.JTextField txtnombreProveedor;
     // End of variables declaration//GEN-END:variables
