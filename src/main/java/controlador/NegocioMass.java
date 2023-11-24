@@ -91,24 +91,17 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     
     public void editProducto(producto p){
         Connection cn = MySQLConexion.getConexion();
-        String sqlConsulta = "SELECT id_ctg FROM categoria WHERE nom_ctg = ?";
+        String sql = "{CALL spModificarProducto (?,?,?,?,?,?,?)}";
         try{
-            PreparedStatement consulta = cn.prepareStatement(sqlConsulta);
-            consulta.setString(1,p.getNom_ctg());
-            ResultSet rs = consulta.executeQuery();
-            if(rs.next()){
-                String idCtg = rs.getString("id_ctg");
-                String sql = "{CALL spModificarProducto (?,?,?,?,?,?,?)}";
-                CallableStatement st = cn.prepareCall(sql);
-                st.setString(1, p.getId_produc());
-                st.setString(2, p.getNom_produc());
-                st.setString(3, p.getMarca_produc());
-                st.setDouble(4, p.getPrecio_empaq_produc());
-                st.setInt(5, p.getCant_x_empaq_produc());
-                st.setString(6, idCtg);  
-                st.setString(7, p.getTipo_empq_produc());
-                int rowsAffected = st.executeUpdate();
-            }   
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, p.getId_produc());
+            st.setString(2, p.getNom_produc());
+            st.setString(3, p.getMarca_produc());
+            st.setDouble(4, p.getPrecio_empaq_produc());
+            st.setInt(5, p.getCant_x_empaq_produc());
+            st.setString(6, p.getId_ctg());  
+            st.setString(7, p.getTipo_empq_produc());
+            st.executeUpdate();
         } catch (Exception ex){
             ex.printStackTrace();
         }
@@ -979,6 +972,26 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         
         return emp;
+    }
+
+    @Override
+    public String ObtenerCategoriaID(String nom_ctg) {
+        String id_ctg = "";
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL ObtenerCategoriaID (?)}";
+        try{
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1,nom_ctg);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                id_ctg = rs.getString(1);
+            }
+             
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return id_ctg;
     }
 
 }

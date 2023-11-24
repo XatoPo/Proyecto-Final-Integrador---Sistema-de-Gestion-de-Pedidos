@@ -10,4 +10,5 @@ public interface busquedas {
     proovedor obtenerDatosProveedor(String id_prov);
     String generarNuevoIDPedido();
     producto obtenerDatosProducto(String id_produc);
+    String ObtenerCategoriaID(String nom_ctg);
 }

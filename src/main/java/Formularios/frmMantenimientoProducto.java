@@ -55,7 +55,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
             
             private void seleccionarCategoriaEnComboBox(String idCategoria) {
                 String nombreCategoria = obtenerNombreCategoriaDesdeId(idCategoria);
-                cbCodigoCategoria.setSelectedItem(nombreCategoria);
+                cbNombreCategoria.setSelectedItem(nombreCategoria);
             }
 
             private String obtenerNombreCategoriaDesdeId(String idCategoria) {
@@ -108,7 +108,6 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
                 EscaladoImagenesButton(btnAyudaMarca, "src\\main\\java\\recursos\\lupa.png");
-                EscaladoImagenesButton(btnAgregarProducto, "src\\main\\java\\recursos\\agregar_producto.png");
             }
         });
     }
@@ -167,7 +166,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         txtPrecioEmpaque = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
         txtCantidadEmpaque = new javax.swing.JTextField();
-        cbCodigoCategoria = new javax.swing.JComboBox<>();
+        cbNombreCategoria = new javax.swing.JComboBox<>();
         txtTipoEmpaque = new javax.swing.JTextField();
         btnAyudaMarca = new javax.swing.JButton();
         btnEliminaProducto = new javax.swing.JButton();
@@ -216,7 +215,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Código de categoría:");
+        jLabel8.setText("Nombre de categoría:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 150, 40));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -236,8 +235,13 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 250, 40));
         jPanel1.add(txtCantidadEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 220, 40));
 
-        cbCodigoCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Bebidas", "Panadería", "Snacks", "Lácteos", "Limpieza", "Frutas y verduras", "Carnes y aves", "Congelados", "Cuidado personal" }));
-        jPanel1.add(cbCodigoCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 240, 40));
+        cbNombreCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Bebidas", "Panadería", "Snacks", "Lácteos", "Limpieza", "Frutas y verduras", "Carnes y aves", "Congelados", "Cuidado personal" }));
+        cbNombreCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNombreCategoriaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbNombreCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 240, 40));
         jPanel1.add(txtTipoEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 240, 40));
 
         btnAyudaMarca.addActionListener(new java.awt.event.ActionListener() {
@@ -296,6 +300,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 40));
 
         txtIdProducto.setEditable(false);
+        txtIdProducto.setFocusable(false);
         panelFondo.add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 150, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 820));
 
@@ -321,7 +326,8 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         pro.setMarca_produc(txtMarca.getText());
         pro.setPrecio_empaq_produc(Double.parseDouble(txtPrecioEmpaque.getText()));
         pro.setCant_x_empaq_produc(Integer.parseInt(txtCantidadEmpaque.getText()));
-        pro.setNom_ctg(cbCodigoCategoria.getSelectedItem().toString());
+        String id_ctg = obj.ObtenerCategoriaID(cbNombreCategoria.getSelectedItem().toString());
+        pro.setId_ctg(id_ctg);
         pro.setTipo_empq_produc(txtTipoEmpaque.getText());
         obj.editProducto(pro);
         muestra();
@@ -350,13 +356,17 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         txtMarca.setText("");
         txtPrecioEmpaque.setText("");
         txtCantidadEmpaque.setText("");
-        cbCodigoCategoria.setSelectedIndex(0);
+        cbNombreCategoria.setSelectedIndex(0);
         txtTipoEmpaque.setText("");
     }
     
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         this.dispose();
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void cbNombreCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNombreCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbNombreCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,7 +408,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
     private javax.swing.JButton btnAyudaMarca;
     private javax.swing.JButton btnEliminaProducto;
     private javax.swing.JButton btnModificaProducto;
-    private javax.swing.JComboBox<String> cbCodigoCategoria;
+    private javax.swing.JComboBox<String> cbNombreCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

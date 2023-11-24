@@ -1181,3 +1181,20 @@ BEGIN
     DELETE FROM producto WHERE id_produc = p_id_produc;
 END //
 DELIMITER ;
+
+
+-----
+DELIMITER //
+
+CREATE PROCEDURE ObtenerCategoriaID(IN categoria_nombre VARCHAR(25))
+BEGIN
+    DECLARE categoria_id CHAR(5);
+
+    SELECT id_ctg INTO categoria_id
+    FROM categoria
+    WHERE nom_ctg = categoria_nombre;
+
+    SELECT categoria_id AS 'ID de la Categoría';
+END //
+
+DELIMITER ;
