@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import java.util.List;
 
-public class vistaRapidaMarcas extends javax.swing.JFrame {
+public class vistaRapidaMarcas2 extends javax.swing.JFrame {
     
     public static String id_produc;
     private int mouseX, mouseY;
     NegocioMass mass = new NegocioMass();
     
-    public vistaRapidaMarcas() {
+    public vistaRapidaMarcas2() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -36,7 +36,7 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
                 int x = e.getXOnScreen() - mouseX;
                 int y = e.getYOnScreen() - mouseY;
 
-                vistaRapidaMarcas.this.setLocation(x, y);
+                vistaRapidaMarcas2.this.setLocation(x, y);
             }
         });
         
@@ -148,7 +148,7 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
 
     private void tablaMarcasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMarcasMouseClicked
         int fila = tablaMarcas.getSelectedRow();
-        frmProducto.txtMarca.setText(tablaMarcas.getValueAt(fila, 0).toString());
+        frmMantenimientoProducto.txtMarcaPro.setText(tablaMarcas.getValueAt(fila, 0).toString());
     }//GEN-LAST:event_tablaMarcasMouseClicked
 
     private void txtNomMarcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomMarcaKeyReleased
@@ -187,20 +187,21 @@ public class vistaRapidaMarcas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaMarcas2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaMarcas2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaMarcas2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vistaRapidaMarcas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRapidaMarcas2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vistaRapidaMarcas().setVisible(true);
+                new vistaRapidaMarcas2().setVisible(true);
             }
         });
     }
