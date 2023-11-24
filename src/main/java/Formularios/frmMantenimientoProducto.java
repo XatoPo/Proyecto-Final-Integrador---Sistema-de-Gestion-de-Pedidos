@@ -430,6 +430,8 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
     
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         this.dispose();
+        frmMenú menu = new frmMenú();
+        menu.setVisible(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void cbNombreCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNombreCategoriaActionPerformed

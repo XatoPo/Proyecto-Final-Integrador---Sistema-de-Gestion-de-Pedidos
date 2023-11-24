@@ -17,6 +17,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import login.frmMenú;
 public class frmMantenimientoEmpleado extends javax.swing.JFrame {
 
 
@@ -835,6 +836,8 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         this.dispose();
+        frmMenú menu = new frmMenú();
+        menu.setVisible(true);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     /**

@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import login.frmMenú;
 
 
 
@@ -651,7 +652,9 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProovedorActionPerformed
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        this.dispose(); 
+        this.dispose();
+        frmMenú menu = new frmMenú();
+        menu.setVisible(true); 
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     public static void main(String args[]) {
