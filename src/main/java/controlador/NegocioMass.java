@@ -90,8 +90,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
     }
     
-    
-    
     @Override
     public void editProducto(producto p){
         Connection cn = MySQLConexion.getConexion();

@@ -264,18 +264,23 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         });
         panelFondo.add(btnModificarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 476, 133, 37));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Primer Nombre");
         panelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 129, 101, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Segundo Nombre");
         panelFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 177, 109, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Primer Apellido");
         panelFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 225, 109, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Segundo Apellido");
         panelFondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 268, 109, -1));
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Cargo");
         panelFondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 322, 109, -1));
         panelFondo.add(dcFechaNacEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 369, 118, -1));
@@ -382,14 +387,17 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         cmbCargoEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Vendedor", "Reponedor", "Cajero" }));
         panelFondo.add(cmbCargoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 312, 118, -1));
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Fecha de Nacimiento");
         panelFondo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 377, 117, -1));
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Contraseña");
         panelFondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 426, 117, -1));
         panelFondo.add(txtPasswordEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 421, 118, -1));
 
         cbActivaContactoEmp.setText("Agregar Informacion de Contacto");
+        cbActivaContactoEmp.setContentAreaFilled(false);
         cbActivaContactoEmp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbActivaContactoEmpMouseClicked(evt);
@@ -402,12 +410,18 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         });
         panelFondo.add(cbActivaContactoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 66, -1, -1));
 
-        jPanelContactoEmp.setBackground(new java.awt.Color(255, 255, 204));
+        jPanelContactoEmp.setBackground(new java.awt.Color(8, 66, 177));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Telefono");
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Correo");
 
         txtTelEmp.addKeyListener(new KeyListener() {
@@ -479,6 +493,7 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         panelFondo.add(jPanelContactoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 104, 367, -1));
 
         cbActivaUbigeoEmp.setText("Agregar Informacion de Ubigeo");
+        cbActivaUbigeoEmp.setContentAreaFilled(false);
         cbActivaUbigeoEmp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbActivaUbigeoEmpMouseClicked(evt);
@@ -486,16 +501,26 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         });
         panelFondo.add(cbActivaUbigeoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 260, -1, -1));
 
-        jPanelUbigeoEmp.setBackground(new java.awt.Color(255, 255, 204));
+        jPanelUbigeoEmp.setBackground(new java.awt.Color(8, 66, 177));
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Distrito");
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Provincia");
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Calle/Avenida");
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Nro Calle");
 
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Referencia");
 
         txtDistEmp.addKeyListener(new KeyListener() {
@@ -650,6 +675,7 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         });
         panelFondo.add(cmbEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 68, 201, 30));
 
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("Codigo de Empleado");
         panelFondo.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 75, -1, -1));
 
@@ -660,7 +686,6 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         });
         panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 6, 40, 41));
 
-        lblFondo.setText("jLabel18");
         lblFondo.setPreferredSize(new java.awt.Dimension(756, 787));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 756, 787));
 

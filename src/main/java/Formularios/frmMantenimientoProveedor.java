@@ -192,11 +192,11 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         cmbProveedor = new javax.swing.JComboBox<>();
         btnEliminarProovedor = new javax.swing.JButton();
         lblCerrar = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
-        setMaximumSize(new java.awt.Dimension(1047, 704));
         setMinimumSize(new java.awt.Dimension(1047, 704));
         setUndecorated(true);
         setResizable(false);
@@ -206,8 +206,8 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        jLabel1.setText("Registro de Proveedor");
-        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 15, -1, 38));
+        jLabel1.setText("Mantenimiento de Proveedor");
+        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 38));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel3.setText("Nombre Proveedor");
@@ -238,11 +238,12 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         jLabel4.setText("Descripción");
         panelFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 135, -1, -1));
 
-        JPDireccion.setBackground(new java.awt.Color(204, 204, 255));
+        JPDireccion.setBackground(new java.awt.Color(8, 66, 177));
         JPDireccion.setEnabled(false);
         JPDireccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Calle / Avenida");
         JPDireccion.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 64, -1, -1));
 
@@ -268,6 +269,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         JPDireccion.add(txtCalleEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 86, 250, 30));
 
         jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Número");
         JPDireccion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 64, -1, -1));
 
@@ -293,15 +295,18 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         JPDireccion.add(txtNroCalleEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(346, 86, 92, 30));
 
         jLabel11.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Referencia");
         JPDireccion.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 128, -1, -1));
         JPDireccion.add(txtRefUbigeoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 150, 417, 30));
 
         jLabel16.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Provincia");
         JPDireccion.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 6, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Distrito");
         JPDireccion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 6, -1, -1));
 
@@ -354,19 +359,22 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
 
         panelFondo.add(JPDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 275, 459, 191));
 
-        JPTelefono.setBackground(new java.awt.Color(204, 204, 255));
+        JPTelefono.setBackground(new java.awt.Color(8, 66, 177));
         JPTelefono.setDoubleBuffered(false);
         JPTelefono.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Tipo de Contacto");
 
         cmbTipoContactoEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-----SELECCIONAR-----", "Gerente", "Ventas", "Atencion al Cliente", " " }));
 
         jLabel15.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Correo Electronico");
 
         jLabel18.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Telefono");
 
         txtTelProv.addKeyListener(new KeyListener() {
@@ -466,6 +474,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 160, 467, 73));
 
         CBmasTelefono.setText("Agregar Información de Contacto");
+        CBmasTelefono.setContentAreaFilled(false);
         CBmasTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CBmasTelefonoMouseClicked(evt);
@@ -474,6 +483,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         panelFondo.add(CBmasTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 472, -1, 30));
 
         CBmasUbigeo.setText("Agregar Infornación de Ubigeo");
+        CBmasUbigeo.setContentAreaFilled(false);
         CBmasUbigeo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CBmasUbigeoMouseClicked(evt);
@@ -495,18 +505,18 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablap);
 
-        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 114, 500, 542));
+        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 146, 500, 510));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 18)); // NOI18N
         jLabel2.setText("Codigos de Proveedores");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 64, -1, -1));
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 180, -1));
 
         cmbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbProveedorActionPerformed(evt);
             }
         });
-        panelFondo.add(cmbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 63, 185, 30));
+        panelFondo.add(cmbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 185, 30));
 
         btnEliminarProovedor.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         btnEliminarProovedor.setText("ELIMINAR");
@@ -523,6 +533,10 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
             }
         });
         panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 35, 34));
+
+        jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
+        jLabel5.setText("Proveedores registrados:");
+        panelFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 150, 30));
 
         lblFondo.setMaximumSize(new java.awt.Dimension(1047, 704));
         lblFondo.setMinimumSize(new java.awt.Dimension(1047, 704));
@@ -671,6 +685,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
