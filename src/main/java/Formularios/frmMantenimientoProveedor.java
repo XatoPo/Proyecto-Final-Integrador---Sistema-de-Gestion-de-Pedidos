@@ -6,8 +6,12 @@ import clases.ubigeo;
 import controlador.NegocioMass;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -20,16 +24,44 @@ import login.frmMenú;
 
 public class frmMantenimientoProveedor extends javax.swing.JFrame {
     
+    private int mouseX, mouseY;
+    
     public frmMantenimientoProveedor() {
         initComponents();
+        setSize(1047, 704);  // Establecer el tamaño del JFrame
+        setResizable(false);
         setLocationRelativeTo(null);
+        
+        // Agregar un MouseListener para permitir arrastrar y soltar el JFrame
+        panelFondo.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        });
+
+        panelFondo.addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen() - mouseX;
+                int y = e.getYOnScreen() - mouseY;
+
+                frmMantenimientoProveedor.this.setLocation(x, y);
+            }
+        });
+        
         EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
+        EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
+        EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
         EscaladoImagenesButton(btnModificarProovedor, "src\\main\\java\\recursos\\proveedor_(1).png");
+        
+        setLocationRelativeTo(null);
+        
         llenarProveedores();
         muestraProv();
         bloquear2();
         bloquear();
     }
+    
     List<proovedor> lista; 
     NegocioMass obj=new NegocioMass();
     void llenarProveedores(){
@@ -125,6 +157,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtnombreProveedor = new javax.swing.JTextField();
@@ -159,17 +192,26 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         cmbProveedor = new javax.swing.JComboBox<>();
         btnEliminarProovedor = new javax.swing.JButton();
         lblCerrar = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 255));
+        setMaximumSize(new java.awt.Dimension(1047, 704));
+        setMinimumSize(new java.awt.Dimension(1047, 704));
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelFondo.setPreferredSize(new java.awt.Dimension(1047, 704));
+        panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         jLabel1.setText("Registro de Proveedor");
+        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 15, -1, 38));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel3.setText("Nombre Proveedor");
+        panelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 63, -1, -1));
 
         txtnombreProveedor.addKeyListener(new KeyListener() {
             @Override
@@ -190,9 +232,11 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 // No es necesario implementar esto, pero debe estar presente debido a la interfaz KeyListener
             }
         });
+        panelFondo.add(txtnombreProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 99, 467, 30));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel4.setText("Descripción");
+        panelFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 135, -1, -1));
 
         JPDireccion.setBackground(new java.awt.Color(204, 204, 255));
         JPDireccion.setEnabled(false);
@@ -308,6 +352,8 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         });
         JPDireccion.add(txtDistEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 28, 180, 30));
 
+        panelFondo.add(JPDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 275, 459, 191));
+
         JPTelefono.setBackground(new java.awt.Color(204, 204, 255));
         JPTelefono.setDoubleBuffered(false);
         JPTelefono.setEnabled(false);
@@ -383,6 +429,8 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
+        panelFondo.add(JPTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 508, -1, -1));
+
         btnModificarProovedor.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         btnModificarProovedor.setText("MODIFICAR");
         btnModificarProovedor.addActionListener(new java.awt.event.ActionListener() {
@@ -390,6 +438,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 btnModificarProovedorActionPerformed(evt);
             }
         });
+        panelFondo.add(btnModificarProovedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 659, 191, 39));
 
         txtdescripcionProv.setColumns(20);
         txtdescripcionProv.setRows(5);
@@ -414,12 +463,15 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txtdescripcionProv);
 
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 160, 467, 73));
+
         CBmasTelefono.setText("Agregar Información de Contacto");
         CBmasTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CBmasTelefonoMouseClicked(evt);
             }
         });
+        panelFondo.add(CBmasTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 472, -1, 30));
 
         CBmasUbigeo.setText("Agregar Infornación de Ubigeo");
         CBmasUbigeo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -427,6 +479,8 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 CBmasUbigeoMouseClicked(evt);
             }
         });
+        panelFondo.add(CBmasUbigeo, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 239, -1, 30));
+        panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 6, 108, 39));
 
         tablap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -441,14 +495,18 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablap);
 
+        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 114, 500, 542));
+
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 18)); // NOI18N
         jLabel2.setText("Codigos de Proveedores");
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 64, -1, -1));
 
         cmbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbProveedorActionPerformed(evt);
             }
         });
+        panelFondo.add(cmbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 63, 185, 30));
 
         btnEliminarProovedor.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         btnEliminarProovedor.setText("ELIMINAR");
@@ -457,109 +515,22 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
                 btnEliminarProovedorActionPerformed(evt);
             }
         });
+        panelFondo.add(btnEliminarProovedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 659, 191, 39));
 
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);
             }
         });
+        panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 35, 34));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnombreProveedor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(CBmasUbigeo)))
-                        .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(JPDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CBmasTelefono)
-                                .addComponent(JPTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnModificarProovedor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarProovedor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(91, 91, 91)
-                        .addComponent(cmbProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(42, 42, 42))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(63, 63, 63)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(11, 11, 11))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtnombreProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBmasUbigeo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JPDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CBmasTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JPTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnModificarProovedor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminarProovedor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblFondo.setMaximumSize(new java.awt.Dimension(1047, 704));
+        lblFondo.setMinimumSize(new java.awt.Dimension(1047, 704));
+        lblFondo.setName(""); // NOI18N
+        lblFondo.setPreferredSize(new java.awt.Dimension(1047, 704));
+        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1047, 704));
+
+        getContentPane().add(panelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1047, 704));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -704,7 +675,9 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JPanel panelFondo;
     private javax.swing.JTable tablap;
     private javax.swing.JTextField txtCalleEmp;
     private javax.swing.JTextField txtCorreoEmp;
