@@ -1198,3 +1198,39 @@ BEGIN
 END //
 
 DELIMITER ;
+
+--
+DELIMITER //
+
+CREATE PROCEDURE obtenerNombreEmpleadoPorCodigoPedido(IN codigo_pedido CHAR(7))
+BEGIN
+    SELECT CONCAT(nom_pat_emp, ' ', nom_mat_emp, ' ', ape_pat_emp, ' ', ape_mat_emp)
+    FROM empleado e
+    INNER JOIN pedido p ON e.id_emp = p.id_emp
+    WHERE p.id_pedi = codigo_pedido;
+END //
+
+DELIMITER ;
+
+--
+DELIMITER //
+
+CREATE PROCEDURE obtenerCodigoEmpleadoPorCodigoPedido(IN codigo_pedido CHAR(7))
+BEGIN
+    SELECT e.id_emp
+    FROM empleado e
+    INNER JOIN pedido p ON e.id_emp = p.id_emp
+    WHERE p.id_pedi = codigo_pedido;
+END //
+
+DELIMITER ;
+
+--
+DELIMITER //
+CREATE PROCEDURE obtenerCodigoProveedorPorCodigoPedido(IN idPedido CHAR(7))
+BEGIN
+    SELECT id_prov 
+    FROM pedido
+    WHERE id_pedi = idPedido;
+END //
+DELIMITER ;

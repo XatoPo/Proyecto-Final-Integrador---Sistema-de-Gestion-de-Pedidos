@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Formularios;
 
 import static Formularios.frmPedido.btnAgregarProducto;
@@ -414,7 +410,6 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificaProductoActionPerformed
     
     private void btnAyudaMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaMarcaActionPerformed
-        txtMarcaPro.setText("");
         vistaRapidaMarcas2.id_produc = id_produc;
         vistaRapidaMarcas2 p = new vistaRapidaMarcas2();
         p.setLocationRelativeTo(null);

@@ -11,4 +11,5 @@ public interface busquedas {
     String generarNuevoIDPedido();
     producto obtenerDatosProducto(String id_produc);
     String ObtenerCategoriaID(String nom_ctg);
+    empleado obtenerCodigoEmpleadoPorCodigoPedido(String id_pedi);
 }

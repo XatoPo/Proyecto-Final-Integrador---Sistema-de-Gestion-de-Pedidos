@@ -3,6 +3,7 @@ package Formularios;
 import clases.*;
 import controlador.NegocioMass;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import login.frmMenú;
 import vistas.*;
@@ -36,7 +38,28 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         setSize(920, 1020);  // Establecer el tamaño del JFrame
         setResizable(false);
         setLocationRelativeTo(null);
-        
+        tablaPedidos.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent Mouse_evt) {
+                JTable table = (JTable) Mouse_evt.getSource();
+                Point point = Mouse_evt.getPoint();
+                int row = table.rowAtPoint(point);
+                if(Mouse_evt.getClickCount()==1){
+                    String id_pedi = tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(),0).toString();
+                    txtIdPedido.setText(tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(),0).toString());
+                    empleado emp = mass.obtenerCodigoEmpleadoPorCodigoPedido(id_pedi);
+                    txtIdEmp.setText(emp.getId_emp());
+                    txtNomEmp.setText(tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(),4).toString());
+                    String idPro = mass.obtenerCodigoProveedorPorCodigoPedido(id_pedi);
+                    txtIdProv.setText(idPro);
+                    txtNomProv.setText(tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(),3).toString());
+                    btnAyudaEmpleado.setEnabled(false);
+                    btnAyudaProovedor.setEnabled(false);
+                    btnAyudaProducto.setEnabled(false);
+                    
+                }
+            }
+          
+        });
         // Agregar un MouseListener para permitir arrastrar y soltar el JFrame
         panelFondo.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -152,6 +175,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         txtTotalPedido = new javax.swing.JLabel();
         btnRegistrarPedido = new javax.swing.JButton();
         btnQuitarProducto = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,7 +196,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
 
         lblTotalPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTotalPedido.setText("Total Pedido:");
-        panelFondo.add(lblTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 100, 40));
+        panelFondo.add(lblTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 100, 40));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -213,15 +237,13 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaPedidos.setEnabled(false);
-        tablaPedidos.setFocusable(false);
         jScrollPane1.setViewportView(tablaPedidos);
 
-        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 880, 150));
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 880, 150));
 
         lblPedidosRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPedidosRegistrados.setText("Pedidos Registrados:");
-        panelFondo.add(lblPedidosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 150, 40));
+        panelFondo.add(lblPedidosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 150, 40));
 
         panelDatosPedido.setBackground(new java.awt.Color(8, 77, 166));
         panelDatosPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -411,11 +433,11 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaProductosParaPedido);
 
-        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 880, 140));
+        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 880, 100));
 
         txtTotalPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTotalPedido.setText("0.0");
-        panelFondo.add(txtTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 600, 90, 40));
+        panelFondo.add(txtTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, 90, 40));
 
         btnRegistrarPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRegistrarPedido.setText("REGISTRAR PEDIDO");
@@ -425,7 +447,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                 btnRegistrarPedidoActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegistrarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 190, 40));
+        panelFondo.add(btnRegistrarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, 190, 40));
 
         btnQuitarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnQuitarProducto.setText("QUITAR PRODUCTO");
@@ -435,7 +457,10 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                 btnQuitarProductoActionPerformed(evt);
             }
         });
-        panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 220, 40));
+        panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 220, 40));
+
+        jButton1.setText("ELIMINAR PEDIDO");
+        panelFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 820, 230, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 870));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -660,6 +685,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevaFactura;
     private javax.swing.JButton btnQuitarProducto;
     private javax.swing.JButton btnRegistrarPedido;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -412,7 +412,7 @@ public class frmPedido extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaProductosParaPedido);
 
-        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 880, 290));
+        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 880, 280));
 
         txtTotalPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTotalPedido.setText("0.0");

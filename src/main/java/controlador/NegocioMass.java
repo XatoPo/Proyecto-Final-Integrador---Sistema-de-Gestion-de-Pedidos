@@ -850,6 +850,47 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return emp;
     }
     
+    public String obtenerCodigoProveedorPorCodigoPedido(String id_pedi){
+        String  codPro = null;
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerCodigoProveedorPorCodigoPedido(?)}";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, id_pedi);
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                codPro =(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return codPro;
+    }
+    
+    
+    @Override
+    public empleado obtenerCodigoEmpleadoPorCodigoPedido(String id_pedi){
+        empleado emp = null;
+        Connection cn = MySQLConexion.getConexion();
+        
+        try {
+            String sql = "{CALL obtenerCodigoEmpleadoPorCodigoPedido(?)}";
+            CallableStatement cs = cn.prepareCall(sql);
+            cs.setString(1, id_pedi);
+            ResultSet rs = cs.executeQuery();
+            if (rs.next()) {
+                emp = new empleado();
+                emp.setId_emp(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return emp;
+    }
+    
     @Override
     public proovedor obtenerDatosProveedor(String id_prov) {
         proovedor prov = null;
