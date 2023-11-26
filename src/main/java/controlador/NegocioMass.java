@@ -69,6 +69,7 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }     
     }
     
+    @Override
     public void eliminarProducto(String idProducto) {
         Connection cn = MySQLConexion.getConexion();
         String sql = "{CALL spEliminarProducto (?)}";
@@ -88,6 +89,8 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             }
         }
     }
+    
+    
     
     @Override
     public void editProducto(producto p){
@@ -130,6 +133,29 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
             ex.printStackTrace();
         }
     }
+    
+    @Override
+    public void eliminarPedido(String idPedido) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spEliminarPedido (?)}";
+        try {           
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, idPedido);
+            int rowsAffected = st.executeUpdate();
+            // Hacer algo con el resultado si es necesario
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     
     @Override
     public void eliminarProveedor(String idProveedor) {
@@ -1043,5 +1069,4 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         return id_ctg;
     }
-
 }

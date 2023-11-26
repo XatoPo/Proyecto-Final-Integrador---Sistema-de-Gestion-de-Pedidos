@@ -32,8 +32,7 @@ public class frmPedido extends javax.swing.JFrame {
     List<detalle_pedido> list_detalle_pedido;
     
     public frmPedido() {
-        initComponents();
-        setSize(920, 1020);  // Establecer el tamaño del JFrame
+        initComponents();  
         setResizable(false);
         setLocationRelativeTo(null);
         
@@ -172,16 +171,16 @@ public class frmPedido extends javax.swing.JFrame {
 
         lblTotalPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTotalPedido.setText("Total Pedido:");
-        panelFondo.add(lblTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 760, 100, 40));
+        panelFondo.add(lblTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 100, 40));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("REGISTRO DE PEDIDO");
-        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 290, 50));
+        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 290, 50));
 
         lblCodPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCodPedido.setText("Código de Pedido:");
-        panelFondo.add(lblCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 140, 40));
+        panelFondo.add(lblCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 140, 40));
 
         btnNuevaFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaFactura.setText("NUEVA FACTURA");
@@ -191,11 +190,11 @@ public class frmPedido extends javax.swing.JFrame {
                 btnNuevaFacturaActionPerformed(evt);
             }
         });
-        panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 210, 40));
+        panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 210, 40));
 
         txtIdPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtIdPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelFondo.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 120, 40));
+        panelFondo.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 120, 40));
 
         tablaPedidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -218,11 +217,11 @@ public class frmPedido extends javax.swing.JFrame {
         tablaPedidos.setFocusable(false);
         jScrollPane1.setViewportView(tablaPedidos);
 
-        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 851, 880, 150));
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 880, 120));
 
         lblPedidosRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPedidosRegistrados.setText("Pedidos Registrados:");
-        panelFondo.add(lblPedidosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 810, 150, 40));
+        panelFondo.add(lblPedidosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 650, 150, 40));
 
         panelDatosPedido.setBackground(new java.awt.Color(8, 77, 166));
         panelDatosPedido.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -304,7 +303,7 @@ public class frmPedido extends javax.swing.JFrame {
         });
         panelDatosPedido.add(btnAyudaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 120, 40));
 
-        panelFondo.add(panelDatosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 460, 260));
+        panelFondo.add(panelDatosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 460, 260));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -318,7 +317,7 @@ public class frmPedido extends javax.swing.JFrame {
         spnCantidadProducto.setEnabled(false);
         jPanel2.add(spnCantidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 130, 30));
 
-        panelFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 470, 50));
+        panelFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 470, 50));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -387,7 +386,7 @@ public class frmPedido extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 380, 50));
 
-        panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 410, 320));
+        panelFondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 410, 320));
 
         tablaProductosParaPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -412,11 +411,11 @@ public class frmPedido extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaProductosParaPedido);
 
-        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 880, 280));
+        panelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 880, 150));
 
         txtTotalPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTotalPedido.setText("0.0");
-        panelFondo.add(txtTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 760, 90, 40));
+        panelFondo.add(txtTotalPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 600, 90, 40));
 
         btnRegistrarPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRegistrarPedido.setText("REGISTRAR PEDIDO");
@@ -426,7 +425,7 @@ public class frmPedido extends javax.swing.JFrame {
                 btnRegistrarPedidoActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegistrarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 760, 190, 40));
+        panelFondo.add(btnRegistrarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 190, 40));
 
         btnQuitarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnQuitarProducto.setText("QUITAR PRODUCTO");
@@ -436,8 +435,8 @@ public class frmPedido extends javax.swing.JFrame {
                 btnQuitarProductoActionPerformed(evt);
             }
         });
-        panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 760, 220, 40));
-        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 1020));
+        panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 600, 220, 40));
+        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -447,7 +446,9 @@ public class frmPedido extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

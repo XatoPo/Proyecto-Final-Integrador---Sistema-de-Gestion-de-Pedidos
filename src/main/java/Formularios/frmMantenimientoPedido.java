@@ -35,9 +35,10 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
     
     public frmMantenimientoPedido() {
         initComponents();
-        setSize(920, 1020);  // Establecer el tamaño del JFrame
+          // Establecer el tamaño del JFrame
         setResizable(false);
         setLocationRelativeTo(null);
+        btnEliminarPedido.setEnabled(false);
         tablaPedidos.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent Mouse_evt) {
                 JTable table = (JTable) Mouse_evt.getSource();
@@ -55,7 +56,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                     btnAyudaEmpleado.setEnabled(false);
                     btnAyudaProovedor.setEnabled(false);
                     btnAyudaProducto.setEnabled(false);
-                    
+                    btnEliminarPedido.setEnabled(true);
                 }
             }
           
@@ -79,23 +80,38 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
 
         // Agregar ComponentListener para gestionar cambios en el tamaño de la ventana
         this.addComponentListener(new ComponentAdapter() {
-            @Override
+           
             public void componentResized(ComponentEvent e) {
                 // Ajustar la escala de las imágenes al cambiar el tamaño de la ventana
                 EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
-                EscaladoImagenesButton(btnNuevaFactura, "src\\main\\java\\recursos\\nueva_factura.png");
                 EscaladoImagenesButton(btnAyudaEmpleado, "src\\main\\java\\recursos\\lupa.png");
                 EscaladoImagenesButton(btnAyudaProovedor, "src\\main\\java\\recursos\\lupa.png");
                 EscaladoImagenesButton(btnAyudaProducto, "src\\main\\java\\recursos\\lupa.png");
                 EscaladoImagenesButton(btnAgregarProducto, "src\\main\\java\\recursos\\agregar_producto.png");
                 EscaladoImagenesButton(btnQuitarProducto, "src\\main\\java\\recursos\\quitar_producto.png");
                 EscaladoImagenesButton(btnRegistrarPedido, "src\\main\\java\\recursos\\registrar_pedido.png");
+                EscaladoImagenesButton(btnEliminarPedido, "src\\main\\java\\recursos\\eliminarpedido.png");
             }
         });
         
         muestraPedidos();
+    }
+    
+    private void EscaladoImagenesLabel(JLabel labelFondo, String ruta) {
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(
+                image.getImage().getScaledInstance(labelFondo.getWidth(), labelFondo.getHeight(), Image.SCALE_DEFAULT));
+        labelFondo.setIcon(icon);
+        this.repaint();
+    }
+    
+    private void EscaladoImagenesButton(JButton botonFondo, String ruta){
+        ImageIcon image = new ImageIcon(ruta);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+        botonFondo.setIcon(icon);
+        this.repaint();
     }
     
     public void muestraPedidos(){
@@ -134,7 +150,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         lblTotalPedido = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         lblCodPedido = new javax.swing.JLabel();
-        btnNuevaFactura = new javax.swing.JButton();
         txtIdPedido = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPedidos = new javax.swing.JTable();
@@ -175,7 +190,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         txtTotalPedido = new javax.swing.JLabel();
         btnRegistrarPedido = new javax.swing.JButton();
         btnQuitarProducto = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnEliminarPedido = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -207,15 +222,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         lblCodPedido.setText("Código de Pedido:");
         panelFondo.add(lblCodPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 140, 40));
 
-        btnNuevaFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNuevaFactura.setText("NUEVA FACTURA");
-        btnNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaFacturaActionPerformed(evt);
-            }
-        });
-        panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, 210, 40));
-
         txtIdPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtIdPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelFondo.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 120, 40));
@@ -239,7 +245,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaPedidos);
 
-        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 880, 150));
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, 880, 130));
 
         lblPedidosRegistrados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPedidosRegistrados.setText("Pedidos Registrados:");
@@ -459,9 +465,15 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         });
         panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 560, 220, 40));
 
-        jButton1.setText("ELIMINAR PEDIDO");
-        panelFondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 820, 230, 40));
-        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 870));
+        btnEliminarPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEliminarPedido.setText("ELIMINAR PEDIDO");
+        btnEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPedidoActionPerformed(evt);
+            }
+        });
+        panelFondo.add(btnEliminarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 760, 250, 40));
+        panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -471,7 +483,9 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -582,16 +596,24 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         muestraPedidos();
     }//GEN-LAST:event_btnRegistrarPedidoActionPerformed
 
-    private void btnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaFacturaActionPerformed
-        list_detalle_pedido = new ArrayList();
-        String new_id_pedi = mass.generarNuevoIDPedido();
-        txtIdPedido.setText(new_id_pedi);
-        btnAyudaEmpleado.setEnabled(true);
-        btnAyudaProovedor.setEnabled(true);
-        btnAyudaProducto.setEnabled(false);
-        limpiaTodosLosCampos();
-    }//GEN-LAST:event_btnNuevaFacturaActionPerformed
+    NegocioMass obj = new NegocioMass();
+    
+    private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedidoActionPerformed
+        String idPedido = txtIdPedido.getText();
+        obj.eliminarPedido(idPedido);
+        muestraPedidos();
+        limpiar();
+        btnEliminarPedido.setEnabled(false);
+    }//GEN-LAST:event_btnEliminarPedidoActionPerformed
 
+    public void limpiar(){
+        txtIdPedido.setText("");
+        txtIdEmp.setText("");
+        txtNomEmp.setText("");
+        txtIdProv.setText("");
+        txtNomProv.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -628,20 +650,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         });
     }
     
-    private void EscaladoImagenesLabel(JLabel labelFondo, String ruta) {
-        ImageIcon image = new ImageIcon(ruta);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(labelFondo.getWidth(), labelFondo.getHeight(), Image.SCALE_DEFAULT));
-        labelFondo.setIcon(icon);
-        this.repaint();
-    }
     
-    private void EscaladoImagenesButton(JButton botonFondo, String ruta){
-        ImageIcon image = new ImageIcon(ruta);
-        Icon icon = new ImageIcon(image.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-        botonFondo.setIcon(icon);
-        this.repaint();
-    }
     
     private void limpiaTodosLosCampos() {
         txtIdEmp.setText("");
@@ -682,10 +691,9 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
     public static javax.swing.JButton btnAyudaEmpleado;
     public static javax.swing.JButton btnAyudaProducto;
     public static javax.swing.JButton btnAyudaProovedor;
-    private javax.swing.JButton btnNuevaFactura;
+    private javax.swing.JButton btnEliminarPedido;
     private javax.swing.JButton btnQuitarProducto;
     private javax.swing.JButton btnRegistrarPedido;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

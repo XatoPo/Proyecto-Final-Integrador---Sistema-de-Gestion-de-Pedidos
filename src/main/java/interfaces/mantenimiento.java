@@ -10,4 +10,6 @@ public interface mantenimiento {
     void editProveedor(proovedor prov);
     void eliminarProveedor(String prov);
     void eliminarEmpleado(String emp);
+    void eliminarProducto(String idProducto);
+    void eliminarPedido(String idPedido);
 }

@@ -111,6 +111,9 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
                 EscaladoImagenesButton(btnAyudaMarca, "src\\main\\java\\recursos\\lupa.png");
+                EscaladoImagenesButton(btnEliminaProducto, "src\\main\\java\\recursos\\quitar_producto.png");
+                EscaladoImagenesButton(btnModificaProducto, "src\\main\\java\\recursos\\modificaproducto.png");
+                EscaladoImagenesButton(btnEliminaProducto, "src\\main\\java\\recursos\\quitar_producto.png");
             }
         });
     }
@@ -241,7 +244,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
                 btnModificaProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 220, 40));
+        jPanel1.add(btnModificaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 230, 40));
 
         txtNombreProducto.addKeyListener(new KeyListener() {
             @Override
@@ -338,7 +341,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
                 btnEliminaProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 180, 40));
+        jPanel1.add(btnEliminaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 220, 40));
 
         cbTipoEmpaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir", "Palet", "Caja", "Pack", "Cesta", "Paquete" }));
         jPanel1.add(cbTipoEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 220, 240, 40));
@@ -421,7 +424,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         obj.eliminarProducto(idProducto);
         muestra();
         limpiar();
-        
+        bloquear();
     }//GEN-LAST:event_btnEliminaProductoActionPerformed
 
     public void limpiar(){

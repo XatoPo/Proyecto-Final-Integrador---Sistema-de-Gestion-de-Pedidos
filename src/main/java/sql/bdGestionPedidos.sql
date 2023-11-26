@@ -1199,7 +1199,7 @@ END //
 
 DELIMITER ;
 
---
+--Procedure para obtener el nombre del empleado por codigo del pedido
 DELIMITER //
 
 CREATE PROCEDURE obtenerNombreEmpleadoPorCodigoPedido(IN codigo_pedido CHAR(7))
@@ -1212,7 +1212,7 @@ END //
 
 DELIMITER ;
 
---
+--Procedure para obtener el codigo del empleado por codigo del pedido
 DELIMITER //
 
 CREATE PROCEDURE obtenerCodigoEmpleadoPorCodigoPedido(IN codigo_pedido CHAR(7))
@@ -1225,12 +1225,25 @@ END //
 
 DELIMITER ;
 
---
+--Procedure para obtener el codigo del proveedor por codigo del pedido
 DELIMITER //
 CREATE PROCEDURE obtenerCodigoProveedorPorCodigoPedido(IN idPedido CHAR(7))
 BEGIN
     SELECT id_prov 
     FROM pedido
     WHERE id_pedi = idPedido;
+END //
+DELIMITER ;
+
+--Procedure para eliminar un pedido por codigo de pedido
+DELIMITER //
+CREATE PROCEDURE spEliminarPedido(IN p_idPedido CHAR(7))
+BEGIN
+    -- Eliminar el detalle del pedido
+    DELETE FROM detalle_pedido WHERE id_pedi = p_idPedido;
+    -- Eliminar la guía de entrega asociada al pedido
+    DELETE FROM guia_entrega WHERE id_pedi = p_idPedido;
+    -- Eliminar el pedido
+    DELETE FROM pedido WHERE id_pedi = p_idPedido;
 END //
 DELIMITER ;
