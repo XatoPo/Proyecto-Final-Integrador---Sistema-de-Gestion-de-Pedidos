@@ -82,6 +82,7 @@ public class frmPedido extends javax.swing.JFrame {
                 EscaladoImagenesButton(btnAgregarProducto, "src\\main\\java\\recursos\\agregar_producto.png");
                 EscaladoImagenesButton(btnQuitarProducto, "src\\main\\java\\recursos\\quitar_producto.png");
                 EscaladoImagenesButton(btnRegistrarPedido, "src\\main\\java\\recursos\\registrar_pedido.png");
+                EscaladoImagenesButton(btnImprimeGuia, "src\\main\\java\\recursos\\impresora.png");
             }
         });
         
@@ -223,13 +224,14 @@ public class frmPedido extends javax.swing.JFrame {
         });
         panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 210, 40));
 
-        btnImprimeGuia.setText("IMPRIMIR GUIA");
+        btnImprimeGuia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnImprimeGuia.setText("IMPRIMIR GUÍA");
         btnImprimeGuia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimeGuiaActionPerformed(evt);
             }
         });
-        panelFondo.add(btnImprimeGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 630, 130, 40));
+        panelFondo.add(btnImprimeGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 650, 190, 40));
 
         txtIdPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtIdPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -476,7 +478,13 @@ public class frmPedido extends javax.swing.JFrame {
         panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 600, 220, 40));
 
         txtCodigoPed_Guia.setEditable(false);
-        panelFondo.add(txtCodigoPed_Guia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 632, 130, 40));
+        txtCodigoPed_Guia.setFocusable(false);
+        txtCodigoPed_Guia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoPed_GuiaActionPerformed(evt);
+            }
+        });
+        panelFondo.add(txtCodigoPed_Guia, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 650, 140, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -639,6 +647,10 @@ public class frmPedido extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error en el reporte: " + e.getMessage());
         }
     }//GEN-LAST:event_btnImprimeGuiaActionPerformed
+
+    private void txtCodigoPed_GuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoPed_GuiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoPed_GuiaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -134,14 +134,17 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnImprimeGuia">
           <Properties>
-            <Property name="text" type="java.lang.String" value="IMPRIMIR GUIA"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="IMPRIMIR GU&#xcd;A"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImprimeGuiaActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="330" y="630" width="130" height="40"/>
+              <AbsoluteConstraints x="570" y="650" width="190" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -817,10 +820,14 @@
         <Component class="javax.swing.JTextField" name="txtCodigoPed_Guia">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodigoPed_GuiaActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="190" y="632" width="130" height="40"/>
+              <AbsoluteConstraints x="760" y="650" width="140" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
