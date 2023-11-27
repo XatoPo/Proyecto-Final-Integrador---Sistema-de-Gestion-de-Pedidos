@@ -679,6 +679,7 @@ public class frmMantenimientoEmpleado extends javax.swing.JFrame {
         jLabel17.setText("Codigo de Empleado");
         panelFondo.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 75, -1, -1));
 
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);

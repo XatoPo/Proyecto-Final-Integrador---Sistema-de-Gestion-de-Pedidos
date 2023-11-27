@@ -509,7 +509,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 18)); // NOI18N
         jLabel2.setText("Codigos de Proveedores");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 180, -1));
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 210, -1));
 
         cmbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,6 +527,7 @@ public class frmMantenimientoProveedor extends javax.swing.JFrame {
         });
         panelFondo.add(btnEliminarProovedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 659, 191, 39));
 
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);

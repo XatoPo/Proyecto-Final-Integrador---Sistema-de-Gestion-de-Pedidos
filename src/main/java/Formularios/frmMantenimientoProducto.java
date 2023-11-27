@@ -1,6 +1,5 @@
 package Formularios;
 
-import static Formularios.frmPedido.btnAgregarProducto;
 import static Formularios.frmPedido.id_produc;
 import clases.producto;
 import controlador.NegocioMass;
@@ -19,12 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import login.frmMenú;
-import vistas.vistaRapidaMarcas;
 import vistas.vistaRapidaMarcas2;
 
 
@@ -354,10 +349,7 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
 
         tbProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID del producto", "Nombre", "Marca", "Precio", "Cantidad por empaquetado", "ID de categoría", "Tipo de empaquetado"
@@ -373,8 +365,9 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbProductos);
 
-        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 890, 350));
+        panelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 910, 340));
 
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);
@@ -401,11 +394,13 @@ public class frmMantenimientoProducto extends javax.swing.JFrame {
 
     private void btnModificaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaProductoActionPerformed
         producto pro = new producto();
+        pro.setId_produc(txtIdProducto.getText());
         pro.setNom_produc(txtNombreProducto.getText());
         pro.setMarca_produc(txtMarcaPro.getText());
         pro.setPrecio_empaq_produc(Double.parseDouble(txtPrecioEmpaque.getText()));
         pro.setCant_x_empaq_produc(Integer.parseInt(txtCantidadEmpaque.getText()));
         pro.setNom_ctg(cbNombreCategoria.getSelectedItem().toString());
+        pro.setId_ctg(obj.ObtenerCategoriaID(cbNombreCategoria.getSelectedItem().toString()));
         pro.setTipo_empq_produc(cbTipoEmpaque.getSelectedItem().toString());
         obj.editProducto(pro);
         muestra();

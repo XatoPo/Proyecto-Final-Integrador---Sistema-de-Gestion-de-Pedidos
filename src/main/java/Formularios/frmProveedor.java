@@ -136,12 +136,13 @@ public class frmProveedor extends javax.swing.JFrame {
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);
             }
         });
-        panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(978, 15, 48, 46));
+        panelFondo.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 20, 40, 40));
 
         tablap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -448,7 +449,7 @@ public class frmProveedor extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi Cond", 0, 14)); // NOI18N
         jLabel2.setText("Proveedores registrados:");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 150, 30));
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 180, 30));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 690));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

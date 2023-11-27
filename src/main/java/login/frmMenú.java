@@ -9,7 +9,7 @@ import Formularios.frmMantenimientoProveedor;
 import Formularios.frmPedido;
 import Formularios.frmProducto;
 import Formularios.frmProveedor;
-import controlador.NegocioMass;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -35,7 +35,8 @@ public class frmMenú extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         
-        lblTitulo.setText("Bienvenido " + nomEmp);
+        String bienvenida = "Bienvenido " + nomEmp;
+        lblTitulo.setText(textoHTML(bienvenida));
         
         // Agregar un MouseListener para permitir arrastrar y soltar el JFrame
         panelFondo.addMouseListener(new MouseAdapter() {
@@ -65,22 +66,172 @@ public class frmMenú extends javax.swing.JFrame {
             }
         });
         
+        // Cambio de color al pasar el mouse sobre el botón Registro de Productos
+        btnRegistroProductos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnRegistroProductos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnRegistroProductos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnRegistroProductos.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnRegistroProductos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnRegistroProductos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnRegistroProductos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnRegistroEmpleados.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnRegistroEmpleados.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnRegistroEmpleados.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnRegistroEmpleados.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnRegistroEmpleados.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnRegistroEmpleados.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnRegistroEmpleados.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnRegistroPedidos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnRegistroPedidos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnRegistroPedidos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnRegistroPedidos.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnRegistroPedidos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnRegistroPedidos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnRegistroPedidos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnRegistroProveedores.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnRegistroProveedores.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnRegistroProveedores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnRegistroProveedores.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnRegistroProveedores.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnRegistroProveedores.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnRegistroProveedores.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnMantenimientoEmpleados.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnMantenimientoEmpleados.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnMantenimientoEmpleados.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnMantenimientoEmpleados.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnMantenimientoEmpleados.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnMantenimientoEmpleados.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnMantenimientoEmpleados.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnMantenimientoPedidos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnMantenimientoPedidos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnMantenimientoPedidos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnMantenimientoPedidos.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnMantenimientoPedidos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnMantenimientoPedidos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnMantenimientoPedidos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnMantenimientoProductos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnMantenimientoProductos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnMantenimientoProductos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnMantenimientoProductos.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnMantenimientoProductos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnMantenimientoProductos.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnMantenimientoProductos.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        btnMantenimientoProveedores.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+        btnMantenimientoProveedores.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+        btnMantenimientoProveedores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnMantenimientoProveedores.setBackground(new Color(3,57,166)); // Cambiar el color al pasar el mouse sobre el botón
+                btnMantenimientoProveedores.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnMantenimientoProveedores.setBackground(new Color(174, 36, 155)); // Restaurar el color original al salir del botón
+                btnMantenimientoProveedores.setForeground(new Color(221, 221, 221)); // Cambiar el color del texto
+            }
+        });
+        
         habilitarPorCargo();
     }
     
     void habilitarPorCargo() {
         switch (cargoEmp) {
             case "Gerente":
-                //Habilitar todos los botones
+                btnMantenimientoEmpleados.setEnabled(true);
+                btnMantenimientoPedidos.setEnabled(true);
+                btnMantenimientoProductos.setEnabled(true);
+                btnMantenimientoProveedores.setEnabled(true);
+                btnRegistroEmpleados.setEnabled(true);
+                btnRegistroPedidos.setEnabled(true);
+                btnRegistroProductos.setEnabled(true);
+                btnRegistroProveedores.setEnabled(true);
                 break;
             case "Reponedor":
-                //Habilitar ciertos botones
+                btnMantenimientoEmpleados.setEnabled(false);
+                btnMantenimientoPedidos.setEnabled(false);
+                btnMantenimientoProductos.setEnabled(true);
+                btnMantenimientoProveedores.setEnabled(true);
+                btnRegistroEmpleados.setEnabled(false);
+                btnRegistroPedidos.setEnabled(false);
+                btnRegistroProductos.setEnabled(true);
+                btnRegistroProveedores.setEnabled(true);
                 break;
             case "Vendedor":
-                //Habilitar ciertos botones
+                btnMantenimientoEmpleados.setEnabled(false);
+                btnMantenimientoPedidos.setEnabled(true);
+                btnMantenimientoProductos.setEnabled(true);
+                btnMantenimientoProveedores.setEnabled(true);
+                btnRegistroEmpleados.setEnabled(false);
+                btnRegistroPedidos.setEnabled(true);
+                btnRegistroProductos.setEnabled(true);
+                btnRegistroProveedores.setEnabled(true);
                 break;
             case "Cajero":
-                //Habilitar ciertos botones
+                btnMantenimientoEmpleados.setEnabled(false);
+                btnMantenimientoPedidos.setEnabled(false);
+                btnMantenimientoProductos.setEnabled(false);
+                btnMantenimientoProveedores.setEnabled(false);
+                btnRegistroEmpleados.setEnabled(false);
+                btnRegistroPedidos.setEnabled(false);
+                btnRegistroProductos.setEnabled(false);
+                btnRegistroProveedores.setEnabled(false);
                 break;
         }
     }
@@ -113,42 +264,58 @@ public class frmMenú extends javax.swing.JFrame {
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 60));
 
+        btnRegistroProductos.setBackground(new java.awt.Color(221, 221, 221));
+        btnRegistroProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistroProductos.setText("PRODUCTOS");
+        btnRegistroProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistroProductos.setEnabled(false);
         btnRegistroProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistroProductosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegistroProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 140, 50));
+        panelFondo.add(btnRegistroProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 140, 50));
 
+        btnRegistroEmpleados.setBackground(new java.awt.Color(221, 221, 221));
+        btnRegistroEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistroEmpleados.setText("EMPLEADOS");
+        btnRegistroEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistroEmpleados.setEnabled(false);
         btnRegistroEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistroEmpleadosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegistroEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 140, 50));
+        panelFondo.add(btnRegistroEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 140, 50));
 
+        btnRegistroProveedores.setBackground(new java.awt.Color(221, 221, 221));
+        btnRegistroProveedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistroProveedores.setText("PROVEEDORES");
+        btnRegistroProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistroProveedores.setEnabled(false);
         btnRegistroProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistroProveedoresActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegistroProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 140, 50));
+        panelFondo.add(btnRegistroProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 140, 50));
 
+        btnRegistroPedidos.setBackground(new java.awt.Color(221, 221, 221));
+        btnRegistroPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRegistroPedidos.setText("PEDIDOS");
+        btnRegistroPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistroPedidos.setEnabled(false);
         btnRegistroPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistroPedidosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnRegistroPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 140, 50));
+        panelFondo.add(btnRegistroPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 140, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("REGISTRO");
-        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 160, 50));
+        panelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 160, 50));
 
         lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,44 +328,60 @@ public class frmMenú extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(3, 57, 166));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 540, 50));
+        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 540, 80));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MANTENIMIENTO");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 220, 40));
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 220, 40));
 
+        btnMantenimientoEmpleados.setBackground(new java.awt.Color(221, 221, 221));
+        btnMantenimientoEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMantenimientoEmpleados.setText("EMPLEADOS");
+        btnMantenimientoEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMantenimientoEmpleados.setEnabled(false);
         btnMantenimientoEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMantenimientoEmpleadosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 140, 50));
+        panelFondo.add(btnMantenimientoEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 140, 50));
 
+        btnMantenimientoProductos.setBackground(new java.awt.Color(221, 221, 221));
+        btnMantenimientoProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMantenimientoProductos.setText("PRODUCTOS");
+        btnMantenimientoProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMantenimientoProductos.setEnabled(false);
         btnMantenimientoProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMantenimientoProductosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, 140, 50));
+        panelFondo.add(btnMantenimientoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 620, 140, 50));
 
+        btnMantenimientoProveedores.setBackground(new java.awt.Color(221, 221, 221));
+        btnMantenimientoProveedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMantenimientoProveedores.setText("PROVEEDORES");
+        btnMantenimientoProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMantenimientoProveedores.setEnabled(false);
         btnMantenimientoProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMantenimientoProveedoresActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 140, 50));
+        panelFondo.add(btnMantenimientoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, 140, 50));
 
+        btnMantenimientoPedidos.setBackground(new java.awt.Color(221, 221, 221));
+        btnMantenimientoPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnMantenimientoPedidos.setText("PEDIDOS");
+        btnMantenimientoPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMantenimientoPedidos.setEnabled(false);
         btnMantenimientoPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMantenimientoPedidosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 600, 140, 50));
+        panelFondo.add(btnMantenimientoPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 140, 50));
 
         lblFondo.setMaximumSize(new java.awt.Dimension(555, 820));
         lblFondo.setMinimumSize(new java.awt.Dimension(555, 820));
@@ -331,6 +514,11 @@ public class frmMenú extends javax.swing.JFrame {
         botonFondo.setIcon(icon);
         this.repaint();
     }
+    
+    public String textoHTML(String texto) {
+        return "<html><div style='text-align: center; width: 100%;'>" + texto.replace("\n", "<br>") + "</div></html>";
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMantenimientoEmpleados;

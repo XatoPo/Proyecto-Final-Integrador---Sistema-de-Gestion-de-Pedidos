@@ -17,9 +17,6 @@ public interface listados {
     List<empleado>  lisEmp();
     List<proovedor>  lisProv();
     /*------------------------------------------------------*/
-    List<pedido> listPedido(String id_pedi);
-    List<detalle_pedido> listDetallePedido (String id_pedi);
-    /*------------------------------------------------------*/
     List<producto> obtenerProductos();
     List<producto> obtenerProductosPorCategoria(String nom_ctg);
     List<producto> obtenerProductosPorMarca(String marca_produc);

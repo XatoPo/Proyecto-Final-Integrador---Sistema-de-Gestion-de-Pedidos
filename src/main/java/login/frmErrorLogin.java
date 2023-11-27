@@ -61,7 +61,6 @@ public class frmErrorLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(400, 300));
 
         panelFondo.setBackground(new java.awt.Color(255, 198, 3));
         panelFondo.setMinimumSize(new java.awt.Dimension(400, 300));
@@ -69,6 +68,7 @@ public class frmErrorLogin extends javax.swing.JFrame {
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 50));
 
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);

@@ -92,29 +92,28 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     
     @Override
     public void editProducto(producto p){
+        System.out.println(p.getId_produc());
+        System.out.println(p.getNom_produc());
+        System.out.println(p.getMarca_produc());
+        System.out.println(p.getPrecio_empaq_produc());
+        System.out.println(p.getCant_x_empaq_produc());
+        System.out.println(p.getId_ctg());
+        System.out.println(p.getTipo_empq_produc());
         Connection cn = MySQLConexion.getConexion();
-        String sqlConsulta = "SELECT id_ctg FROM categoria WHERE nom_ctg = ?";
+        String sql = "{CALL spModificarProducto (?, ?, ?, ?, ?, ?, ?)}";
         try {
-            PreparedStatement consulta = cn.prepareStatement(sqlConsulta);
-            consulta.setString(1, p.getNom_ctg());
-            ResultSet rs = consulta.executeQuery();
-            if (rs.next()) {
-                String idCtg = rs.getString("id_ctg");
-                String sql = "{CALL spModificarProducto (?, ?, ?, ?, ?, ?, ?)}";
-                CallableStatement st = cn.prepareCall(sql);
-                st.setString(1, p.getId_produc()); 
-                st.setString(2, p.getNom_produc());
-                st.setString(3, p.getMarca_produc());
-                st.setDouble(4, p.getPrecio_empaq_produc());
-                st.setInt(5, p.getCant_x_empaq_produc());
-                st.setString(6, idCtg);
-                st.setString(7, p.getTipo_empq_produc());
-                int rowsAffected = st.executeUpdate();
-            }
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, p.getId_produc()); 
+            st.setString(2, p.getNom_produc());
+            st.setString(3, p.getMarca_produc());
+            st.setDouble(4, p.getPrecio_empaq_produc());
+            st.setInt(5, p.getCant_x_empaq_produc());
+            st.setString(6, p.getId_ctg());
+            st.setString(7, p.getTipo_empq_produc());
+            int rowsAffected = st.executeUpdate();
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-
     }
     
     
@@ -516,24 +515,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return list_produc;
     }
     
-    public List<producto> obtenerNombresMarcas() {
-    List<producto> nombresMarcas = new ArrayList<>();
-    Connection cn = MySQLConexion.getConexion();
-    try {
-        String sql = "{CALL ObtenerNombresMarcas()}";
-        CallableStatement cs = cn.prepareCall(sql);
-        ResultSet rs = cs.executeQuery();
-        while (rs.next()) {
-            producto p = new producto();
-            p.setMarca_produc(rs.getString(1));
-            nombresMarcas.add(p);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        }
-        return nombresMarcas;
-    }
-    
     @Override
     public List<producto> obtenerProductos() {
         List<producto> list_produc = new ArrayList();
@@ -769,16 +750,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return list_pedi;
     }
     
-    @Override
-    public List<pedido> listPedido(String id_pedi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<detalle_pedido> listDetallePedido(String id_pedi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
     /*-----BUSQUEDAS-----*/
     @Override
     public List<categoria> obtenerNombresCategorias() {
@@ -883,6 +854,7 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return emp;
     }
     
+    @Override
     public String obtenerCodigoProveedorPorCodigoPedido(String id_pedi){
         String  codPro = null;
         Connection cn = MySQLConexion.getConexion();
@@ -1014,6 +986,45 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return produc;
     }
     
+    @Override
+    public String ObtenerCategoriaID(String nom_ctg) {
+        String id_ctg = "";
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL ObtenerCategoriaID (?)}";
+        try{
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1,nom_ctg);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                id_ctg = rs.getString(1);
+            }
+             
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return id_ctg;
+    }
+    
+    @Override
+    public List<producto> obtenerNombresMarcas() {
+        List<producto> nombresMarcas = new ArrayList<>();
+        Connection cn = MySQLConexion.getConexion();
+        try {
+            String sql = "{CALL ObtenerNombresMarcas()}";
+            CallableStatement cs = cn.prepareCall(sql);
+            ResultSet rs = cs.executeQuery();
+            while (rs.next()) {
+                producto p = new producto();
+                p.setMarca_produc(rs.getString(1));
+                nombresMarcas.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nombresMarcas;
+    }
+    
     /*-----LOGIN-----*/
     @Override
     public empleado login_emp(String id_emp, String password_emp) {
@@ -1057,23 +1068,4 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         return emp;
     }
 
-    @Override
-    public String ObtenerCategoriaID(String nom_ctg) {
-        String id_ctg = "";
-        Connection cn = MySQLConexion.getConexion();
-        String sql = "{CALL ObtenerCategoriaID (?)}";
-        try{
-            CallableStatement st = cn.prepareCall(sql);
-            st.setString(1,nom_ctg);
-            ResultSet rs = st.executeQuery();
-
-            if (rs.next()) {
-                id_ctg = rs.getString(1);
-            }
-             
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return id_ctg;
-    }
 }

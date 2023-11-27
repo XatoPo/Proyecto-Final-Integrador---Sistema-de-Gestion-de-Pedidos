@@ -43,7 +43,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblVersion">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Gestion Pedidos Mass+  v1.4.6"/>
+            <Property name="text" type="java.lang.String" value="Gestion Pedidos Mass+  v2.1.4"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

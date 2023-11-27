@@ -82,7 +82,7 @@ public class frmVersion extends javax.swing.JFrame {
 
         panelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblVersion.setText("Gestion Pedidos Mass+  v1.4.6");
+        lblVersion.setText("Gestion Pedidos Mass+  v2.1.4");
         panelFondo.add(lblVersion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 30));
         panelFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 240, 90));
         panelFondo.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 384, 280, 30));

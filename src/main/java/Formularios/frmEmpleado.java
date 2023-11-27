@@ -567,6 +567,7 @@ public class frmEmpleado extends javax.swing.JFrame {
         jLabel2.setText("Empleados registrados:");
         panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 200, 30));
 
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCerrarMouseClicked(evt);

@@ -12,4 +12,6 @@ public interface busquedas {
     producto obtenerDatosProducto(String id_produc);
     String ObtenerCategoriaID(String nom_ctg);
     empleado obtenerCodigoEmpleadoPorCodigoPedido(String id_pedi);
+    List<producto> obtenerNombresMarcas();
+    String obtenerCodigoProveedorPorCodigoPedido(String id_pedi);
 }
