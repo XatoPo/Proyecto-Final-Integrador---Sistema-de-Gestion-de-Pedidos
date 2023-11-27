@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte_GuiaEntrega" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b709beec-b318-41fa-9f89-ef158d8f1b3a">
-	<property name="ireport.zoom" value="3.2153832150000645"/>
+	<property name="ireport.zoom" value="1.5000000000000295"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="cod" class="java.lang.String">
@@ -419,7 +419,7 @@ WHERE
 			</textField>
 			<image>
 				<reportElement x="10" y="33" width="101" height="32" uuid="ce718c53-e766-4d76-8079-03bc8082b712"/>
-				<imageExpression><![CDATA["C:\\Users\\Victor Manuel\\Documents\\NetBeansProjects\\Proyecto-Final-Integrador---Sistema-de-Gestion-de-Pedidos\\src\\main\\java\\reportes\\logoMass2.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["src\\main\\java\\reportes\\logoMass2.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
