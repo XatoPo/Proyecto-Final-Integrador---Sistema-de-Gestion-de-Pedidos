@@ -362,8 +362,17 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
 
     @Override
-    public void adiGuia(gui_entrega guia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void adiGuia(gui_entrega g) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spAdicionGuia (?, ?)}";
+        try{           
+            CallableStatement st=cn.prepareCall(sql);
+            st.setString(1, g.getId_pedi());
+            st.setString(2, g.getFech_entrg());
+            int rowsAffected = st.executeUpdate();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     @Override

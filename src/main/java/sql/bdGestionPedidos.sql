@@ -669,7 +669,7 @@ BEGIN
         ape_mat_emp,
         cargo_emp,
         fech_nac_emp,
-        CAST(AES_ENCRYPT(password_emp, 'aB7xY9zL3pQ') AS CHAR)
+        AES_ENCRYPT(password_emp, 'aB7xY9zL3pQ')
     );
 END@@
 
@@ -1247,3 +1247,102 @@ BEGIN
     DELETE FROM pedido WHERE id_pedi = p_idPedido;
 END //
 DELIMITER ;
+
+
+-- PROCEDURE PARA AGREGAR UNA NUEVA GUIA DE ENTREGA
+DELIMITER @@
+CREATE PROCEDURE spAdicionGuia(
+    id_pedi CHAR(7),
+    fech_entrg DATE
+)
+BEGIN
+    DECLARE nuevoID CHAR(7);
+
+    -- Generar nuevo ID para la guia
+    SET nuevoID = CONCAT('GUIA', LPAD((SELECT IFNULL(MAX(SUBSTRING(id_guia, 5)) + 1, 1) FROM guia_entrega), 3, '0'));
+
+    -- Insertar la nueva guia
+    INSERT INTO guia_entrega (
+        id_guia,
+        id_pedi,
+        fech_entrg
+    ) VALUES (
+        nuevoID,
+        id_pedi,
+        fech_entrg
+    );
+END@@
+DELIMITER ;
+
+
+
+
+--NO USAR EN LA BASE DE DATOS!
+--CONSULTA EN IREPORT PARA OBTENER TODOS LOS DATOS DE LA GUIA DE ENTREGA 
+--SEGUN UN CODIGO DE PEDIDO
+
+SELECT
+    p.id_pedi,
+    p.fech_pedi,
+    p.hora_pedi,
+    p.estado_pedi,
+    prov.id_prov,
+    prov.nom_prov AS nombre_proveedor,
+    prov.descd_prov,
+    ubp.id_ubigeo AS id_ubigeo_proveedor,
+    ubp.distrito_ubi AS distrito_proveedor,
+    ubp.provincia_ubi AS provincia_proveedor,
+    ubp.calle_avend_ubi AS calle_avenida_proveedor,
+    ubp.num_calle_ubi AS numero_calle_proveedor,
+    ubp.referencia_ubi AS referencia_proveedor,
+    ctp.id_contac AS id_contacto_proveedor,
+    ctp.tipo_contac AS tipo_contacto_proveedor,
+    ctp.telef_contac AS telefono_proveedor,
+    ctp.email_contac AS email_proveedor,
+    emp.id_emp,
+    CONCAT(emp.ape_pat_emp, ' ', emp.ape_mat_emp, ', ', emp.nom_pat_emp, ' ', emp.nom_mat_emp) AS nombre_empleado,
+    emp.cargo_emp,
+    ube.id_ubigeo AS id_ubigeo_empleado,
+    ube.distrito_ubi AS distrito_empleado,
+    ube.provincia_ubi AS provincia_empleado,
+    ube.calle_avend_ubi AS calle_avenida_empleado,
+    ube.num_calle_ubi AS numero_calle_empleado,
+    ube.referencia_ubi AS referencia_empleado,
+    cte.id_contac AS id_contacto_empleado,
+    cte.tipo_contac AS tipo_contacto_empleado,
+    cte.telef_contac AS telefono_empleado,
+    cte.email_contac AS email_empleado,
+    dp.id_produc,
+    dp.cant_produc_pedi,
+    dp.precio_tot_x_produc,
+    prod.nom_produc,
+    prod.marca_produc,
+    prod.precio_empaq_produc,
+    prod.cant_x_empaq_produc,
+    prod.id_ctg,
+    prod.tipo_empq_produc,
+    cat.id_ctg AS id_categoria,
+    cat.nom_ctg AS nombre_categoria,
+    (SELECT SUM(precio_tot_x_produc)
+    FROM detalle_pedido
+    WHERE id_pedi = p.id_pedi) AS valorTotalPedido,
+    guia.*
+FROM
+    pedido p
+INNER JOIN proveedor prov ON p.id_prov = prov.id_prov
+INNER JOIN ubigeo ubp ON prov.id_ubigeo = ubp.id_ubigeo
+INNER JOIN contacto ctp ON prov.id_contac = ctp.id_contac
+INNER JOIN empleado emp ON p.id_emp = emp.id_emp
+INNER JOIN ubigeo ube ON emp.id_ubigeo = ube.id_ubigeo
+INNER JOIN contacto cte ON emp.id_contac = cte.id_contac
+INNER JOIN detalle_pedido dp ON p.id_pedi = dp.id_pedi
+INNER JOIN producto prod ON dp.id_produc = prod.id_produc
+INNER JOIN categoria cat ON prod.id_ctg = cat.id_ctg
+LEFT JOIN (
+   SELECT *
+   FROM guia_entrega
+   ORDER BY id_guia DESC
+   LIMIT 1
+) AS guia ON guia.id_pedi = p.id_pedi
+WHERE
+    p.id_pedi = $P{cod}

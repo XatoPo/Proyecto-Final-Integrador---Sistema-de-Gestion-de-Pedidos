@@ -21,6 +21,35 @@ import javax.swing.table.DefaultTableModel;
 import login.frmMenú;
 import vistas.*;
 
+
+import java.awt.HeadlessException;
+import java.awt.Point;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.jar.JarException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.util.JRLoader;
+import util.MySQLConexion;
+
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JTable;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.view.JasperViewer;
+
+
+
+
+
 public class frmPedido extends javax.swing.JFrame {
     
     private int mouseX, mouseY;
@@ -30,11 +59,13 @@ public class frmPedido extends javax.swing.JFrame {
     public static String id_produc;
     public static String id_ctg;
     List<detalle_pedido> list_detalle_pedido;
-    
+    String codigoPedido;
+
     public frmPedido() {
         initComponents();  
         setResizable(false);
         setLocationRelativeTo(null);
+        
         
         // Agregar un MouseListener para permitir arrastrar y soltar el JFrame
         panelFondo.addMouseListener(new MouseAdapter() {
@@ -71,7 +102,22 @@ public class frmPedido extends javax.swing.JFrame {
             }
         });
         
+        tablaPedidos.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent Mouse_evt){
+               JTable table = (JTable) Mouse_evt.getSource();
+               Point point = Mouse_evt.getPoint();
+               int row = table.rowAtPoint(point);
+               if(Mouse_evt.getClickCount()==1){
+                   codigoPedido=tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(), 0).toString();
+                   txtCodigoPed_Guia.setText(codigoPedido);
+                   System.out.println(codigoPedido);
+               }
+           } 
+        });
+        
         muestraPedidos();
+        
+        
     }
     
     public void muestraPedidos(){
@@ -111,6 +157,7 @@ public class frmPedido extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         lblCodPedido = new javax.swing.JLabel();
         btnNuevaFactura = new javax.swing.JButton();
+        btnImprimeGuia = new javax.swing.JButton();
         txtIdPedido = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPedidos = new javax.swing.JTable();
@@ -151,6 +198,7 @@ public class frmPedido extends javax.swing.JFrame {
         txtTotalPedido = new javax.swing.JLabel();
         btnRegistrarPedido = new javax.swing.JButton();
         btnQuitarProducto = new javax.swing.JButton();
+        txtCodigoPed_Guia = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -192,6 +240,14 @@ public class frmPedido extends javax.swing.JFrame {
         });
         panelFondo.add(btnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 210, 40));
 
+        btnImprimeGuia.setText("IMPRIMIR GUIA");
+        btnImprimeGuia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimeGuiaActionPerformed(evt);
+            }
+        });
+        panelFondo.add(btnImprimeGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 630, 130, 40));
+
         txtIdPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtIdPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelFondo.add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 120, 40));
@@ -213,7 +269,6 @@ public class frmPedido extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaPedidos.setEnabled(false);
         tablaPedidos.setFocusable(false);
         jScrollPane1.setViewportView(tablaPedidos);
 
@@ -436,6 +491,9 @@ public class frmPedido extends javax.swing.JFrame {
             }
         });
         panelFondo.add(btnQuitarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 600, 220, 40));
+
+        txtCodigoPed_Guia.setEditable(false);
+        panelFondo.add(txtCodigoPed_Guia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 632, 130, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 820));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -569,6 +627,36 @@ public class frmPedido extends javax.swing.JFrame {
         muestraPedidos();
     }//GEN-LAST:event_btnRegistrarPedidoActionPerformed
 
+    private void btnImprimeGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimeGuiaActionPerformed
+        
+        LocalDate fecha = LocalDate.now();
+        //FECHA
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String fechaFormateada = fecha.format(formatoFecha);
+        gui_entrega guia = new gui_entrega();
+        guia.setFech_entrg(fechaFormateada);
+        guia.setId_pedi(codigoPedido);
+        mass.adiGuia(guia);
+        
+        MySQLConexion obj = new MySQLConexion();
+        String RutaLocal = System.getProperty("user.dir");
+        try {
+        String rutaInforme = RutaLocal + "/src/main/java/reportes/Reporte_GuiaEntrega.jasper";
+        System.out.println("Ruta del informe: " + rutaInforme); // Probando
+
+        Map parametros = new HashMap<>();
+        //parametros.put("cod", jTextField1.getText());
+        parametros.put("cod", codigoPedido);
+        JasperPrint informe = JasperFillManager.fillReport(rutaInforme, parametros, obj.getConexion());
+
+        JasperViewer ventanavisor = new JasperViewer(informe, false);
+        ventanavisor.setTitle("INFORME");
+        ventanavisor.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en el reporte: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnImprimeGuiaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -658,6 +746,7 @@ public class frmPedido extends javax.swing.JFrame {
     public static javax.swing.JButton btnAyudaEmpleado;
     public static javax.swing.JButton btnAyudaProducto;
     public static javax.swing.JButton btnAyudaProovedor;
+    private javax.swing.JButton btnImprimeGuia;
     private javax.swing.JButton btnNuevaFactura;
     private javax.swing.JButton btnQuitarProducto;
     private javax.swing.JButton btnRegistrarPedido;
@@ -690,6 +779,7 @@ public class frmPedido extends javax.swing.JFrame {
     private javax.swing.JTable tablaPedidos;
     private javax.swing.JTable tablaProductosParaPedido;
     public static javax.swing.JLabel txtCantXEmpaque;
+    private javax.swing.JTextField txtCodigoPed_Guia;
     public static javax.swing.JTextField txtIdEmp;
     public static javax.swing.JLabel txtIdPedido;
     public static javax.swing.JTextField txtIdProduc;

@@ -9,7 +9,7 @@ public interface registros {
     void registrarPedido(pedido pedi);
     void adiEmpleado(empleado emp);
     void adiProveedor(proovedor emp);
-    void adiGuia(gui_entrega guia);
+    void adiGuia(gui_entrega g);
     void adiProducto(producto produc);
     void adiProovedor(proovedor prov);
     void adiUbigeo(ubigeo ubigeo);
