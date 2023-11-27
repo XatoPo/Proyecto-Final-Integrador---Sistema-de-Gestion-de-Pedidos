@@ -20,25 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import login.frmMenú;
 import vistas.*;
-
-
-import java.awt.HeadlessException;
 import java.awt.Point;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.jar.JarException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.view.JasperViewer;
-import net.sf.jasperreports.engine.util.JRLoader;
 import util.MySQLConexion;
-
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTable;
