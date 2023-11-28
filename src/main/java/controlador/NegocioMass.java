@@ -370,11 +370,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }     
 
     @Override
-    public void adiContacto(contacto contac) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void adiGuia(gui_entrega g) {
         Connection cn = MySQLConexion.getConexion();
         String sql = "{CALL spAdicionGuia (?, ?)}";
@@ -411,16 +406,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         } catch(Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    @Override
-    public void adiProovedor(proovedor prov) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void adiUbigeo(ubigeo ubigeo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     @Override
@@ -480,36 +465,6 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
         }
         
         return list_ctg;
-    }
-
-    @Override
-    public List<contacto> listContactoEmpleado(String id_contac, String id_emp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<contacto> listContactoProovedor(String id_contac, String id_prov) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<ubigeo> listUbigeoEmpleado(String id_ubigeo, String id_emp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<ubigeo> listUbigeoProovedor(String id_ubigeo, String id_prov) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<proovedor> listProovedor(String id_prov) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<gui_entrega> listGia(String id_guia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
