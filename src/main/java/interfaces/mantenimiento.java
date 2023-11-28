@@ -12,4 +12,5 @@ public interface mantenimiento {
     void eliminarEmpleado(String emp);
     void eliminarProducto(String idProducto);
     void eliminarPedido(String idPedido);
+    void editEstadoPedido(pedido p);
 }

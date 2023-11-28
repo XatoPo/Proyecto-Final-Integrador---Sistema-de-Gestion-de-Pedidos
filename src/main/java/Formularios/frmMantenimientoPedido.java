@@ -40,6 +40,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         btnEliminarPedido.setEnabled(false);
         btnModificarEstado.setEnabled(false);
+        cbEstado.setEnabled(false);
         tablaPedidos.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent Mouse_evt) {
                 JTable table = (JTable) Mouse_evt.getSource();
@@ -59,7 +60,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                     cbEstado.setSelectedItem(tablaPedidos.getValueAt(row, 5).toString());
                     btnEliminarPedido.setEnabled(true);
                     btnModificarEstado.setEnabled(true);
-                    
+                    cbEstado.setEnabled(true);
                 }
             }
           
@@ -90,7 +91,8 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
                 EscaladoImagenesButton(btnEliminarPedido, "src\\main\\java\\recursos\\eliminarpedido.png");
-                EscaladoImagenesButton(btnModificarEstado, "src\\main\\java\\recursos\\modificarproducto.png");
+                EscaladoImagenesButton(btnModificarEstado, "src\\main\\java\\recursos\\modificapedido.png");
+                
             }
         });
         
@@ -120,11 +122,7 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
             dt.addRow(f);
         }
     }
-    
-    public void muestraDetallePedido(){
-        
-    }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -242,48 +240,59 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         txtIdProv.setEditable(false);
         txtIdProv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtIdProv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelDatosPedido.add(txtIdProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 150, 40));
+        txtIdProv.setFocusable(false);
+        panelDatosPedido.add(txtIdProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 150, 40));
 
         txtIdEmp.setEditable(false);
         txtIdEmp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtIdEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelDatosPedido.add(txtIdEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 150, 40));
+        txtIdEmp.setFocusable(false);
+        txtIdEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdEmpActionPerformed(evt);
+            }
+        });
+        panelDatosPedido.add(txtIdEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 150, 40));
 
         txtNomEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNomEmp.setForeground(new java.awt.Color(255, 255, 255));
         txtNomEmp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        panelDatosPedido.add(txtNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 270, 40));
+        panelDatosPedido.add(txtNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 270, 40));
 
         txtNomProv.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNomProv.setForeground(new java.awt.Color(255, 255, 255));
         txtNomProv.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        panelDatosPedido.add(txtNomProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 270, 40));
+        panelDatosPedido.add(txtNomProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 270, 40));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha:");
-        panelDatosPedido.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 80, 40));
+        panelDatosPedido.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 60, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Hora:");
-        panelDatosPedido.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 70, 50));
+        panelDatosPedido.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 150, 70, 50));
 
         txtFecha.setEditable(false);
-        panelDatosPedido.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 200, 40));
+        txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtFecha.setFocusable(false);
+        panelDatosPedido.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 180, 40));
 
         txtHora.setEditable(false);
-        panelDatosPedido.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, 200, 40));
+        txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtHora.setFocusable(false);
+        panelDatosPedido.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 180, 40));
 
         txtEstado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtEstado.setForeground(new java.awt.Color(255, 255, 255));
         txtEstado.setText("Estado:");
-        panelDatosPedido.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 120, 40));
+        panelDatosPedido.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 120, 40));
 
         cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona", "Pendiente", "Terminado", "Cancelado" }));
-        panelDatosPedido.add(cbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 230, 40));
+        panelDatosPedido.add(cbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 200, 40));
 
-        panelFondo.add(panelDatosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 880, 350));
+        panelFondo.add(panelDatosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 740, 350));
 
         btnEliminarPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminarPedido.setText("ELIMINAR PEDIDO");
@@ -331,11 +340,28 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         muestraPedidos();
         limpiar();
         btnEliminarPedido.setEnabled(false);
+        btnModificarEstado.setEnabled(false);
     }//GEN-LAST:event_btnEliminarPedidoActionPerformed
 
     private void btnModificarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEstadoActionPerformed
-        
+        pedido p = new pedido();
+        p.setId_pedi(txtIdPedido.getText());
+        p.setFech_pedi(txtFecha.getText());
+        p.setHora_pedi(txtHora.getText());
+        p.setId_prov(txtIdProv.getText());
+        p.setId_emp(txtIdEmp.getText());
+        p.setEstado_pedi(cbEstado.getSelectedItem().toString());
+        obj.editEstadoPedido(p);
+        muestraPedidos();
+        limpiar();
+        cbEstado.setEnabled(false);
+        btnEliminarPedido.setEnabled(false);
+        btnModificarEstado.setEnabled(false);
     }//GEN-LAST:event_btnModificarEstadoActionPerformed
+
+    private void txtIdEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdEmpActionPerformed
 
     public void limpiar(){
         txtIdPedido.setText("");
@@ -343,6 +369,9 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         txtNomEmp.setText("");
         txtIdProv.setText("");
         txtNomProv.setText("");
+        txtFecha.setText("");
+        txtHora.setText("");
+        cbEstado.setSelectedIndex(0);
     }
     
     /**

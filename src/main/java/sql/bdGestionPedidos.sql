@@ -1274,7 +1274,18 @@ BEGIN
 END@@
 DELIMITER ;
 
+--Procedure para modificar el estado de un pedido por el id
+DELIMITER //
+CREATE PROCEDURE spModificarEstadoPedido(
+    IN p_id_pedi CHAR(7),
+    IN p_nuevo_estado VARCHAR(20)
+)
+BEGIN
+    DECLARE v_estado_actual VARCHAR(20);
+        UPDATE pedido SET estado_pedi = p_nuevo_estado WHERE id_pedi = p_id_pedi; 
+END //
 
+DELIMITER ;
 
 
 --NO USAR EN LA BASE DE DATOS!

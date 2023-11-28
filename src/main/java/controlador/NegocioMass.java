@@ -70,6 +70,20 @@ public class NegocioMass implements registros, listados, mantenimiento, login, b
     }
     
     @Override
+    public void editEstadoPedido(pedido p) {
+        Connection cn = MySQLConexion.getConexion();
+        String sql = "{CALL spModificarEstadoPedido (?, ?)}";
+        try {
+            CallableStatement st = cn.prepareCall(sql);
+            st.setString(1, p.getId_pedi());
+            st.setString(2, p.getEstado_pedi());
+            int rowsAffected = st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
+    }
+    
+    @Override
     public void eliminarProducto(String idProducto) {
         Connection cn = MySQLConexion.getConexion();
         String sql = "{CALL spEliminarProducto (?)}";
