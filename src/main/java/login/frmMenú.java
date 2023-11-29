@@ -255,6 +255,7 @@ public class frmMenú extends javax.swing.JFrame {
         btnMantenimientoProveedores = new javax.swing.JButton();
         btnMantenimientoPedidos = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -332,8 +333,8 @@ public class frmMenú extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("MANTENIMIENTO");
-        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 220, 40));
+        jLabel2.setText("ACTUALIZACIÓN");
+        panelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 660, 220, 40));
 
         btnMantenimientoEmpleados.setBackground(new java.awt.Color(221, 221, 221));
         btnMantenimientoEmpleados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -345,7 +346,7 @@ public class frmMenú extends javax.swing.JFrame {
                 btnMantenimientoEmpleadosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 140, 50));
+        panelFondo.add(btnMantenimientoEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 140, 50));
 
         btnMantenimientoProductos.setBackground(new java.awt.Color(221, 221, 221));
         btnMantenimientoProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -357,7 +358,7 @@ public class frmMenú extends javax.swing.JFrame {
                 btnMantenimientoProductosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 620, 140, 50));
+        panelFondo.add(btnMantenimientoProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, 140, 50));
 
         btnMantenimientoProveedores.setBackground(new java.awt.Color(221, 221, 221));
         btnMantenimientoProveedores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -369,11 +370,11 @@ public class frmMenú extends javax.swing.JFrame {
                 btnMantenimientoProveedoresActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, 140, 50));
+        panelFondo.add(btnMantenimientoProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, 140, 50));
 
         btnMantenimientoPedidos.setBackground(new java.awt.Color(221, 221, 221));
         btnMantenimientoPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnMantenimientoPedidos.setText("PEDIDOS");
+        btnMantenimientoPedidos.setText("ACTUALIZAR ESTADO DE PEDIDOS");
         btnMantenimientoPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMantenimientoPedidos.setEnabled(false);
         btnMantenimientoPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -381,12 +382,17 @@ public class frmMenú extends javax.swing.JFrame {
                 btnMantenimientoPedidosActionPerformed(evt);
             }
         });
-        panelFondo.add(btnMantenimientoPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 140, 50));
+        panelFondo.add(btnMantenimientoPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 730, 290, 50));
 
         lblFondo.setMaximumSize(new java.awt.Dimension(555, 820));
         lblFondo.setMinimumSize(new java.awt.Dimension(555, 820));
         lblFondo.setPreferredSize(new java.awt.Dimension(555, 820));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 555, 820));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("MANTENIMIENTO");
+        panelFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 220, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -531,6 +537,7 @@ public class frmMenú extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistroProveedores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblLogo;

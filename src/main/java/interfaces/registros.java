@@ -13,5 +13,4 @@ public interface registros {
     void adiUbigeoEmp(ubigeo u);
     void adiContactoProv(contacto c);
     void adiUbigeoProv(ubigeo u);
-
 }

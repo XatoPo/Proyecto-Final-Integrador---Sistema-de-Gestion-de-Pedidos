@@ -38,7 +38,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
           // Establecer el tamaño del JFrame
         setResizable(false);
         setLocationRelativeTo(null);
-        btnEliminarPedido.setEnabled(false);
         btnModificarEstado.setEnabled(false);
         cbEstado.setEnabled(false);
         tablaPedidos.addMouseListener(new MouseAdapter() {
@@ -58,7 +57,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                     txtFecha.setText(tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(), 1).toString());
                     txtHora.setText(tablaPedidos.getValueAt(tablaPedidos.getSelectedRow(), 2).toString());
                     cbEstado.setSelectedItem(tablaPedidos.getValueAt(row, 5).toString());
-                    btnEliminarPedido.setEnabled(true);
                     btnModificarEstado.setEnabled(true);
                     cbEstado.setEnabled(true);
                 }
@@ -90,7 +88,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
                 EscaladoImagenesLabel(lblLogo, "src\\main\\java\\recursos\\logoMass.png");
                 EscaladoImagenesLabel(lblFondo, "src\\main\\java\\recursos\\fondoMass(920X1020).png");
                 EscaladoImagenesLabel(lblCerrar, "src\\main\\java\\recursos\\cerrar.png");
-                EscaladoImagenesButton(btnEliminarPedido, "src\\main\\java\\recursos\\eliminarpedido.png");
                 EscaladoImagenesButton(btnModificarEstado, "src\\main\\java\\recursos\\modificapedido.png");
                 
             }
@@ -156,7 +153,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         txtHora = new javax.swing.JTextField();
         txtEstado = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox<>();
-        btnEliminarPedido = new javax.swing.JButton();
         btnModificarEstado = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
@@ -178,8 +174,8 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("MANTENIMIENTO DE PEDIDO");
-        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 290, 50));
+        lblTitulo.setText("ACTUALIZACIÓN DE ESTADO DE PEDIDO");
+        panelFondo.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 400, 50));
 
         lblCodPedido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblCodPedido.setText("Código de Pedido:");
@@ -294,22 +290,13 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
 
         panelFondo.add(panelDatosPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 740, 350));
 
-        btnEliminarPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEliminarPedido.setText("ELIMINAR PEDIDO");
-        btnEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarPedidoActionPerformed(evt);
-            }
-        });
-        panelFondo.add(btnEliminarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 700, 250, 40));
-
         btnModificarEstado.setText("MODIFICAR ESTADO DE PEDIDO");
         btnModificarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarEstadoActionPerformed(evt);
             }
         });
-        panelFondo.add(btnModificarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 700, 260, 40));
+        panelFondo.add(btnModificarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 700, 260, 40));
         panelFondo.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 760));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -334,15 +321,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
 
     NegocioMass obj = new NegocioMass();
     
-    private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedidoActionPerformed
-        String idPedido = txtIdPedido.getText();
-        obj.eliminarPedido(idPedido);
-        muestraPedidos();
-        limpiar();
-        btnEliminarPedido.setEnabled(false);
-        btnModificarEstado.setEnabled(false);
-    }//GEN-LAST:event_btnEliminarPedidoActionPerformed
-
     private void btnModificarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarEstadoActionPerformed
         pedido p = new pedido();
         p.setId_pedi(txtIdPedido.getText());
@@ -355,7 +333,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
         muestraPedidos();
         limpiar();
         cbEstado.setEnabled(false);
-        btnEliminarPedido.setEnabled(false);
         btnModificarEstado.setEnabled(false);
     }//GEN-LAST:event_btnModificarEstadoActionPerformed
 
@@ -411,7 +388,6 @@ public class frmMantenimientoPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminarPedido;
     private javax.swing.JButton btnModificarEstado;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel1;

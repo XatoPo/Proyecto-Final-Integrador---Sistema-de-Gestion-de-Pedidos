@@ -1,6 +1,5 @@
 package clases;
 
-
 public class proovedor{
     private String id_prov;
     private String nom_prov;
